@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Full-time"
+    },
+    {
+        "id": 2,
+        "name": "Part-time"
+    },
+    {
+        "id": 3,
+        "name": "Freelance"
+    },
+    {
+        "id": 4,
+        "name": "Contract"
+    },
+    {
+        "id": 5,
+        "name": "Internship"
+    },
+    {
+        "id": 6,
+        "name": "Temporary"
+    },
+    {
+        "id": 7,
+        "name": "Remote"
+    },
+    {
+        "id": 8,
+        "name": "Volunteer"
+    },
+    {
+        "id": 9,
+        "name": "Consultant"
+    },
+    {
+        "id": 10,
+        "name": "Seasonal"
+    }
+]

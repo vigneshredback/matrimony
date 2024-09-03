@@ -57,3 +57,67 @@ class Couples(models.Model):
 
     def __str__(self):
         return f"{self.bridename} and {self.broomname}"
+
+
+class City(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class JobType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Hobby(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+class Religion(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Biodata(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=10)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    date_of_birth = models.DateField()
+    age = models.IntegerField()
+    height = models.DecimalField(max_digits=5, decimal_places=2)  # Example: 5.9 for 5'9"
+    weight = models.DecimalField(max_digits=5, decimal_places=2)  # Example: 70.5 for 70.5 kg
+    father_name = models.CharField(max_length=150)
+    mother_name = models.CharField(max_length=150)
+    address = models.TextField()
+    job_type = models.ForeignKey(JobType, on_delete=models.SET_NULL, null=True)
+    company_name = models.CharField(max_length=150)
+    salary = models.DecimalField(max_digits=10, decimal_places=2)
+    job_experience = models.DecimalField(max_digits=5, decimal_places=2)  # Example: 3.5 for 3.5 years
+    degree = models.CharField(max_length=150)
+    school = models.CharField(max_length=150)
+    college = models.CharField(max_length=150)
+    whatsapp_link = models.URLField(max_length=200, blank=True, null=True)
+    facebook_link = models.URLField(max_length=200, blank=True, null=True)
+    instagram_link = models.URLField(max_length=200, blank=True, null=True)
+    x_link = models.URLField(max_length=200, blank=True, null=True)  # X (formerly Twitter)
+    youtube_link = models.URLField(max_length=200, blank=True, null=True)
+    linkedin_link = models.URLField(max_length=200, blank=True, null=True)
+    hobbies = models.ManyToManyField(Hobby)
+    religion = models.ForeignKey(Religion, on_delete=models.SET_NULL, null=True)
+    family_name = models.CharField(max_length=150)
+    profession = models.CharField(max_length=150)
+    position = models.CharField(max_length=150)
+
+    # Image fields
+    image1 = models.ImageField(upload_to='images/profile', blank=True, null=True)
+    image2 = models.ImageField(upload_to='images/profile', blank=True, null=True)
+    image3 = models.ImageField(upload_to='images/profile', blank=True, null=True)
+    image4 = models.ImageField(upload_to='images/profile', blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username

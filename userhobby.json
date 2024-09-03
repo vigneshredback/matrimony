@@ -1,0 +1,167 @@
+[
+    {
+        "id": 1,
+        "biodata_id": 5,
+        "hobby_id": 1
+    },
+    {
+        "id": 2,
+        "biodata_id": 5,
+        "hobby_id": 2
+    },
+    {
+        "id": 3,
+        "biodata_id": 5,
+        "hobby_id": 3
+    },
+    {
+        "id": 4,
+        "biodata_id": 6,
+        "hobby_id": 1
+    },
+    {
+        "id": 5,
+        "biodata_id": 6,
+        "hobby_id": 4
+    },
+    {
+        "id": 6,
+        "biodata_id": 7,
+        "hobby_id": 2
+    },
+    {
+        "id": 7,
+        "biodata_id": 7,
+        "hobby_id": 5
+    },
+    {
+        "id": 8,
+        "biodata_id": 8,
+        "hobby_id": 1
+    },
+    {
+        "id": 9,
+        "biodata_id": 8,
+        "hobby_id": 6
+    },
+    {
+        "id": 10,
+        "biodata_id": 9,
+        "hobby_id": 3
+    },
+    {
+        "id": 11,
+        "biodata_id": 9,
+        "hobby_id": 7
+    },
+    {
+        "id": 12,
+        "biodata_id": 10,
+        "hobby_id": 4
+    },
+    {
+        "id": 13,
+        "biodata_id": 10,
+        "hobby_id": 5
+    },
+    {
+        "id": 14,
+        "biodata_id": 11,
+        "hobby_id": 6
+    },
+    {
+        "id": 15,
+        "biodata_id": 11,
+        "hobby_id": 8
+    },
+    {
+        "id": 16,
+        "biodata_id": 12,
+        "hobby_id": 1
+    },
+    {
+        "id": 17,
+        "biodata_id": 12,
+        "hobby_id": 7
+    },
+    {
+        "id": 18,
+        "biodata_id": 13,
+        "hobby_id": 3
+    },
+    {
+        "id": 19,
+        "biodata_id": 13,
+        "hobby_id": 4
+    },
+    {
+        "id": 20,
+        "biodata_id": 14,
+        "hobby_id": 5
+    },
+    {
+        "id": 21,
+        "biodata_id": 14,
+        "hobby_id": 8
+    },
+    {
+        "id": 22,
+        "biodata_id": 15,
+        "hobby_id": 2
+    },
+    {
+        "id": 23,
+        "biodata_id": 15,
+        "hobby_id": 6
+    },
+    {
+        "id": 24,
+        "biodata_id": 16,
+        "hobby_id": 1
+    },
+    {
+        "id": 25,
+        "biodata_id": 16,
+        "hobby_id": 4
+    },
+    {
+        "id": 26,
+        "biodata_id": 17,
+        "hobby_id": 7
+    },
+    {
+        "id": 27,
+        "biodata_id": 17,
+        "hobby_id": 8
+    },
+    {
+        "id": 28,
+        "biodata_id": 18,
+        "hobby_id": 2
+    },
+    {
+        "id": 29,
+        "biodata_id": 18,
+        "hobby_id": 5
+    },
+    {
+        "id": 30,
+        "biodata_id": 19,
+        "hobby_id": 6
+    },
+    {
+        "id": 31,
+        "biodata_id": 19,
+        "hobby_id": 7
+    },
+    {
+        "id": 32,
+        "biodata_id": 20,
+        "hobby_id": 3
+    },
+    {
+        "id": 33,
+        "biodata_id": 20,
+        "hobby_id": 8
+    }
+]

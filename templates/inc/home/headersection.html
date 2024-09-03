@@ -8,7 +8,7 @@
             </form>
             <div class="rel-sear">
                 <h4>Top searches:</h4>
-                <a href="all-profiles.html">Browse all profiles</a>
+                <a href="{% url 'allprofiles' %}">Browse all profiles</a>
                 <a href="all-profiles.html">Mens profile</a>
                 <a href="all-profiles.html">Female profile</a>
                 <a href="all-profiles.html">New profiles</a>
@@ -187,7 +187,7 @@
                                                     <div class="menu-box menu-box-2">
                                                         <h5>Browse profiles <span>1200+ Verified profiles</span></h5>
                                                         <span class="explor-cta">More details</span>
-                                                        <a href="all-profiles.html" class="fclick"></a>
+                                                        <a href="{% url 'allprofiles' %}" class="fclick"></a>
                                                     </div>
                                                 </li>
                                                 <li>
@@ -284,14 +284,14 @@
         <div class="mv-bus">
             <h4><i class="fa fa-globe" aria-hidden="true"></i> EXPLORE CATEGORY</h4>
             <ul>
-                <li><a href="all-profiles.html">Browse profiles</a></li>
+                <li><a href="{% url 'allprofiles' %}">Browse profiles</a></li>
                 <li><a href="wedding.html">Wedding page</a></li>
                 <li><a href="services.html">All Services</a></li>
                 <li><a href="plans.html">Join Now</a></li>
             </ul>
             <h4><i class="fa fa-align-center" aria-hidden="true"></i> All Pages</h4>
             <ul>
-                <li><a href="all-profiles.html">All profiles</a></li>
+                <li><a href="{% url 'allprofiles' %}">All profiles</a></li>
                 <li><a href="profile-details.html">Profile details</a></li>
                 <li><a href="wedding.html">Wedding</a></li>
                 <li><a href="wedding-video.html">Wedding video</a></li>
@@ -391,7 +391,7 @@
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="sign-up.html">Sign-up</a></li>
                 <li><a href="plans.html">Pricing plans</a></li>
-                <li><a href="all-profiles.html">Browse profiles</a></li>
+                <li><a href="{% url 'allprofiles' %}">Browse profiles</a></li>
             </ul>
         </div>
     </div>

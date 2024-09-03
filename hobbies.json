@@ -1,0 +1,22 @@
+[
+    {"id": 1, "name": "Reading"},
+    {"id": 2, "name": "Cooking"},
+    {"id": 3, "name": "Traveling"},
+    {"id": 4, "name": "Gardening"},
+    {"id": 5, "name": "Photography"},
+    {"id": 6, "name": "Painting"},
+    {"id": 7, "name": "Cycling"},
+    {"id": 8, "name": "Hiking"},
+    {"id": 9, "name": "Fishing"},
+    {"id": 10, "name": "Swimming"},
+    {"id": 11, "name": "Writing"},
+    {"id": 12, "name": "Knitting"},
+    {"id": 13, "name": "Music"},
+    {"id": 14, "name": "Playing Video Games"},
+    {"id": 15, "name": "Dancing"},
+    {"id": 16, "name": "Yoga"},
+    {"id": 17, "name": "Camping"},
+    {"id": 18, "name": "Bird Watching"},
+    {"id": 19, "name": "Collecting"},
+    {"id": 20, "name": "Pottery"}
+]
