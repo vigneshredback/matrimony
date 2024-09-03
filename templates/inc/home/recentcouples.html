@@ -1,0 +1,38 @@
+    {% load static %}
+    <!-- RECENT COUPLES -->
+    <section>
+        <div class="hom-couples-all">
+            <div class="container">
+                <div class="row">
+                    <div class="home-tit">
+                        <p>trusted brand</p>
+                        <h2><span>Recent Couples</span></h2>
+                        <span class="leaf1"></span>
+                        <span class="tit-ani-"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="hom-coup-test">
+
+                <ul class="couple-sli">
+
+                    {% for item in couples %}
+
+                    <li>
+                        <div class="hom-coup-box">
+                            <span class="leaf"></span>
+                            <img src="{{item.image.url}}" alt="" loading="lazy">
+                            <div class="bx">
+                                <h4>{{item.broomname}} & {{item.bridename}} <span>New York</span></h4>
+                                <a href="wedding-video.html" class="sml-cta cta-dark">View more</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- END -->
