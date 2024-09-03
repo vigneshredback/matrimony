@@ -22,6 +22,7 @@ def calculate_age(birthdate):
 
 def allprofiles(request):
     profiles = Biodata.objects.all()
+    totalprofiles = profiles.count()
     paginator = Paginator(profiles, 5)  # 10 profiles per page
 
     page_number = request.GET.get('page')
@@ -45,4 +46,4 @@ def allprofiles(request):
         }
         return JsonResponse(data)
 
-    return render(request, 'pages/allprofiles.html', {'profiles': page_obj})
+    return render(request, 'pages/allprofiles.html', {'profiles': page_obj, 'totalprofiles': totalprofiles})
