@@ -83,9 +83,10 @@ class Religion(models.Model):
     def __str__(self):
         return self.name
 
+genderchoices = (('M', 'Male'), ('F', 'Female'))
 class Biodata(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    gender = models.CharField(max_length=10)
+    gender = models.CharField(choices=genderchoices,max_length=10)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
     date_of_birth = models.DateField()
     age = models.IntegerField()
@@ -99,6 +100,7 @@ class Biodata(models.Model):
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     job_experience = models.DecimalField(max_digits=5, decimal_places=2)  # Example: 3.5 for 3.5 years
     degree = models.CharField(max_length=150)
+    about = models.TextField(default='no details')
     school = models.CharField(max_length=150)
     college = models.CharField(max_length=150)
     whatsapp_link = models.URLField(max_length=200, blank=True, null=True)

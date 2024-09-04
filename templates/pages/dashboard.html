@@ -5,7 +5,7 @@
     <div class="mob-me-clo"><img src="images/icon/close.svg" alt=""></div>
     <div class="mv-bus">
         <div class="head-pro">
-            <img src="images/profiles/1.jpg" alt="" loading="lazy">
+            <img src="{{biodata.image1}}" alt="" loading="lazy">
             <b>user profile</b><br>
             <h4>Ashley emyy</h4>
         </div>
@@ -24,11 +24,11 @@
                 <div class="row">
                     <div class="col-md-4 col-lg-3">
                         <div class="db-nav">
-                            <div class="db-nav-pro"><img src="{% static 'images/profiles/12.jpg' %}" class="img-fluid" alt=""></div>
+                            <div class="db-nav-pro"><img src="{{biodata.image1}}" class="img-fluid" alt=""></div>
                             <div class="db-nav-list">
                                 <ul>
                                     <li><a href="user-dashboard.html" class="act"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
-                                    <li><a href="user-profile.html"><i class="fa fa-male" aria-hidden="true"></i>Profile</a></li>
+                                    <li><a href="{% url 'dashboardprofile' %}"><i class="fa fa-male" aria-hidden="true"></i>Profile</a></li>
                                     <li><a href="user-interests.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>Interests</a></li>
                                     <li><a href="user-chat.html"><i class="fa fa-commenting-o" aria-hidden="true"></i>Chat list</a></li>
                                     <li><a href="user-plan.html"><i class="fa fa-money" aria-hidden="true"></i>Plan</a></li>

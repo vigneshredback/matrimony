@@ -11,6 +11,7 @@ from app.forms import RegistrationForm
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from app.models import Biodata
 
 User = get_user_model()
 
@@ -64,7 +65,12 @@ def loginview(request):
 
         if user is not None:
             login(request,user)
-            return redirect('home')  # Redirect to the home page or any other page
+            try:
+                biodata = Biodata.objects.get(user=user)
+                return redirect('home')
+            except Biodata.DoesNotExist:
+                return redirect('profile_detail', pk=user.id)
+
         else:
             return render(request, 'pages/login.html', {'error': 'Invalid username or password'})
     else:

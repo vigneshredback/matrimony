@@ -7,7 +7,7 @@
         <li>
             <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
                 <div class="pro-img">
-                    <a href="profile-details.html">
+                    <a href="{% url 'profile_detail' item.id %}">
                         <img src="{{item.image1}}" alt="">
                     </a>
                     <div class="pro-ave" title="User currently available">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="pro-detail">
-                    <h4><a href="profile-details.html">{{ item.user.name }}</a></h4>
+                    <h4><a href="{% url 'profile_detail' item.id %}">{{ item.user.name }}</a></h4>
                     <div class="pro-bio">
                         <span>{{ item.degree }}</span>
                         <span>{{ item.profession }}</span>
@@ -71,7 +71,7 @@
                 li.innerHTML = `
                     <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
                         <div class="pro-img">
-                            <a href="profile-details.html">
+                            <a href="http://127.0.0.1:8000/profile-detail/${item.id}/">
                                 <img src="${item.image1}" alt="${item.image1}">
                             </a>
                             <div class="pro-ave" title="User currently available">
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         <div class="pro-detail">
-                            <h4><a href="profile-details.html">${item.name}</a></h4>
+                            <h4><a href="http://127.0.0.1:8000/profile-detail/${item.id}/">${item.name}</a></h4>
                             <div class="pro-bio">
                                 <span>${item.degree}</span>
                                 <span>${item.profession}</span>

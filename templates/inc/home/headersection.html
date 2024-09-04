@@ -38,6 +38,8 @@
                         <li><a href="#!"><i class="fa-brands fa-twitter"></i></a></li>
                         <li><a href="#!"><i class="fa-brands fa-facebook"></i></a></li>
                         <li><a href="#!"><i class="fa-brands fa-whatsapp"></i></a></li>
+                        <li><a href="#!">{{ request.user.email }}</a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -223,7 +225,7 @@
                                 <div class="smenu-open smenu-single">
                                     <ul>
                                         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                                        <li><a href="user-profile.html">My profile</a></li>
+                                        <li><a href="{% url 'dashboardprofile' %}">My profile</a></li>
                                         <li><a href="user-interests.html">Interests</a></li>
                                         <li><a href="user-chat.html">Chat lists</a></li>
                                         <li><a href="user-plan.html">My plan details</a></li>
