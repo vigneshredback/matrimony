@@ -9,4 +9,8 @@ def dashboard(request):
     return render(request,'pages/dashboard.html',{'biodata':biodata})
 
 def dashboardprofile(request):
-    return render(request,'pages/dashboard_profile.html')
+    user = request.user
+    print(user)
+    biodata = Biodata.objects.filter(user=request.user).first()
+
+    return render(request,'pages/dashboard_profile.html',{'biodata':biodata})
