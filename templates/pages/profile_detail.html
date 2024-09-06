@@ -12,8 +12,8 @@
                                 <img src="{{profile.image1}}" loading="lazy" class="pro" alt="">
                             </div>
                             <div class="s3">
-                                <a href="#!" class="cta fol cta-chat">Chat now</a>
-                                <span class="cta cta-sendint" data-toggle="modal" data-target="#sendInter">Send
+                       
+                                <span class="cta cta-sendint" data-toggle="modal" data-target="#sendInter" style="width: 100% !important;">Send
                                     interest</span>
                             </div>
                         </div>
@@ -29,26 +29,26 @@
                                 <ul>
                                     <li>
                                         <div>
-                                            <img src="images/icon/pro-city.png" loading="lazy" alt="">
+                                            <img src="{% static 'images/icon/pro-city.png' %}" loading="lazy" alt="">
                                             <span>City: <strong>{{profile.city}}</strong></span>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
-                                            <img src="images/icon/pro-age.png" loading="lazy" alt="">
+                                            <img src="{% static 'images/icon/pro-age.png' %}" loading="lazy" alt="">
                                             <span>Age: <strong>{{profile.age}}</strong></span>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
-                                            <img src="images/icon/pro-city.png" loading="lazy" alt="">
+                                            <img src="{% static 'images/icon/pro-height.png' %}" loading="lazy" alt="">
                                             <span>Height: <strong>{{profile.height}} cm</strong></span>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
-                                            <img src="images/icon/pro-city.png" loading="lazy" alt="">
-                                            <span>Job: <strong>{{profile.profession}}</strong></span>
+                                            <img src="{% static 'images/icon/pro-city.png' %}" loading="lazy" alt="">
+                                            <span>Job: <strong>{{profile.job_type}}</strong></span>
                                         </div>
                                     </li>
                                 </ul>

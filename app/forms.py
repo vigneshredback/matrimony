@@ -100,7 +100,7 @@ class BiodataUpdateForm(forms.ModelForm):
             'x_link': forms.TextInput(attrs={'class': 'form-control'}),
             'youtube_link': forms.TextInput(attrs={'class': 'form-control'}),
             'linkedin_link': forms.TextInput(attrs={'class': 'form-control'}),
-            'hobbies': forms.SelectMultiple(attrs={'class': 'chosen-select'}),
+            'hobbies': forms.SelectMultiple(attrs={'class': 'chosen-select','required':True}),
             'religion': forms.Select(attrs={'class': 'form-control'}),
             'family_name': forms.TextInput(attrs={'class': 'form-control'}),
             'profession': forms.TextInput(attrs={'class': 'form-control'}),

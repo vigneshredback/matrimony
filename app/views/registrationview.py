@@ -36,6 +36,7 @@ def register(request):
             })
             send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [user.email])
 
+            messages.success(request, 'email sent to your email. Please confirm your email address to complete the registration.')
             return redirect('home')
     else:
         form = RegistrationForm()
@@ -51,6 +52,7 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
+        messages.success(request, 'Your account has been activated!, you can login now')
         return redirect('login')
     else:
         return render(request, 'pages/activation_invalid.html')
@@ -67,12 +69,15 @@ def loginview(request):
             login(request,user)
             try:
                 biodata = Biodata.objects.get(user=user)
+                messages.success(request, "Logged in successfully!")
                 return redirect('home')
+
             except Biodata.DoesNotExist:
                 return redirect('profile_detail', pk=user.id)
 
         else:
-            return render(request, 'pages/login.html', {'error': 'Invalid username or password'})
+            messages.error(request, "Invalid username or password!")
+            return render(request, 'pages/login.html')
     else:
         return render(request, 'pages/login.html')
     
@@ -82,6 +87,7 @@ def logoutview(request):
     Logs out the user and redirects them to the homepage or another page.
     """
     logout(request)  # This logs out the user
+    messages.success(request, "Logged out successfully!")
     return redirect('home')  # Redirect to a named URL (e.g., homepage or login page)
 
 def password_reset_request(request):

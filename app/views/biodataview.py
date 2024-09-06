@@ -3,6 +3,7 @@ from app.forms import BiodataForm,Biodata,BiodataUpdateForm
 from datetime import date
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.contrib import messages
 
 def create_biodata(request):
     if request.method == 'POST':
@@ -12,11 +13,13 @@ def create_biodata(request):
             biodata = form.save(commit=False)
             biodata.user = request.user
             biodata.save()
+            messages.success(request,"Biodata created successfully!")
             return redirect('home')
         else:
             print(form.errors)
     else:
         form = BiodataForm()
+    messages.info(request,"Create your biodata first")
     return render(request, 'pages/biodata_form.html', {'form': form})
 
 def calculate_age(birthdate):
@@ -57,6 +60,7 @@ def profile_detail(request, pk):
         profile = Biodata.objects.get(pk=pk)
         return render(request, 'pages/profile_detail.html', {'profile': profile})
     except Biodata.DoesNotExist:
+        messages.warning(request, "create your profile first")
         return redirect('biodata')
 
 
@@ -109,10 +113,14 @@ def biodata_update_view(request):
         if form.is_valid():
             print('Form is valid')
             form.save()
+            messages.success(request, "Biodata updated succesfully!")
             return redirect('home')  # Redirect to a success page
         else:
             print('Form is not valid')
-            print(form.errors)  # Debugging form errors
+            form = BiodataUpdateForm(instance=biodata)
+            messages.error(request, "Error updating biodata. Please try again.")
+            return render(request, 'pages/biodata_update.html', {'form': form})
+            # print(form.errors)  # Debugging form errors
     else:
         form = BiodataUpdateForm(instance=biodata)
     

@@ -83,7 +83,7 @@ class Religion(models.Model):
     def __str__(self):
         return self.name
 
-genderchoices = (('M', 'Male'), ('F', 'Female'))
+genderchoices = (('Male', 'Male'), ('Female', 'Female'))
 class Biodata(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(choices=genderchoices,max_length=10)
@@ -97,7 +97,7 @@ class Biodata(models.Model):
     address = models.TextField()
     job_type = models.ForeignKey(JobType, on_delete=models.SET_NULL, null=True)
     company_name = models.CharField(max_length=150)
-    salary = models.DecimalField(max_digits=10, decimal_places=2)
+    salary = models.IntegerField()
     job_experience = models.DecimalField(max_digits=5, decimal_places=2)  # Example: 3.5 for 3.5 years
     degree = models.CharField(max_length=150)
     about = models.TextField(default='no details')
@@ -122,4 +122,4 @@ class Biodata(models.Model):
     image4 = models.ImageField(upload_to='images/profile', blank=True, null=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.name

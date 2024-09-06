@@ -13,9 +13,9 @@
                     <div class="pro-ave" title="User currently available">
                         <span class="pro-ave-yes"></span>
                     </div>
-                    <div class="pro-avl-status">
+                    {% comment %} <div class="pro-avl-status">
                         <h5>Available Online</h5>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 <div class="pro-detail">
                     <h4><a href="{% url 'profile_detail' item.id %}">{{ item.user.name }}</a></h4>
@@ -26,7 +26,6 @@
                         <span>Height: {{ item.height }}</span>
                     </div>
                     <div class="links">
-                        <span class="cta-chat">Chat now</span>
                         <a href="#!">WhatsApp</a>
                         <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
                         <a href="profile-details.html">More details</a>

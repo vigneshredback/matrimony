@@ -38,28 +38,27 @@
                         <div class="col-md-4 col-lg-3">
                             <div class="db-nav">
                                 <div class="db-nav-pro">
-                                    <img src="images/profiles/12.jpg" class="img-fluid" alt="">
+                                    {% if biodata.image1.url == none %}
+                                    <img src="{{biodata.image1.url}}" class="img-fluid" alt="">
+                                    {% else %}
+                                    <img src="{% static 'images/profiles/men1.jpg' %}" class="img-fluid" alt="no image">
+                                    {% endif %}
                                 </div>
                                 <div class="db-nav-list">
                                     <ul>
                                         <li>
-                                            <a href="user-dashboard.html">
-                                                <i class="fa fa-tachometer" aria-hidden="true"></i>{{biodata}}
+                                            <a href="{% url 'dashboard' %}">
+                                                <i class="fa fa-tachometer" aria-hidden="true"></i>{{name}}'s Dashbord 
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="user-profile.html" class="act">
+                                            <a href="{% url 'dashboardprofile' %}" class="act">
                                                 <i class="fa fa-male" aria-hidden="true"></i>Profile
                                             </a>
                                         </li>
                                         <li>
                                             <a href="user-interests.html">
                                                 <i class="fa fa-handshake-o" aria-hidden="true"></i>Interests
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-chat.html">
-                                                <i class="fa fa-commenting-o" aria-hidden="true"></i>Chat list
                                             </a>
                                         </li>
                                         <li>
@@ -73,7 +72,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="{% url 'logout' %}">
                                                 <i class="fa fa-sign-out" aria-hidden="true"></i>Log out
                                             </a>
                                         </li>
@@ -87,7 +86,11 @@
                                     <h2 class="db-tit">Profiles status</h2>
                                     <div class="db-profile">
                                         <div class="img">
-                                            <img src="images/profiles/12.jpg" loading="lazy" alt="">
+                                            {% if biodata.image1.url == '' %}
+                                            <img src="{{biodata.image1.url}}" class="img-fluid" alt="">
+                                            {% else %}
+                                            <img src="{% static 'images/profiles/men1.jpg' %}" class="img-fluid" alt="no image">
+                                            {% endif %}
                                         </div>
                                         <div class="edit">
                                             <a href="{% url 'biodata_update' %}" class="cta-dark" target="_blank">Edit profile</a>
@@ -104,7 +107,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a class="dropdown-item" href="#">Edid profile</a>
+                                                    <a class="dropdown-item" href="#">Edit profile</a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item" href="#">View profile</a>
@@ -116,7 +119,7 @@
                                         </div>
                                         <div class="db-pro-pgog">
                                             <span>
-                                                <b class="count">90</b>%
+                                                <b class="count">10</b>%
                                             </span>
                                         </div>
                                         <ul class="pro-stat-ic">
@@ -149,27 +152,7 @@
                                 </div>
                                 
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 db-sec-com db-pro-stat-pg">
-                                    <h2 class="db-tit">Profiles views</h2>
-                                    <div class="db-pro-stat-view-filter cho-round-cor chosenini">
-                                        <div>
-                                            <select class="chosen-select">
-                                                <option value="">Current month</option>
-                                                <option value="">Jan 2024</option>
-                                                <option value="">Fan 2024</option>
-                                                <option value="">Mar 2024</option>
-                                                <option value="">Apr 2024</option>
-                                                <option value="">May 2024</option>
-                                                <option value="">Jun 2024</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="chartin">
-                                        <canvas id="Chart_leads"></canvas>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
