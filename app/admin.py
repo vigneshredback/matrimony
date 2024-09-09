@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import Couples
 from .models import Biodata, City, JobType, Hobby, Religion,User
 
-
 # Register your models here.
 admin.site.register(Biodata)
 admin.site.register(City)

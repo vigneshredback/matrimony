@@ -23,6 +23,7 @@ urlpatterns = [
     path('allprofiles/', biodataview.allprofiles, name='allprofiles'),
     path('profile-detail/<int:pk>/', biodataview.profile_detail, name='profile_detail'),
     path('biodata/update/', biodataview.biodata_update_view, name='biodata_update'),
+    path('search/',biodataview.searchprofile, name='search'),
     # dashboard urls
     path('dashboard/', dashboardview.dashboard, name='dashboard'),
     path('dashboard-profile/', dashboardview.dashboardprofile, name='dashboardprofile')

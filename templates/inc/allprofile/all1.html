@@ -1,6 +1,6 @@
 
 <!-- Your existing content goes here -->
-
+{% load static %}
 <div class="all-list-sh">
     <ul id="profile-list">
         {% for item in profiles %}
@@ -8,7 +8,16 @@
             <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
                 <div class="pro-img">
                     <a href="{% url 'profile_detail' item.id %}">
-                        <img src="{{item.image1}}" alt="">
+                        {% if not item.image %}
+                        {% if item.gender == 'Male' %}
+                            <img src="{% static 'images/couples/maleavatar.jpg' %}" alt="male">
+                        {% else %}
+                            <img src="{% static 'images/couples/femaleavatar.jpg' %}" alt="female">
+                        {% endif %}
+                    {% else %}
+                        <img src="{{ item.image.url }}" alt="original">
+                    {% endif %}
+                    
                     </a>
                     <div class="pro-ave" title="User currently available">
                         <span class="pro-ave-yes"></span>
@@ -67,11 +76,12 @@
             const profileList = document.getElementById('profile-list');
             data.profiles.forEach(item => {
                 const li = document.createElement('li');
+                const imgSrc = item.image_url ? item.image_url : (item.gender === 'Male' ? '/static/images/couples/maleavatar.jpg' : '/static/images/couples/femaleavatar.jpg');
                 li.innerHTML = `
                     <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
                         <div class="pro-img">
-                            <a href="http://127.0.0.1:8000/profile-detail/${item.id}/">
-                                <img src="${item.image1}" alt="${item.image1}">
+                            <a href="/profile-detail/${item.id}/">
+                                <img src="${imgSrc}" alt="${item.gender}">
                             </a>
                             <div class="pro-ave" title="User currently available">
                                 <span class="pro-ave-yes"></span>
@@ -81,7 +91,7 @@
                             </div>
                         </div>
                         <div class="pro-detail">
-                            <h4><a href="http://127.0.0.1:8000/profile-detail/${item.id}/">${item.name}</a></h4>
+                            <h4><a href="/profile-detail/${item.id}/">${item.name}</a></h4>
                             <div class="pro-bio">
                                 <span>${item.degree}</span>
                                 <span>${item.profession}</span>
@@ -111,6 +121,7 @@
         .catch(() => {
             loading = false;
             document.getElementById('loading').style.display = 'none';
+            // Optional: Handle error, show user message
         });
     }
 </script>

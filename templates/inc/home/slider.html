@@ -12,15 +12,16 @@
                                 <p>Most trusted Matrimony Brand in the World.</p>
                             </div>
                             <div class="ban-search chosenini">
-                                <form>
+                                <form method="post" action="{% url 'search' %}">
+                                    {% csrf_token %}
                                     <ul>
                                         <li class="sr-look">
                                             <div class="form-group">
                                                 <label>I'm looking for</label>
                                                 <select class="chosen-select" name='gender'>
-                                                    <option value="all">I'm looking for</option>
-                                                    <option value="men">Men</option>
-                                                    <option value="women">Women</option>
+                                                    <option value="all">All Genders</option>
+                                                    <option value="Male">Men</option>
+                                                    <option value="Female">Women</option>
                                                 </select>
                                             </div>
                                         </li>
@@ -28,7 +29,7 @@
                                             <div class="form-group">
                                                 <label>Age</label>
                                                 <select class="chosen-select" name='age'>
-                                                    <option value="all">Age</option>
+                                                    <option value="all">Any Age</option>
                                                     <option value="1">18 to 30</option>
                                                     <option value="2">31 to 40</option>
                                                     <option value="3">41 to 50</option>
@@ -39,11 +40,10 @@
                                             <div class="form-group">
                                                 <label>Religion</label>
                                                 <select class="chosen-select" name='religion'>
-                                                    <option value="all">Religion</option>
+                                                    <option value="all">Any Religion</option>
                                                     {% for item in religions %}
-                                                    <option>{{item}}</option>
+                                                    <option value="{{ item.name }}">{{ item.name }}</option>
                                                     {% endfor %}
-
                                                 </select>
                                             </div>
                                         </li>
@@ -51,9 +51,9 @@
                                             <div class="form-group">
                                                 <label>City</label>
                                                 <select class="chosen-select" name='city'>
-                                                    <option value="all">City</option>
+                                                    <option value="all">Any City</option>
                                                     {% for item in cities %}
-                                                    <option>{{item}}</option>
+                                                    <option value="{{ item.name }}">{{ item.name }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
@@ -63,6 +63,7 @@
                                         </li>
                                     </ul>
                                 </form>
+                                
                             </div>
                         </div>
                     </div>

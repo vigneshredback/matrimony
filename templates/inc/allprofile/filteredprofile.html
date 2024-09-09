@@ -1,0 +1,116 @@
+<!-- Your existing content goes here -->
+{% load static %}
+<div class="all-list-sh">
+    <ul id="profile-list">
+        {% for item in profiles %}
+        <li>
+            <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
+                <div class="pro-img">
+                    <a href="{% url 'profile_detail' item.id %}">
+                        {% if not item.image %}
+                        {% if item.gender == 'Male' %}
+                            <img src="{% static 'images/couples/maleavatar.jpg' %}" alt="male">
+                        {% else %}
+                            <img src="{% static 'images/couples/femaleavatar.jpg' %}" alt="female">
+                        {% endif %}
+                        {% else %}
+                            <img src="{{ item.image.url }}" alt="original">
+                        {% endif %}
+                    </a>
+                    <div class="pro-ave" title="User currently available">
+                        <span class="pro-ave-yes"></span>
+                    </div>
+                </div>
+                <div class="pro-detail">
+                    <h4><a href="{% url 'profile_detail' item.id %}">{{ item.user.name }}</a></h4>
+                    <div class="pro-bio">
+                        <span>{{ item.degree }}</span>
+                        <span>{{ item.profession }}</span>
+                        <span>Age: {{ item.age }}</span>
+                        <span>Height: {{ item.height }}</span>
+                    </div>
+                    <div class="links">
+                        <a href="#!">WhatsApp</a>
+                        <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
+                        <a href="profile-details.html">More details</a>
+                    </div>
+                </div>
+                <span class="enq-sav" data-toggle="tooltip" title="Click to save this profile.">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div id="loading" style="display: none;">Loading...</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('#profile-list');
+        const loadingIndicator = document.getElementById('loading');
+        let page = 1;
+        let isLoading = false;
+        let hasNext = true;
+
+
+    
+        function loadMoreProfiles() {
+            if (!hasNext || isLoading) return;
+
+            isLoading = true;
+            loadingIndicator.style.display = 'block';
+
+            page++;
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `http://127.0.0.1:8000/search/?page=${page}&gender={{gender}}&age={{age}}&religion={{religion}}&city={{city}}`, true);
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    hasNext = response.has_next;
+                    const profiles = response.profiles;
+
+                    if (profiles.length) {
+                        profiles.forEach(profile => {
+                            const li = document.createElement('li');
+                            li.innerHTML = `
+                                <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
+                                    <div class="pro-img">
+                                        <a href="/profile/${profile.id}">
+                                            <img src="${profile.image1}" alt="${profile.name}">
+                                        </a>
+                                    </div>
+                                    <div class="pro-detail">
+                                        <h4><a href="/profile/${profile.id}">${profile.name}</a></h4>
+                                        <div class="pro-bio">
+                                            <span>${profile.degree}</span>
+                                            <span>${profile.profession}</span>
+                                            <span>Age: ${profile.age}</span>
+                                            <span>Height: ${profile.height}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            container.appendChild(li);
+                        });
+                    }
+
+                    isLoading = false;
+                    loadingIndicator.style.display = 'none';
+                }
+            };
+            xhr.send();
+        }
+    
+        window.addEventListener('scroll', function() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !isLoading) {
+                loadMoreProfiles();
+            }
+        });
+    });
+    
+</script>

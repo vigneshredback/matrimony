@@ -9,7 +9,16 @@
                     <div class="profile">
                         <div class="pg-pro-big-im">
                             <div class="s1">
-                                <img src="{{profile.image1}}" loading="lazy" class="pro" alt="">
+                                {% if not item.image %}
+                                    {% if profile.gender == 'Male' %}
+                                        <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
+                                    {% else %}
+                                        <img src="{% static 'images/couples/femaleavatar.jpg' %}" class="image-responsive" alt="female">
+                                    {% endif %}
+                                {% else %}
+                                    <img src="{{ profile.image.url }}" alt="original">
+                                {% endif %}
+              
                             </div>
                             <div class="s3">
                        
@@ -66,21 +75,45 @@
                                 <div id="image-gallery">
                                     <div class="pro-gal-imag">
                                         <div class="img-wrapper">
-                                            <a href="#!"><img src="{{profile.image2}}" class="img-responsive" alt=""></a>
+                                            {% if not item.image %}
+                                            {% if profile.gender == 'Male' %}
+                                                <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
+                                            {% else %}
+                                                <img src="{% static 'images/couples/femaleavatar.jpg' %}" class="image-responsive" alt="female">
+                                            {% endif %}
+                                            {% else %}
+                                            <img src="{{ profile.image2.url }}" alt="original">
+                                            {% endif %}
                                             <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="pro-gal-imag">
                                         <div class="img-wrapper">
-                                            <a href="#!"><img src="{{profile.image3}}" class="img-responsive" alt=""></a>
+                                            {% if not item.image %}
+                                            {% if profile.gender == 'Male' %}
+                                                <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
+                                            {% else %}
+                                                <img src="{% static 'images/couples/femaleavatar.jpg' %}" class="image-responsive" alt="female">
+                                            {% endif %}
+                                            {% else %}
+                                            <img src="{{ profile.image3.url }}" alt="original">
+                                            {% endif %}
                                             <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="pro-gal-imag">
                                         <div class="img-wrapper">
-                                            <a href="#!"><img src="{{profile.image4}}.jpg" class="img-responsive" alt=""></a>
+                                            {% if not item.image %}
+                                            {% if profile.gender == 'Male' %}
+                                                <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
+                                            {% else %}
+                                                <img src="{% static 'images/couples/femaleavatar.jpg' %}" class="image-responsive" alt="female">
+                                            {% endif %}
+                                            {% else %}
+                                            <img src="{{ profile.image4.url }}" alt="original">
+                                            {% endif %}
                                             <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                             </div>
                                         </div>

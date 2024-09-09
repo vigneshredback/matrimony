@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h1>Statistics</h1>
+<ul>
+    <li>Total Users: {{ user_count }}</li>
+    <li>Total Biodata: {{ biodata_count }}</li>
+    <li>Total Cities: {{ city_count }}</li>
+    <li>Total Job Types: {{ job_type_count }}</li>
+    <li>Total Hobbies: {{ hobby_count }}</li>
+    <li>Total Religions: {{ religion_count }}</li>
+    <li>Total Couples: {{ couples_count }}</li>
+</ul>
+{% endblock %}
