@@ -77,11 +77,12 @@
                     if (profiles.length) {
                         profiles.forEach(profile => {
                             const li = document.createElement('li');
+                            const imgSrc = profile.image_url ? profile.image_url : (profile.gender === 'Male' ? 'http://127.0.0.1:8000//static/images/couples/maleavatar.jpg' : 'http://127.0.0.1:8000//static/images/couples/femaleavatar.jpg');
                             li.innerHTML = `
                                 <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
                                     <div class="pro-img">
                                         <a href="/profile/${profile.id}">
-                                            <img src="${profile.image1}" alt="${profile.name}">
+                                            <img src="${imgSrc}" alt="${imgSrc}">
                                         </a>
                                     </div>
                                     <div class="pro-detail">
@@ -92,6 +93,13 @@
                                             <span>Age: ${profile.age}</span>
                                             <span>Height: ${profile.height}</span>
                                         </div>
+                                        
+                                        <div class="links">
+                                            <a href="#!">WhatsApp</a>
+                                            <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
+                                            <a href="profile-details.html">More details</a>
+                                        </div>
+
                                     </div>
                                 </div>
                             `;

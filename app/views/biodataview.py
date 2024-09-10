@@ -4,7 +4,7 @@ from datetime import date
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.contrib import messages
-
+from app.models import Biodata,City,Religion
 def create_biodata(request):
     if request.method == 'POST':
         form = BiodataForm(request.POST, request.FILES)
@@ -28,6 +28,9 @@ def calculate_age(birthdate):
 
 def allprofiles(request):
     profiles = Biodata.objects.all()
+    cities = City.objects.all()
+    religions = Religion.objects.all()
+    context = {'cities':cities,'religions':religions}
     totalprofiles = profiles.count()
     paginator = Paginator(profiles, 5)  # 10 profiles per page
 
@@ -54,7 +57,7 @@ def allprofiles(request):
         }
         return JsonResponse(data)
 
-    return render(request, 'pages/allprofiles.html', {'profiles': page_obj, 'totalprofiles': totalprofiles})
+    return render(request, 'pages/allprofiles.html', {'profiles': page_obj, 'totalprofiles': totalprofiles,'cities':cities,'religions':religions})
 
 
 
@@ -65,6 +68,8 @@ def searchprofile(request):
         age = request.POST.get('age', 'all')
         city = request.POST.get('city', 'all')
         religion = request.POST.get('religion', 'all')
+        cities = City.objects.all()
+        religions = Religion.objects.all()
 
         print(gender, age, city, religion)
 
@@ -117,7 +122,7 @@ def searchprofile(request):
             }
             return JsonResponse(data)
 
-        return render(request, 'pages/filteredprofiles.html', {'profiles': page_obj, 'totalprofiles': totalprofiles,'gender':gender,'age':age,'city':city,'religion':religion})
+        return render(request, 'pages/filteredprofiles.html', {'profiles': page_obj, 'totalprofiles': totalprofiles,'gender':gender,'age':age,'city':city,'religion':religion,'cities':cities,'religions':religions})
     
     if request.method == 'GET':
         print('GET request received')
