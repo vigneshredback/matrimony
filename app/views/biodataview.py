@@ -192,23 +192,30 @@ def profile_detail(request, pk):
         return redirect('biodata')
 
 def biodata_update_view(request):
-    user = request.user
-    biodata = Biodata.objects.get(user=user)
-    
+    user_id = request.user.id
+
+    try:
+        # Try to get the existing Biodata object for the logged-in user
+        biodata = Biodata.objects.get(user_id=user_id)
+    except Biodata.DoesNotExist:
+        # Handle the case where the Biodata object does not exist
+        biodata = None
+        messages.error(request, "Biodata does not exist.")
+        return redirect('biodata')  # Redirect to an error page or some other page
+
+    # If a Biodata object exists, continue with the form handling
     if request.method == 'POST':
         form = BiodataUpdateForm(request.POST, request.FILES, instance=biodata)
         if form.is_valid():
             print('Form is valid')
             form.save()
-            messages.success(request, "Biodata updated succesfully!")
+            messages.success(request, "Biodata updated successfully!")
             return redirect('home')  # Redirect to a success page
         else:
             print('Form is not valid')
-            form = BiodataUpdateForm(instance=biodata)
             messages.error(request, "Error updating biodata. Please try again.")
-            return render(request, 'pages/biodata_update.html', {'form': form})
-            # print(form.errors)  # Debugging form errors
     else:
+        # GET request: Display the form with the current Biodata instance
         form = BiodataUpdateForm(instance=biodata)
-    
+
     return render(request, 'pages/biodata_update.html', {'form': form})

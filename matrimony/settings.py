@@ -144,12 +144,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'app.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.hostinger.com'
-EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 535
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'vignesh@redbackit.com'
-EMAIL_HOST_PASSWORD = 'b!8TSw40g@'
-DEFAULT_FROM_EMAIL = 'vignesh@redbackit.com'
+EMAIL_HOST_USER = 'vigneshredback@gmail.com'
+EMAIL_HOST_PASSWORD = 'pwbmondaqaqklhwz'
+DEFAULT_FROM_EMAIL = 'vigneshredback@gmail.com'
+EMAIL_TIMEOUT = 30   
 
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

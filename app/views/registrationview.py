@@ -17,6 +17,31 @@ User = get_user_model()
 
 
 
+# def register(request):
+#     if request.method == 'POST':
+#         form = RegistrationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.is_active = False
+#             user.save()
+
+#             # Send email verification
+#             current_site = get_current_site(request)
+#             mail_subject = 'Activate your account.'
+#             message = render_to_string('pages/activation_email.html', {
+#                 'user': user,
+#                 'domain': current_site.domain,
+#                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+#                 'token': default_token_generator.make_token(user),
+#             })
+#             send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [user.email])
+
+#             messages.success(request, 'email sent to your email. Please confirm your email address to complete the registration.')
+#             return redirect('home')
+#     else:
+#         form = RegistrationForm()
+#     return render(request, 'pages/register.html')
+
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -24,20 +49,12 @@ def register(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-
-            # Send email verification
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your account.'
-            message = render_to_string('pages/activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
-            })
-            send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [user.email])
-
-            messages.success(request, 'email sent to your email. Please confirm your email address to complete the registration.')
+            messages.success(request, 'registration successfully please wait for admin approval')
             return redirect('home')
+        else:
+            print(form.errors)
+            messages.error(request, "form details are not valid")
+            return redirect('register')
     else:
         form = RegistrationForm()
     return render(request, 'pages/register.html')

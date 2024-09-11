@@ -7,14 +7,14 @@
             <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
                 <div class="pro-img">
                     <a href="{% url 'profile_detail' item.id %}">
-                        {% if not item.image %}
+                        {% if not item.image1 %}
                         {% if item.gender == 'Male' %}
                             <img src="{% static 'images/couples/maleavatar.jpg' %}" alt="male">
                         {% else %}
                             <img src="{% static 'images/couples/femaleavatar.jpg' %}" alt="female">
                         {% endif %}
                         {% else %}
-                            <img src="{{ item.image.url }}" alt="original">
+                            <img src="{{ item.image1.url }}" alt="original">
                         {% endif %}
                     </a>
                     <div class="pro-ave" title="User currently available">

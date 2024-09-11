@@ -9,14 +9,14 @@
                     <div class="profile">
                         <div class="pg-pro-big-im">
                             <div class="s1">
-                                {% if not item.image %}
+                                {% if not profile.image1 %}
                                     {% if profile.gender == 'Male' %}
                                         <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
                                     {% else %}
                                         <img src="{% static 'images/couples/femaleavatar.jpg' %}" class="image-responsive" alt="female">
                                     {% endif %}
                                 {% else %}
-                                    <img src="{{ profile.image.url }}" alt="original">
+                                    <img src="{{ profile.image1.url }}" alt="original">
                                 {% endif %}
               
                             </div>
@@ -75,7 +75,7 @@
                                 <div id="image-gallery">
                                     <div class="pro-gal-imag">
                                         <div class="img-wrapper">
-                                            {% if not item.image %}
+                                            {% if not profile.image2 %}
                                             {% if profile.gender == 'Male' %}
                                                 <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
                                             {% else %}
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="pro-gal-imag">
                                         <div class="img-wrapper">
-                                            {% if not item.image %}
+                                            {% if not profile.image3 %}
                                             {% if profile.gender == 'Male' %}
                                                 <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
                                             {% else %}
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="pro-gal-imag">
                                         <div class="img-wrapper">
-                                            {% if not item.image %}
+                                            {% if not profile.image4 %}
                                             {% if profile.gender == 'Male' %}
                                                 <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
                                             {% else %}
