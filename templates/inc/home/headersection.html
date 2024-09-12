@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="lhs">
                     <ul>
-                        <li><a href="#!" class="ser-open"><i class="fa-brands fa-search" aria-hidden="true"></i></a></li>
+                        <li><a href="#!" class="ser-open"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
                         <li><a href="{% url 'faq' %}">FAQ</a></li>
                         <li><a href="{% url 'contact' %}">Contact</a></li>
@@ -31,14 +31,16 @@
                 </div>
                 <div class="rhs">
                     <ul>
-                        <li><a href="tel:+9704462944"><i class="fa-brands fa-phone" aria-hidden="true"></i> &nbsp;+01 5312
+                        <li><a href="tel:+9704462944"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;+01 5312
                                 5312</a></li>
-                        <li><a href="mailto:info@example.com"><i class="fa-brands fa-envelope-o"
-                                    aria-hidden="true"></i>&nbsp; help@company.com</a></li>
+                        <li><a href="mailto:info@example.com"><i class="fa fa-envelope-o"
+                                    aria-hidden="true"></i>&nbsp; redback.in</a></li>
                         <li><a href="#!"><i class="fa-brands fa-twitter"></i></a></li>
                         <li><a href="#!"><i class="fa-brands fa-facebook"></i></a></li>
                         <li><a href="#!"><i class="fa-brands fa-whatsapp"></i></a></li>
-                        <li><a href="#!">{{ request.user.email }}</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="#!">welcome{{ request.user.name }}</a></li>
+                        {% endif %}
                         
                     </ul>
                 </div>
@@ -55,10 +57,10 @@
             <p><strong>Best Wedding Matrimony</strong> lacinia viverra lectus. Fusce imperdiet ullamcorper metus eu
                 fringilla.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
             <ul class="menu-pop-info">
-                <li><a href="#!"><i class="fa-brands fa-phone" aria-hidden="true"></i>+92 (8800) 68 - 8960</a></li>
+                <li><a href="#!"><i class="fa fa-phone" aria-hidden="true"></i>+92 (8800) 68 - 8969</a></li>
                 <li><a href="#!"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>+92 (8800) 68 - 8960</a></li>
-                <li><a href="#!"><i class="fa-brands fa-envelope-o" aria-hidden="true"></i>help@company.com</a></li>
-                <li><a href="#!"><i class="fa-brands fa-map-marker" aria-hidden="true"></i>3812 Lena Lane City Jackson Mississippi</a></li>
+                <li><a href="#!"><i class="fa fa-envelope-o" aria-hidden="true"></i>help@company.com</a></li>
+                <li><a href="#!"><i class="fa fa-map-marker" aria-hidden="true"></i>3812 Lena Lane City Jackson Mississippi</a></li>
             </ul>
             <div class="menu-pop-help">
                 <h4>Support Team</h4>
