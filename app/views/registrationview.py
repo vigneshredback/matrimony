@@ -12,6 +12,9 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from app.models import Biodata
+from django.contrib.auth.decorators import login_required
+from app.forms import UserEditForm
+from django.http import JsonResponse
 
 User = get_user_model()
 
@@ -152,3 +155,30 @@ def password_reset_confirm(request, uidb64, token):
 
 def password_reset_complete(request):
     return render(request, 'pages/password_reset_complete.html')
+
+
+
+# views.py
+@login_required
+def edit_account(request):
+    user = request.user  # Get the currently logged-in user
+
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            # If a new password is provided, hash it before saving
+            password = form.cleaned_data.get('password')
+            if password:
+                user.set_password(password)  # Hash and set the new password
+
+            form.save(commit=False)  # Save the form without committing yet
+            user.save()  # Save the user with the new hashed password
+            messages.success(request, 'Your account has been updated successfully!')
+            return redirect('dashboardsetting')
+        else:
+            messages.error(request, 'error happened try again!')
+            return redirect('dashboardsetting')
+    
+    else:
+        form = UserEditForm(instance=user)  # Pre-fill the form with the user's data
+        return render(request, 'edit_account.html', {'form': form})

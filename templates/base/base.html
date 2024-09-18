@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="keyword" content="">
     <!--== FAV ICON(BROWSER TAB ICON) ==-->
-    <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'images/fav.ico' %}" type="image/x-icon">
     <!--== CSS FILES ==-->
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
@@ -24,9 +24,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
     <style>
+        ::selection {
+            background-color: #000000;
+            color: #fff;
+        }
         .toast {
     opacity: 1 !important; /* Ensures no opacity is applied */
+}
+body {
+    user-select: none;
 }
     </style>
 </head>
@@ -38,8 +46,15 @@
     {% endblock content %}
 
     {% include 'inc/home/footer.html' %}
-
-
+    <!-- cursor JS -->
+    {% comment %} <script src="https://unpkg.com/kursor"></script>
+    <script>
+        new kursor({
+            type: 2,
+            removeDefaultCursor: true,
+             color: '#FF0060'
+        })
+    </script> {% endcomment %}
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -65,7 +80,6 @@
                                 "showMethod": "fadeIn",        // Show method
                                 "hideMethod": "fadeOut"        // Hide method
                               };
-          
                               toastr["{{ message.tags|default:'info' }}"]("{{ message }}");
                           {% endfor %}
                       {% endif %}
@@ -82,6 +96,46 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <!-- Initialize Toastr options (Optional) -->
+
+
+        <script>
+            document.addEventListener('contextmenu', function(event) {
+                event.preventDefault();
+            });
+        </script>
+
+        <script>
+            document.onkeydown = function(e) {
+                // Disable F12
+                if (e.key === "F12") {
+                    return false;
+                }
+                // Disable Ctrl+Shift+I
+                if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                    return false;
+                }
+                // Disable Ctrl+U
+                if (e.ctrlKey && e.key === 'U') {
+                    return false;
+                }
+                // Disable Ctrl+Shift+C or Ctrl+Shift+J (inspect and console)
+                if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'J')) {
+                    return false;
+                }
+            };
+        </script>
+        
+
+        <script>
+            document.addEventListener('keydown', function(event) {
+                // Prevent Ctrl+U
+                if (event.ctrlKey && event.key === 'u') {
+                    event.preventDefault();
+                }
+            });
+        </script>
+        
+        
 
     {% block script %}
     {% endblock script %}

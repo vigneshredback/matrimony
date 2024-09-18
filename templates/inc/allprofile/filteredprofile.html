@@ -48,6 +48,8 @@
 
 
 
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const container = document.querySelector('#profile-list');
@@ -56,8 +58,6 @@
         let isLoading = false;
         let hasNext = true;
 
-
-    
         function loadMoreProfiles() {
             if (!hasNext || isLoading) return;
 
@@ -66,8 +66,9 @@
 
             page++;
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', `http://127.0.0.1:8000/search/?page=${page}&gender={{gender}}&age={{age}}&religion={{religion}}&city={{city}}`, true);
+            xhr.open('GET', `/search/?page=${page}&gender={{gender}}&age={{age}}&religion={{religion}}&city={{city}}`, true);
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
@@ -77,29 +78,31 @@
                     if (profiles.length) {
                         profiles.forEach(profile => {
                             const li = document.createElement('li');
-                            const imgSrc = profile.image_url ? profile.image_url : (profile.gender === 'Male' ? 'http://127.0.0.1:8000//static/images/couples/maleavatar.jpg' : 'http://127.0.0.1:8000//static/images/couples/femaleavatar.jpg');
+                            const imgSrc = profile.image_url ? profile.image_url : 
+                                (profile.gender === 'Male' 
+                                ? 'http://127.0.0.1:8000//static/images/couples/maleavatar.jpg' 
+                                : 'http://127.0.0.1:8000//static/images/couples/femaleavatar.jpg');
+
                             li.innerHTML = `
                                 <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
                                     <div class="pro-img">
-                                        <a href="/profile/${profile.id}">
+                                        <a href="/profile-detail/${profile.id}">
                                             <img src="${imgSrc}" alt="${imgSrc}">
                                         </a>
                                     </div>
                                     <div class="pro-detail">
-                                        <h4><a href="/profile/${profile.id}">${profile.name}</a></h4>
+                                        <h4><a href="/profile-detail/${profile.id}">${profile.name}</a></h4>
                                         <div class="pro-bio">
                                             <span>${profile.degree}</span>
                                             <span>${profile.profession}</span>
                                             <span>Age: ${profile.age}</span>
                                             <span>Height: ${profile.height}</span>
                                         </div>
-                                        
                                         <div class="links">
                                             <a href="#!">WhatsApp</a>
                                             <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
                                             <a href="profile-details.html">More details</a>
                                         </div>
-
                                     </div>
                                 </div>
                             `;
@@ -111,14 +114,20 @@
                     loadingIndicator.style.display = 'none';
                 }
             };
+
+            xhr.onerror = function() {
+                console.error("An error occurred while fetching profiles.");
+                isLoading = false;
+                loadingIndicator.style.display = 'none';
+            };
+
             xhr.send();
         }
-    
+
         window.addEventListener('scroll', function() {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !isLoading) {
                 loadMoreProfiles();
             }
         });
     });
-    
 </script>

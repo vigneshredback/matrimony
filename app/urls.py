@@ -1,5 +1,5 @@
 from django.urls import path 
-from .views import  dashboardview, homeview,aboutview,faqview,planview,contactview,registrationview,biodataview
+from .views import  dashboardview, homeview,aboutview,faqview,planview,contactview,registrationview,biodataview,views,admindashboardview
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -13,12 +13,14 @@ urlpatterns = [
     path('login/', registrationview.loginview, name='login'),
     path('logout/', registrationview.logoutview, name='logout'),
     path('activate/<uidb64>/<token>/', registrationview.activate, name='activate'),
+    path('edit-account/', registrationview.edit_account, name='edit_account'),
     # Password reset URLs
     path('password-reset/', registrationview.password_reset_request, name='password_reset'),
     path('password-reset/done/', registrationview.password_reset_done, name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', registrationview.password_reset_confirm, name='password_reset_confirm'),
     path('password-reset-complete/', registrationview.password_reset_complete, name='password_reset_complete'),
     path('biodata/', biodataview.create_biodata, name='biodata'),
+    
     # profile urls
     path('allprofiles/', biodataview.allprofiles, name='allprofiles'),
     path('profile-detail/<int:pk>/', biodataview.profile_detail, name='profile_detail'),
@@ -26,5 +28,16 @@ urlpatterns = [
     path('search/',biodataview.searchprofile, name='search'),
     # dashboard urls
     path('dashboard/', dashboardview.dashboard, name='dashboard'),
-    path('dashboard-profile/', dashboardview.dashboardprofile, name='dashboardprofile')
+    path('dashboard-profile/', dashboardview.dashboardprofile, name='dashboardprofile'),
+    path('dashboard-setting/', dashboardview.dashboardsetting, name='dashboardsetting'),
+    # 
+    path('aj', views.aj, name='aj'),
+    path('get-post/', views.get_post, name='get_post'),
+    # other URL patterns
+    #  path('post/<int:pk>/like/', biodataview.LikeToggleView.as_view(), name='biodata_like'),
+     path('post/<int:pk>/like/', biodataview.LikeToggleView.as_view(), name='like_toggle'),
+
+
+    # admin dashboard
+    path('adminpage/', admindashboardview.adminhome, name='admin_dashboard'),
     ]

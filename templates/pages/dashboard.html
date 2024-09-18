@@ -28,16 +28,16 @@
                                 {% if biodata.image1.url == none %}
                                 <img src="{{biodata.image1.url}}" class="img-fluid" alt="">
                                 {% else %}
-                                <img src="{% static 'images/profiles/men1.jpg' %}" class="img-fluid" alt="no image">
+                                <img src="{% static 'images/couples/maleavatar.jpg' %}" class="img-fluid" alt="no image">
                                 {% endif %}
                             </div>
                             <div class="db-nav-list">
                                 <ul>
                                     <li><a href="{% url 'dashboard' %}" class="act"><i class="fa fa-tachometer" aria-hidden="true"></i>{{name}}'s' Dashboard</a></li>
                                     <li><a href="{% url 'dashboardprofile' %}"><i class="fa fa-male" aria-hidden="true"></i>Profile</a></li>
-                                    <li><a href="user-interests.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>Interests</a></li>
-                                    <li><a href="user-plan.html"><i class="fa fa-money" aria-hidden="true"></i>Plan</a></li>
-                                    <li><a href="user-setting.html"><i class="fa fa-cog" aria-hidden="true"></i>Setting</a></li>
+                                    {% comment %} <li><a href="user-interests.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>Interests</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="user-plan.html"><i class="fa fa-money" aria-hidden="true"></i>Plan</a></li> {% endcomment %}
+                                    <li><a href="{% url 'dashboardsetting' %}"><i class="fa fa-cog" aria-hidden="true"></i>Setting</a></li>
                                     <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</a></li>
                                 </ul>
                             </div>
@@ -136,31 +136,7 @@
                             </ul>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 col-lg-6 col-xl-4 db-sec-com">
-                                <h2 class="db-tit">Profiles status</h2>
-                                <div class="db-pro-stat">
-                                    <h6>Profile completion</h6>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                          <li><a class="dropdown-item" href="#">Edid profile</a></li>
-                                          <li><a class="dropdown-item" href="#">View profile</a></li>
-                                          <li><a class="dropdown-item" href="#">Profile visibility settings</a></li>
-                                        </ul>
-                                      </div>
-                                    <div class="db-pro-pgog">
-                                        <span><b class="count">90</b>%</span>
-                                    </div>
-                                    <ul class="pro-stat-ic">
-                                        <li><span><i class="fa fa-heart-o like" aria-hidden="true"></i><b>12</b>Likes</span></li>
-                                        <li><span><i class="fa fa-eye view" aria-hidden="true"></i><b>12</b>Views</span></li>
-                                        <li><span><i class="fa fa-handshake-o inte" aria-hidden="true"></i><b>12</b>Interests</span></li>
-                                        <li><span><i class="fa fa-hand-pointer-o clic" aria-hidden="true"></i><b>12</b>Clicks</span></li>
-                                    </ul>
-                                </div>
-                            </div>
+
                             <div class="col-md-12 col-lg-6 col-xl-4 db-sec-com">
                                 <h2 class="db-tit">Plan details</h2>
                                 <div class="db-pro-stat">
@@ -189,35 +165,32 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-xl-4 db-sec-com">
-                                <h2 class="db-tit">Recent chat list</h2>
-                                    <div class="db-pro-stat">
-                                        <div class="db-inte-prof-list db-inte-prof-chat">
-                                            <ul>
-                                                <li>
-                                                    <div class="db-int-pro-1"> <img src="{% static 'images/profiles/2.jpg' %}" alt=""> </div>
-                                                    <div class="db-int-pro-2">
-                                                        <h5>Julia Ann</h5> <span>Illunois, United States</span> </div>
-                                                </li>
-                                                <li>
-                                                    <div class="db-int-pro-1"> <img src="{% static 'images/profiles/16.jpg' %}" alt=""> </div>
-                                                    <div class="db-int-pro-2">
-                                                        <h5>Julia Ann</h5> <span>Illunois, United States</span> </div>
-                                                </li>
-                                                <li>
-                                                    <div class="db-int-pro-1"> <img src="{% static 'images/profiles/13.jpg' %}" alt=""> </div>
-                                                    <div class="db-int-pro-2">
-                                                        <h5>Julia Ann</h5> <span>Illunois, United States</span> </div>
-                                                </li>
-                                                <li>
-                                                    <div class="db-int-pro-1"> <img src="{% static 'images/profiles/14.jpg' %}" alt=""> </div>
-                                                    <div class="db-int-pro-2">
-                                                        <h5>Julia Ann</h5> <span>Illunois, United States</span> </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                            <div class="col-md-12 col-lg-6 col-xl-4 db-sec-com">
+                                <h2 class="db-tit">Profiles status</h2>
+                                <div class="db-pro-stat">
+                                    <h6>Profile completion</h6>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown">
+                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                          <li><a class="dropdown-item" href="#">Edid profile</a></li>
+                                          <li><a class="dropdown-item" href="#">View profile</a></li>
+                                          <li><a class="dropdown-item" href="#">Profile visibility settings</a></li>
+                                        </ul>
+                                      </div>
+                                    <div class="db-pro-pgog">
+                                        <span><b class="count">90</b>%</span>
                                     </div>
+                                    <ul class="pro-stat-ic">
+                                        <li><span><i class="fa fa-heart-o like" aria-hidden="true"></i><b>12</b>Likes</span></li>
+                              
+                                        <li><span><i class="fa fa-handshake-o inte" aria-hidden="true"></i><b>12</b>Interests</span></li>
+               
+                                    </ul>
+                                </div>
                             </div>
+
                         </div>
                         <div class="row">
                             <div class="col-md-12 db-sec-com">
@@ -390,12 +363,6 @@
     </div>
   </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 db-sec-com">
-                                <h2 class="db-tit">Profiles views</h2>
-                                <div class="chartin">
-                                    <canvas id="Chart_leads"></canvas>
                                 </div>
                             </div>
                         </div>

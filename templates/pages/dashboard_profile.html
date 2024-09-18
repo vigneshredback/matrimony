@@ -41,41 +41,17 @@
                                     {% if biodata.image1.url == none %}
                                     <img src="{{biodata.image1.url}}" class="img-fluid" alt="">
                                     {% else %}
-                                    <img src="{% static 'images/profiles/men1.jpg' %}" class="img-fluid" alt="no image">
+                                    <img src="{% static 'images/couples/maleavatar.jpg' %}" class="img-fluid" alt="no image">
                                     {% endif %}
                                 </div>
                                 <div class="db-nav-list">
                                     <ul>
-                                        <li>
-                                            <a href="{% url 'dashboard' %}">
-                                                <i class="fa fa-tachometer" aria-hidden="true"></i>{{name}}'s Dashbord 
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'dashboardprofile' %}" class="act">
-                                                <i class="fa fa-male" aria-hidden="true"></i>Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-interests.html">
-                                                <i class="fa fa-handshake-o" aria-hidden="true"></i>Interests
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-plan.html">
-                                                <i class="fa fa-money" aria-hidden="true"></i>Plan
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-setting.html">
-                                                <i class="fa fa-cog" aria-hidden="true"></i>Setting
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'logout' %}">
-                                                <i class="fa fa-sign-out" aria-hidden="true"></i>Log out
-                                            </a>
-                                        </li>
+                                        <li><a href="{% url 'dashboard' %}" ><i class="fa fa-tachometer" aria-hidden="true"></i>{{name}}'s' Dashboard</a></li>
+                                        <li><a href="{% url 'dashboardprofile' %}" class="act"><i class="fa fa-male" aria-hidden="true"></i>Profile</a></li>
+                                        {% comment %} <li><a href="user-interests.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>Interests</a></li> {% endcomment %}
+                                        {% comment %} <li><a href="user-plan.html"><i class="fa fa-money" aria-hidden="true"></i>Plan</a></li> {% endcomment %}
+                                        <li><a href="{% url 'dashboardsetting' %}"><i class="fa fa-cog" aria-hidden="true"></i>Setting</a></li>
+                                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -123,30 +99,24 @@
                                             </span>
                                         </div>
                                         <ul class="pro-stat-ic">
+
                                             <li>
                                                 <span>
                                                     <i class="fa fa-heart-o like" aria-hidden="true"></i>
                                                     <b>12</b>Likes
                                                 </span>
                                             </li>
-                                            <li>
-                                                <span>
-                                                    <i class="fa fa-eye view" aria-hidden="true"></i>
-                                                    <b>12</b>Views
-                                                </span>
-                                            </li>
+
+
+
                                             <li>
                                                 <span>
                                                     <i class="fa fa-handshake-o inte" aria-hidden="true"></i>
                                                     <b>12</b>Interests
                                                 </span>
                                             </li>
-                                            <li>
-                                                <span>
-                                                    <i class="fa fa-hand-pointer-o clic" aria-hidden="true"></i>
-                                                    <b>12</b>Clicks
-                                                </span>
-                                            </li>
+
+
                                         </ul>
                                     </div>
                                 </div>

@@ -1,10 +1,20 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect,HttpResponse,get_object_or_404
 from app.forms import BiodataForm,Biodata,BiodataUpdateForm
 from datetime import date
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.contrib import messages
-from app.models import Biodata,City,Religion
+from app.models import Biodata,City,Religion,Like
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from app.models import Like, Biodata
+from app.serializers import LikeSerializer
+
+
+
 def create_biodata(request):
     if request.method == 'POST':
         form = BiodataForm(request.POST, request.FILES)
@@ -26,13 +36,47 @@ def calculate_age(birthdate):
     today = date.today()
     return today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
 
+# def allprofiles(request):
+#     profiles = Biodata.objects.all()
+#     cities = City.objects.all()
+#     religions = Religion.objects.all()
+#     context = {'cities':cities,'religions':religions}
+#     totalprofiles = profiles.count()
+#     paginator = Paginator(profiles, 5)  # 10 profiles per page
+
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+
+#     if request.headers.get('x-requested-with') == 'XMLHttpRequest':  # Check if request is AJAX
+#         profiles_data = []
+#         for profile in page_obj:
+#             profiles_data.append({
+#                 'id': profile.id,
+#                 'gender': profile.gender,
+#                 'name': profile.user.name,  # Assuming `user` is a ForeignKey in `Biodata`
+#                 'degree': profile.degree,
+#                 'profession': profile.profession,
+#                 'age': profile.age,
+#                 'height': profile.height,
+#                 'image1': profile.image1.url if profile.image1 else '',  # Convert ImageField to URL
+#             })
+        
+#         data = {
+#             'profiles': profiles_data,
+#             'has_next': page_obj.has_next(),
+#         }
+#         return JsonResponse(data)
+
+#     return render(request, 'pages/allprofiles.html', {'profiles': page_obj, 'totalprofiles': totalprofiles,'cities':cities,'religions':religions})
+
 def allprofiles(request):
     profiles = Biodata.objects.all()
     cities = City.objects.all()
     religions = Religion.objects.all()
-    context = {'cities':cities,'religions':religions}
+    context = {'cities': cities, 'religions': religions}
     totalprofiles = profiles.count()
-    paginator = Paginator(profiles, 5)  # 10 profiles per page
+
+    paginator = Paginator(profiles, 1)  # 5 profiles per page
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -40,6 +84,9 @@ def allprofiles(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':  # Check if request is AJAX
         profiles_data = []
         for profile in page_obj:
+            # Check if the user has liked this profile
+            user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
+
             profiles_data.append({
                 'id': profile.id,
                 'gender': profile.gender,
@@ -49,6 +96,7 @@ def allprofiles(request):
                 'age': profile.age,
                 'height': profile.height,
                 'image1': profile.image1.url if profile.image1 else '',  # Convert ImageField to URL
+                'user_has_liked': user_has_liked  # Add like status to the data
             })
         
         data = {
@@ -57,8 +105,16 @@ def allprofiles(request):
         }
         return JsonResponse(data)
 
-    return render(request, 'pages/allprofiles.html', {'profiles': page_obj, 'totalprofiles': totalprofiles,'cities':cities,'religions':religions})
+    # Pass the same data for HTML response
+    for profile in page_obj:
+        profile.user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
 
+    return render(request, 'pages/allprofiles.html', {
+        'profiles': page_obj,
+        'totalprofiles': totalprofiles,
+        'cities': cities,
+        'religions': religions
+    })
 
 
 def searchprofile(request):
@@ -219,3 +275,25 @@ def biodata_update_view(request):
         form = BiodataUpdateForm(instance=biodata)
 
     return render(request, 'pages/biodata_update.html', {'form': form})
+
+from django.views.decorators.http import require_POST
+
+class LikeToggleView(APIView):
+    def post(self, request, pk, *args, **kwargs):
+        user = request.user
+        biodata = get_object_or_404(Biodata, pk=pk)
+        
+        # Check if the user already liked this Biodata
+        like = Like.objects.filter(user=user, biodata=biodata).first()
+        
+        if like:
+            # User already liked, remove the like (unlike)
+            like.delete()
+            liked = False
+        else:
+            # Add a new like
+            Like.objects.create(user=user, biodata=biodata)
+            liked = True
+
+        # Return the like status (True for liked, False for unliked)
+        return Response({"liked": liked}, status=status.HTTP_200_OK)

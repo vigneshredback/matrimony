@@ -1,0 +1,307 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- LOGIN -->
+    <section>
+        <div class="db">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-lg-3">
+                        <div class="db-nav">
+                            <div class="db-nav-pro">
+                                {% if biodata.image1.url == none %}
+                                <img src="{{biodata.image1.url}}" class="img-fluid" alt="">
+                                {% else %}
+                                <img src="{% static 'images/couples/maleavatar.jpg' %}" class="img-fluid" alt="no image">
+                                {% endif %}
+                            </div>
+                            <div class="db-nav-list">
+                                <ul>
+                                    <li><a href="{% url 'dashboard' %}" ><i class="fa fa-tachometer" aria-hidden="true"></i>{{name}}'s' Dashboard</a></li>
+                                    <li><a href="{% url 'dashboardprofile' %}"><i class="fa fa-male" aria-hidden="true"></i>Profile</a></li>
+                                    {% comment %} <li><a href="user-interests.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>Interests</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="user-plan.html"><i class="fa fa-money" aria-hidden="true"></i>Plan</a></li> {% endcomment %}
+                                    <li><a href="{% url 'dashboardsetting' %}" class="act"><i class="fa fa-cog" aria-hidden="true"></i>Setting</a></li>
+                                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-lg-9">
+                        <div class="row">
+                            <div class="col-md-12 db-sec-com">
+                                <h2 class="db-tit">Profile settings</h2>
+                                <div class="col7 fol-set-rhs">
+                                    <!--START-->
+                                    <div class="ms-write-post fol-sett-sec sett-rhs-pro" style="">
+                                        <div class="foll-set-tit fol-pro-abo-ico">
+                                            <h4>Profile</h4>
+                                        </div>
+                                        <div class="fol-sett-box">
+                                            <ul>
+                                                <li>
+                                                    <div class="sett-lef">
+                                                        <div class="auth-pro-sm sett-pro-wid">
+                                                            <div class="auth-pro-sm-img">
+                                                                {% if not biodata.image1 %}
+                                                                {% if biodata.gender == 'Male' %}
+                                                                    <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
+                                                                {% else %}
+                                                                    <img src="{% static 'images/couples/femaleavatar.jpg' %}" class="image-responsive" alt="female">
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <img src="{{ biodata.image1.url }}" alt="original">
+                                                            {% endif %}
+                                          
+                                                            </div>
+                                                            <div class="auth-pro-sm-desc">
+                                                                <h5>{{request.user.name}}</h5>
+                                                                <p>Premium user | Illunois</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sett-rig">
+                                                        <a href="#" class="set-sig-out">Sign Out</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="sett-lef">
+                                                        <div class="sett-rad-left">
+                                                            <h5>Profile visible</h5>
+                                                            <p>You can set-up who can able to view your profile.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sett-rig">
+                                                        <div class="sett-select-drop">
+                                                            <select>
+                                                              <option value="All users">All users</option>
+                                                              <option value="Premium">Premium</option>
+                                                              <option value="Free">Free</option>
+                                                              <option value="Free">No-more visible(You can't visible, so no one can view your profile)</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="sett-lef">
+                                                        <div class="sett-rad-left">
+                                                            <h5>Who can send you Interest requests?</h5>
+                                                            <p>You can set-up who can able to make Interest request here.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sett-rig">
+                                                        <div class="sett-select-drop">
+                                                            <select>
+                                                                <option value="All users">All users</option>
+                                                                <option value="Premium">Premium</option>
+                                                                <option value="Free">Free</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!--END-->	
+                                    <!--START-->
+                                    <div class="ms-write-post fol-sett-sec sett-rhs-acc" style="">
+                                        <div class="foll-set-tit fol-pro-abo-ico">
+                                            <h4>Account</h4><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#!" class="sett-edit-btn sett-acc-edit-eve"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                        </div>
+                                        <div class="fol-sett-box sett-acc-view sett-two-tab">
+                                            <ul>
+                                                <li>
+                                                    <div>Full name</div>
+                                                    <div>{{request.user.name}}</div>
+                                                </li>
+                                                <li>
+                                                    <div>Mobile</div>
+                                                    <div>+91 {{request.user.phone}}</div>
+                                                </li>
+                                                <li>
+                                                    <div>Email id</div>
+                                                    <div>{{request.user.email}}</div>
+                                                </li>
+                                                <li>
+                                                    <div>Password</div>
+                                                    <div>**********</div>
+                                                </li>
+                                                <li>
+                                                    <div>Profile type</div>
+                                                    <div>Platinum</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    <div class="sett-acc-edit">
+                                            <form class="form-com sett-pro-form">
+                                                <ul>
+                                                    <li>
+                                                        <div class="fm-lab">Full name</div>
+                                                        <div class="fm-fie"><input type="text" value="vijaya kumar"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="fm-lab">Email id</div>
+                                                        <div class="fm-fie"><input type="text" value="vijaykumar@gmail.com"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="fm-lab">Password</div>
+                                                        <div class="fm-fie"><input type="password" value="dfght3d34"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="fm-lab">Confirm password</div>
+                                                        <div class="fm-fie"><input type="password" value="asg235sf"></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="fm-lab">Profile type</div>
+                                                        <div class="fm-fie">
+                                                            <select>
+                                                              <option value="volvo">General</option>
+                                                              <option value="opel">Bloger</option>
+                                                              <option value="saab">Business</option>
+                                                              <option value="saab">Marketer</option>
+                                                            </select>
+                                                        </div>
+                                                    </li>
+                                                    <li><input type="submit" value="Update" class=""><input type="reset" value="Cancel" class="sett-acc-edi-can"></li>
+                                                </ul>
+                                            </form>
+                                        </div>	
+                                    </div>
+                                    <!--END-->	
+                                    {% comment %} <!--START-->
+                                    <div class="ms-write-post fol-sett-sec sett-rhs-not" style="">
+                                        <div class="foll-set-tit fol-pro-abo-ico">
+                                            <h4>Notifications</h4>
+                                        </div>
+                                        <div class="fol-sett-box">
+                                            <ul>
+                                                <li>
+                                                    <div class="sett-lef">
+                                                        <div class="sett-rad-left">
+                                                            <h5>Interest request</h5>
+                                                            <p>Interest request email notificatios</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sett-rig">
+                                                        <div class="checkboxes-and-radios">
+                                                           <input type="checkbox" name="checkbox-cats" id="sett-not-mail" value="1" checked="">
+                                                            <label for="sett-not-mail"></label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="sett-lef">
+                                                        <div class="sett-rad-left">
+                                                            <h5>Chat</h5>
+                                                            <p>New chat notificatios</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sett-rig">
+                                                        <div class="checkboxes-and-radios">
+                                                           <input type="checkbox" name="checkbox-cats" id="sett-not-fri" value="1" checked="">
+                                                            <label for="sett-not-fri"></label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="sett-lef">
+                                                        <div class="sett-rad-left">
+                                                            <h5>Profile views</h5>
+                                                            <p>If any one view your profile means you get the notifications at end of the day</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sett-rig">
+                                                        <div class="checkboxes-and-radios">
+                                                           <input type="checkbox" name="checkbox-cats" id="sett-not-fol" value="1" checked>
+                                                            <label for="sett-not-fol"></label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="sett-lef">
+                                                        <div class="sett-rad-left">
+                                                            <h5>New profile match</h5>
+                                                            <p>You get the profile match emails</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sett-rig">
+                                                        <div class="checkboxes-and-radios">
+                                                           <input type="checkbox" name="checkbox-cats" id="sett-not-mes" value="1" checked="">
+                                                            <label for="sett-not-mes"></label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!--END--> {% endcomment %}
+                                   						
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Account</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Form inside the modal -->
+          <form id="edit-account-form" method="POST" action="{% url 'edit_account' %}">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input class="border px-3 py-2 w-100 mb-2" name="name" id="name" type="text" value="{{ user.name }}" placeholder="Enter your name">
+            <label for="mobile">Mobile:</label>
+            <input class="border px-3 py-2 w-100 mb-2" name="phone" id="mobile" type="number" value="{{ user.phone }}" placeholder="Enter your mobile number">
+            <label for="password">Password:</label>
+            <input class="border px-3 py-2 w-100 mb-2" name="password" id="password" type="password" placeholder="Enter your password">
+            <label for="cpassword">Confirm Password:</label>
+            <input class="border px-3 py-2 w-100 mb-2" name="cpassword" id="cpassword" type="password" placeholder="Confirm your password">
+            <button type="submit" class="btn btn-primary" >Save changes</button>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="submitForm()">Save changes</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+    function submitForm() {
+      const form = document.getElementById('edit-account-form');
+      const formData = new FormData(form);
+  
+      fetch("{% url 'edit_account' %}", {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+        },
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("Account updated successfully!");
+          location.reload();  // Reload the page to see the changes
+        } else {
+          alert("Error updating account: " + JSON.stringify(data.errors));
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+
+    {% endblock content %}

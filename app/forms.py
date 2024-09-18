@@ -110,3 +110,30 @@ class BiodataUpdateForm(forms.ModelForm):
             'image3': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'image4': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
+
+# forms.py
+
+
+# forms.py
+class UserEditForm(forms.ModelForm):
+    cpassword = forms.CharField(widget=forms.PasswordInput, required=False)
+
+    class Meta:
+        model = User
+        fields = ['name', 'phone', 'password']  # Include the fields to be edited
+        widgets = {
+            'password': forms.PasswordInput,  # Mask the password input
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        cpassword = cleaned_data.get("cpassword")
+
+        # Only validate passwords if they are provided (optional password change)
+        if password or cpassword:
+            if password != cpassword:
+                self.add_error('password', "Passwords do not match!")
+                self.add_error('cpassword', "Passwords do not match!")
+        
+        return cleaned_data
