@@ -130,8 +130,7 @@ class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     biodata = models.ForeignKey(Biodata, on_delete=models.CASCADE)
 
-    class Meta:
-        unique_together = ('user', 'biodata')  # Ensure a user can only like a biodata once
+
 
     def __str__(self):
         return f"{self.user.name} likes {self.biodata.user.name}"

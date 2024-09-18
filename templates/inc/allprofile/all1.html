@@ -12,9 +12,9 @@
                         {% else %}
                             <img src="{% static 'images/couples/femaleavatar.jpg' %}" alt="female">
                         {% endif %}
-                    {% else %}
-                        <img src="{{ item.image1.url }}" alt="original">
-                    {% endif %}
+                        {% else %}
+                            <img src="{{ item.image1.url }}" alt="original">
+                        {% endif %}
                     </a>
                     <div class="pro-ave" title="User currently available">
                         <span class="pro-ave-yes"></span>
@@ -38,11 +38,11 @@
                 <span class="enq-sav like-icon" data-biodata-id="{{ item.id }}" data-liked="true" title="Click to remove like.">
                     <i class="fa fa-thumbs-down" aria-hidden="true"></i> <!-- Liked state -->
                 </span>
-            {% else %}
+                {% else %}
                 <span class="enq-sav like-icon" data-biodata-id="{{ item.id }}" data-liked="false" title="Click to like.">
                     <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <!-- Not liked state -->
                 </span>
-            {% endif %}
+                {% endif %}
             </div>
         </li>
         {% endfor %}
@@ -50,7 +50,6 @@
 </div>
 
 <div id="loading" style="display: none;">Loading...</div>
-
 
 <script>
     let page = 2;  // Start with page 2 because page 1 is already loaded
@@ -77,7 +76,7 @@
             const profileList = document.getElementById('profile-list');
             data.profiles.forEach(item => {
                 const li = document.createElement('li');
-                const imgSrc = item.image_url ? item.image_url : (item.gender === 'Male' ? '/static/images/couples/maleavatar.jpg' : '/static/images/couples/femaleavatar.jpg');
+                const imgSrc = item.image1 ? item.image1 : (item.gender === 'Male' ? '/static/images/couples/maleavatar.jpg' : '/static/images/couples/femaleavatar.jpg');
                 li.innerHTML = `
                     <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
                         <div class="pro-img">
@@ -87,7 +86,6 @@
                             <div class="pro-ave" title="User currently available">
                                 <span class="pro-ave-yes"></span>
                             </div>
-                
                         </div>
                         <div class="pro-detail">
                             <h4><a href="/profile-detail/${item.id}/">${item.name}</a></h4>
@@ -103,14 +101,14 @@
                                 <a href="profile-details.html">More details</a>
                             </div>
                         </div>
-  ${item.user_has_liked ? 
-                                `<span class="enq-sav like-icon" data-biodata-id="${item.id}" data-liked="true" title="Click to remove like.">
-                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                </span>` : 
-                                `<span class="enq-sav like-icon" data-biodata-id="${item.id}" data-liked="false" title="Click to like.">
-                                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                </span>`
-                            }
+                        ${item.user_has_liked ? 
+                            `<span class="enq-sav like-icon" data-biodata-id="${item.id}" data-liked="true" title="Click to remove like.">
+                                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                            </span>` : 
+                            `<span class="enq-sav like-icon" data-biodata-id="${item.id}" data-liked="false" title="Click to like.">
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                            </span>`
+                        }
                     </div>
                 `;
                 profileList.appendChild(li);
@@ -120,6 +118,9 @@
             loading = false;
             document.getElementById('loading').style.display = 'none';
             hasNextPage = data.has_next;
+
+            // Reattach event handlers after new profiles are loaded
+            attachLikeIconHandlers();
         })
         .catch(() => {
             loading = false;
@@ -127,18 +128,14 @@
             // Optional: Handle error, show user message
         });
     }
-</script>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
+    function attachLikeIconHandlers() {
         const likeIcons = document.querySelectorAll('.like-icon');
-    
         likeIcons.forEach(icon => {
             icon.addEventListener('click', function() {
                 const biodataId = this.getAttribute('data-biodata-id');
                 const isLiked = this.getAttribute('data-liked') === 'true';
-    
+
                 fetch(`/post/${biodataId}/like/`, {
                     method: 'POST',
                     headers: {
@@ -150,13 +147,11 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.liked) {
-                        // Toggle icon to liked state
-                        this.innerHTML = '<i class="fa fa-thumbs-down" aria-hidden="true"></i>';
+                        this.innerHTML = '<i class="fa fa-thumbs-down" aria-hidden="true"></i>'; // Liked state
                         this.setAttribute('data-liked', 'true');
                         this.setAttribute('title', 'Click to remove like.');
                     } else {
-                        // Toggle icon to not liked state
-                        this.innerHTML = '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>';
+                        this.innerHTML = '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>'; // Not liked state
                         this.setAttribute('data-liked', 'false');
                         this.setAttribute('title', 'Click to like.');
                     }
@@ -164,10 +159,8 @@
                 .catch(error => console.error('Error:', error));
             });
         });
-    });
+    }
+
+    // Attach event handlers on page load
+    document.addEventListener('DOMContentLoaded', attachLikeIconHandlers);
 </script>
-
-
-
-
-
