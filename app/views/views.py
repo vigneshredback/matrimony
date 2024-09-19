@@ -13,4 +13,4 @@ def get_post(request):
     }
     
     # Return the data as a JSON response
-    return JsonResponse(data)
+    return JsonResponse(data,status=200)

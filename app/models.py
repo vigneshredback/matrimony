@@ -85,6 +85,7 @@ class Religion(models.Model):
         return self.name
 
 genderchoices = (('Male', 'Male'), ('Female', 'Female'))
+
 class Biodata(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(choices=genderchoices,max_length=10)

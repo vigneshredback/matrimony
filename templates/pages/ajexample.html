@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple AJAX GET Request</title>
+</head>
+<body>
+
+<h2>Simple GET Request Example</h2>
+
+<button id="getDataBtn">Get Data</button>
+<div id="response"></div>
+
+<script>
+    document.getElementById("getDataBtn").addEventListener("click", function() {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        
+        // Define what happens on successful data submission
+        xhr.onload = function() {
+            if (xhr.status == 200) {
+                // Parse the JSON response
+                var response = JSON.parse(xhr.responseText);
+                // Update the HTML with the response data
+                document.getElementById("response").innerHTML = 
+                    "<p><strong>Title:</strong> " + response.title + "</p>" +
+                    "<p><strong>Body:</strong> " + response.body + "</p>";
+            } else {
+                document.getElementById("response").innerHTML = "<p>An error occurred: " + xhr.status + "</p>";
+            }
+        };
+
+        // Define what happens in case of an error
+        xhr.onerror = function() {
+            document.getElementById("response").innerHTML = "<p>An error occurred during the request</p>";
+        };
+
+        // Configure the request (GET) and specify the endpoint
+        xhr.open("GET", "/get-post/", true);
+
+        // Send the request
+        xhr.send();
+    });
+    
+</script>
+
+</body>
+</html>

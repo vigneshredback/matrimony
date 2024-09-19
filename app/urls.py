@@ -39,5 +39,6 @@ urlpatterns = [
 
 
     # admin dashboard
-    path('adminpage/', admindashboardview.adminhome, name='admin_dashboard'),
+    path('admin-home/', admindashboardview.adminhome, name='adminhome'),
+    path('admin-adduser/', admindashboardview.adminadduser, name='adminadduser'),
     ]

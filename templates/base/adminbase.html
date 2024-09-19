@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/admin-style.css' %}">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -167,7 +172,7 @@
             <div class="ad-menu">
               <ul>
                 <li class="ic-db">
-                  <a href="dashboard.html">Dashboard</a>
+                  <a href="{% url 'adminhome' %}">Dashboard</a>
                 </li>
                 <li class="ic-user">
                   <a href="#" class="">Users</a>
@@ -189,7 +194,7 @@
                         <a href="admin-platinum-users.html">Premium Users</a>
                       </li>
                       <li>
-                        <a href="admin-add-new-user.html">Add new User</a>
+                        <a href="{% url 'adminadduser' %}">Add new User</a>
                       </li>
                     </ol>
                   </div>
@@ -256,12 +261,42 @@
     <!-- END -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+          
+              <script>
+                  document.addEventListener("DOMContentLoaded", function() {
+                      {% if messages %}
+                          {% for message in messages %}
+                              toastr.options = {
+                                "closeButton": true,           // Close button on the toast
+                                "debug": false,
+                                "newestOnTop": true,           // Display the newest toast on top
+                                "progressBar": true,           // Show progress bar
+                                "positionClass": "toast-top-right", // Position of the toast (you can change to other positions)
+                                "preventDuplicates": false,    // Allow duplicate toasts
+                                "onclick": null,
+                                "showDuration": "300",         // How long it takes to show (in milliseconds)
+                                "hideDuration": "4000",        // How long it takes to hide (in milliseconds)
+                                "timeOut": "10000",             // Display duration of the toast (5000ms = 5 seconds)
+                                "extendedTimeOut": "2000",     // Extra time when hovering over the toast (in milliseconds)
+                                "showEasing": "swing",         // Animation easing when showing the toast
+                                "hideEasing": "linear",        // Animation easing when hiding the toast
+                                "showMethod": "fadeIn",        // Show method
+                                "hideMethod": "fadeOut"        // Hide method
+                              };
+                              toastr["{{ message.tags|default:'info' }}"]("{{ message }}");
+                          {% endfor %}
+                      {% endif %}
+                  });
+    </script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/select-opt.js' %}"></script>
     <script src="{% static 'admin/js/chart.js' %}"></script>
     <script src="{% static 'admin/js/admin-custom.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
     <script>
       //ARNING CHART
       var earningCanvas = document.getElementById("Chart_earni");
@@ -269,7 +304,7 @@
       var earningsData = {
         labels: ["Premium Plus", "Premium"],
         datasets: [{
-          data: [50, 60],
+          data: [50, 50],
           backgroundColor: ["#8463FF", "#6384FF"]
         }]
       };
@@ -298,7 +333,7 @@
           labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
           datasets: [{
             label: 'data-1',
-            data: [4000, 5000, 4550, 6005, 8550, 9008, 3220, 4880, 6550, 2500],
+            data: [4000, 5000, 4550, 6005, 8550, 9008, 3220, 4880, 6550, 2500, 2500],
             backgroundColor: "rgba(255,99,132,0.2)",
             borderColor: "rgba(255,99,132,1)",
             borderWidth: 2,

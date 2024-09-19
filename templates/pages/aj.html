@@ -3,47 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple AJAX GET Request</title>
+    <title>Document</title>
 </head>
 <body>
+    <h1>my name is aj</h1>
+    <div id="response2"></div>
+    <button id="getData">Get data</button>
+    <div id="response"></div>
 
-<h2>Simple GET Request Example</h2>
+    <!-- <script>
+        let count = 0
+        let response = document.getElementById('response')
+        document.getElementById('getData').addEventListener('click',()=>{
 
-<button id="getDataBtn">Get Data</button>
-<div id="response"></div>
+            // creating new XMLHttpRequest object
+            let request = new XMLHttpRequest()
+            // configure the (GET) and specify the end point
+            request.open('GET','/get-post/',true);
+            //  Send the request
+            request.send();
+            // define what happens on succesfull data
+            request.onload = ()=>{
+                if(request.status == 200){
+                    let title = document.createElement('h1');
+                    let description = document.createElement('p');
 
-<script>
-    document.getElementById("getDataBtn").addEventListener("click", function() {
-        // Create a new XMLHttpRequest object
-        var xhr = new XMLHttpRequest();
-        
-        // Define what happens on successful data submission
-        xhr.onload = function() {
-            if (xhr.status == 200) {
-                // Parse the JSON response
-                var response = JSON.parse(xhr.responseText);
-                // Update the HTML with the response data
-                document.getElementById("response").innerHTML = 
-                    "<p><strong>Title:</strong> " + response.title + "</p>" +
-                    "<p><strong>Body:</strong> " + response.body + "</p>";
-            } else {
-                document.getElementById("response").innerHTML = "<p>An error occurred: " + xhr.status + "</p>";
+                    let recevieddata = JSON.parse(request.response)
+                    console.log(recevieddata);
+                    
+                    title.innerHTML=`${recevieddata.title}`
+                    description.innerHTML=`${recevieddata.body}`
+                        response.appendChild(title)
+                        response.appendChild(description)
+                    count++
+                }
+                else{
+                    document.getElementById('reaponse').appendChild=`<p>You recevied error ${request.status}</p>`
+                }
+            };
+            // what happens in case of error
+            request.onerror = ()=>{
+                document.getElementById('response').appendChild='<p>error occured</p>'
+            };
+            
+        })
+    </script> -->
+
+    <script>
+        let response2 = document.getElementById('response2')
+
+        let apidata = async ()=>{
+            try{
+
+                let datafetch = fetch('http://127.0.0.1:8000/get-post/') 
+
+                datafetch.then((response)=>{
+                    return response.json();
+                }).then((data)=>{
+                    console.log(data);
+                    response2.innerHTML = `<h1>${data.title}</h1><p>${data.body}</p>`
+                })
             }
-        };
+            catch(e){
+                console.log(`the error is ${e}`);
+                
+            }
 
-        // Define what happens in case of an error
-        xhr.onerror = function() {
-            document.getElementById("response").innerHTML = "<p>An error occurred during the request</p>";
-        };
+        }
 
-        // Configure the request (GET) and specify the endpoint
-        xhr.open("GET", "/get-post/", true);
-
-        // Send the request
-        xhr.send();
-    });
-    
-</script>
-
+        apidata()
+        
+    </script>
 </body>
 </html>
