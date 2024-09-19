@@ -36,11 +36,11 @@
                 </div>
                 {% if item.user_has_liked %}
                 <span class="enq-sav like-icon" data-biodata-id="{{ item.id }}" data-liked="true" title="Click to remove like.">
-                    <i class="fa fa-thumbs-down" aria-hidden="true"></i> <!-- Liked state -->
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> <!-- Liked state -->liked
                 </span>
                 {% else %}
                 <span class="enq-sav like-icon" data-biodata-id="{{ item.id }}" data-liked="false" title="Click to like.">
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <!-- Not liked state -->
+                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <!-- Not liked state -->not Liked
                 </span>
                 {% endif %}
             </div>
@@ -103,10 +103,10 @@
                         </div>
                         ${item.user_has_liked ? 
                             `<span class="enq-sav like-icon" data-biodata-id="${item.id}" data-liked="true" title="Click to remove like.">
-                                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                <i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked
                             </span>` : 
                             `<span class="enq-sav like-icon" data-biodata-id="${item.id}" data-liked="false" title="Click to like.">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> not Liked
                             </span>`
                         }
                     </div>
@@ -147,11 +147,11 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.liked) {
-                        this.innerHTML = '<i class="fa fa-thumbs-down" aria-hidden="true"></i>'; // Liked state
+                        this.innerHTML = '<i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked'; // Liked state
                         this.setAttribute('data-liked', 'true');
                         this.setAttribute('title', 'Click to remove like.');
                     } else {
-                        this.innerHTML = '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>'; // Not liked state
+                        this.innerHTML = '<i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Not liked'; // Not liked state
                         this.setAttribute('data-liked', 'false');
                         this.setAttribute('title', 'Click to like.');
                     }
