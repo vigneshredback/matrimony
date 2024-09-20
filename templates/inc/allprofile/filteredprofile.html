@@ -180,7 +180,7 @@
     document.addEventListener('DOMContentLoaded', attachLikeIconHandlers);
 </script> {% endcomment %}
 
-<script>
+{% comment %} <script>
     document.addEventListener('DOMContentLoaded', function() {
         const container = document.querySelector('#profile-list');
         const loadingIndicator = document.getElementById('loading');
@@ -210,6 +210,143 @@
                             const li = document.createElement('li');
                             const imgSrc = profile.image1 || (profile.gender === 'Male' 
                                 ? '{% static "images/couples/maleavatar.jpg" %}' 
+                                : '{% static "images/couples/femaleavatar.jpg" %}');
+
+                            li.innerHTML = `
+                                <div class="all-pro-box user-avil-onli" data-useravil="avilyes" data-aviltxt="Available online">
+                                    <div class="pro-img">
+                                        <a href="/profile-detail/${profile.id}/">
+                                            <img src="${imgSrc}" alt="${profile.gender}">
+                                        </a>
+                                        <div class="pro-ave" title="User currently available">
+                                            <span class="pro-ave-yes"></span>
+                                        </div>
+                                    </div>
+                                    <div class="pro-detail">
+                                        <h4><a href="/profile-detail/${profile.id}/">${profile.name}</a></h4>
+                                        <div class="pro-bio">
+                                            <span>${profile.degree}</span>
+                                            <span>${profile.profession}</span>
+                                            <span>Age: ${profile.age}</span>
+                                            <span>Height: ${profile.height}</span>
+                                        </div>
+                                        <div class="links">
+                                            <a href="#!">WhatsApp</a>
+                                            <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
+                                            <a href="profile-details.html">More details</a>
+                                        </div>
+                                    </div>
+                                    ${profile.user_has_liked ? 
+                                        `<span class="enq-sav like-icon" data-biodata-id="${profile.id}" data-liked="true" title="Click to remove like.">
+                                            <i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked
+                                        </span>` : 
+                                        `<span class="enq-sav like-icon" data-biodata-id="${profile.id}" data-liked="false" title="Click to like.">
+                                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Not liked
+                                        </span>`
+                                    }
+                                </div>`;
+                            container.appendChild(li);
+                        });
+
+                        // Re-attach event listeners for new like icons
+                        attachLikeIconHandlers();
+                    }
+
+                    isLoading = false;
+                    loadingIndicator.style.display = 'none';
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error("An error occurred while fetching profiles.");
+                isLoading = false;
+                loadingIndicator.style.display = 'none';
+            };
+
+            xhr.send();
+        }
+
+        window.addEventListener('scroll', function() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !isLoading) {
+                loadMoreProfiles();
+            }
+        });
+    });
+
+    function attachLikeIconHandlers() {
+        const likeIcons = document.querySelectorAll('.like-icon');
+        likeIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const biodataId = this.getAttribute('data-biodata-id');
+                const isLiked = this.getAttribute('data-liked') === 'true';
+
+                fetch(`/post/${biodataId}/like/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.liked) {
+                        this.innerHTML = '<i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked';
+                        this.setAttribute('data-liked', 'true');
+                        this.setAttribute('title', 'Click to remove like.');
+                    } else {
+                        this.innerHTML = '<i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Not liked';
+                        this.setAttribute('data-liked', 'false');
+                        this.setAttribute('title', 'Click to like.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', attachLikeIconHandlers);
+</script> {% endcomment %}
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('#profile-list');
+        const loadingIndicator = document.getElementById('loading');
+        let page = 1;
+        let isLoading = false;
+        let hasNext = true;
+        const loadedProfileIds = new Set(); // To track loaded profiles
+
+        function loadMoreProfiles() {
+            if (!hasNext || isLoading) return;
+
+            isLoading = true;
+            loadingIndicator.style.display = 'block';
+
+            page++;
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `/search/?page=${page}&gender={{ gender }}&age={{ age }}&religion={{ religion }}&city={{ city }}`, true);
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    hasNext = response.has_next;
+                    const profiles = response.profiles;
+
+                    if (profiles.length) {
+                        profiles.forEach(profile => {
+                            // Check if the profile is already loaded
+                            if (loadedProfileIds.has(profile.id)) {
+                                return; // Skip adding if already loaded
+                            }
+
+                            loadedProfileIds.add(profile.id); // Mark this profile as loaded
+
+                            const li = document.createElement('li');
+                            const imgSrc = profile.image1 || (profile.gender === 'Male'
+                                ? '{% static "images/couples/maleavatar.jpg" %}'
                                 : '{% static "images/couples/femaleavatar.jpg" %}');
 
                             li.innerHTML = `

@@ -175,7 +175,7 @@ def searchprofile(request):
         # Apply filters
         if gender != 'all':
             profiles = profiles.filter(gender=gender)
-        
+
         if age != 'all':
             if age == '1':
                 profiles = profiles.filter(age__gte=18, age__lte=30)
@@ -192,12 +192,13 @@ def searchprofile(request):
 
         # Count the total profiles
         totalprofiles = profiles.count()
-        paginator = Paginator(profiles, 5)  # 5 profiles per page
 
-        # Default to page 1 if not specified
+        # Implement pagination, displaying 5 profiles per page
+        paginator = Paginator(profiles, 5)
         page_number = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
 
+        # Prepare profiles data for the JSON response
         profiles_data = []
         for profile in page_obj:
             user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
@@ -213,14 +214,17 @@ def searchprofile(request):
                 'user_has_liked': user_has_liked
             })
 
-        # AJAX request (infinite scroll)
+        # Handle AJAX requests for infinite scroll
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             data = {
                 'profiles': profiles_data,
-                'has_next': page_obj.has_next(),
+                'has_next': page_obj.has_next(),  # Check if more profiles exist
             }
+            if totalprofiles < 5:
+                return JsonResponse('no data', safe=False)
             return JsonResponse(data)
 
+        # Regular non-AJAX response for initial page load
         return render(request, 'pages/filteredprofiles.html', {
             'profiles': page_obj,
             'totalprofiles': totalprofiles,
@@ -233,7 +237,6 @@ def searchprofile(request):
         })
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
-
 def profile_detail(request, pk):
     try:
         profile = Biodata.objects.get(pk=pk)
