@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3*!o+u9z!m(v8o_(@bci%8l5=k1y8l_93-ia!w)e2fec3e$gm7
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CSRF_TRUSTED_ORIGINS = ['https://searchyourmatch.com']
 
 # Application definition
 
