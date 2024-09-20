@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
 from django.db import models
-
+# from django.core.validators import RegexValidator
 class UserManager(BaseUserManager):
     def create_user(self, email, name, phone, password=None):
         if not email:
@@ -20,6 +20,7 @@ class UserManager(BaseUserManager):
             password=password,
         )
         user.is_admin = True
+        user.is_superuser = True  # Set is_superuser to True
         user.save(using=self._db)
         return user
 
@@ -91,6 +92,17 @@ class Biodata(models.Model):
     gender = models.CharField(choices=genderchoices,max_length=10)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
     date_of_birth = models.DateField()
+    # aadhaar = models.CharField(
+    #     max_length=12,
+    #     validators=[
+    #         RegexValidator(
+    #             regex=r'^\d{12}$',
+    #             message='Aadhaar number must be exactly 12 digits',
+    #             code='invalid_aadhaar'
+    #         ),
+    #     ],
+    #     help_text="Enter your 12-digit Aadhaar number"
+    # )
     age = models.IntegerField()
     height = models.DecimalField(max_digits=5, decimal_places=2)  # Example: 5.9 for 5'9"
     weight = models.DecimalField(max_digits=5, decimal_places=2)  # Example: 70.5 for 70.5 kg

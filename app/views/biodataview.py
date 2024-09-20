@@ -36,7 +36,7 @@ def calculate_age(birthdate):
     today = date.today()
     return today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
 
-
+@login_required(login_url='login')
 def allprofiles(request):
     profiles = Biodata.objects.all()
     cities = City.objects.all()
@@ -158,6 +158,7 @@ def allprofiles(request):
         })
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+@login_required(login_url='login')
 def searchprofile(request):
     if request.method == 'POST' or request.method == 'GET':
         # Retrieve filters from request
@@ -233,10 +234,13 @@ def searchprofile(request):
             'city': city,
             'religion': religion,
             'cities': cities,
-            'religions': religions
+            'religions': religions,
+            'user_has_liked': user_has_liked
         })
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
 def profile_detail(request, pk):
     try:
         profile = Biodata.objects.get(pk=pk)

@@ -98,13 +98,13 @@ body {
         <!-- Initialize Toastr options (Optional) -->
 
 
-        <script>
+        {% comment %} <script>
             document.addEventListener('contextmenu', function(event) {
                 event.preventDefault();
             });
-        </script>
+        </script> {% endcomment %}
 
-        <script>
+        {% comment %} <script>
             document.onkeydown = function(e) {
                 // Disable F12
                 if (e.key === "F12") {
@@ -123,17 +123,17 @@ body {
                     return false;
                 }
             };
-        </script>
+        </script> {% endcomment %}
         
 
-        <script>
+        {% comment %} <script>
             document.addEventListener('keydown', function(event) {
                 // Prevent Ctrl+U
                 if (event.ctrlKey && event.key === 'u') {
                     event.preventDefault();
                 }
             });
-        </script>
+        </script> {% endcomment %}
         
         
 

@@ -35,7 +35,7 @@
                         <a href="profile-details.html">More details</a>
                     </div>
                 </div>
-            {% if item.user_has_liked %}
+                {% if item.user_has_liked %}
                 <span class="enq-sav like-icon" data-biodata-id="{{ item.id }}" data-liked="true" title="Click to remove like.">
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i> <!-- Liked state -->liked
                 </span>
@@ -44,13 +44,17 @@
                     <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <!-- Not liked state -->not Liked
                 </span>
                 {% endif %}
+                {% if item.user_has_liked %}
+                <span>hi</span>
+                {% endif %}
             </div>
         </li>
         {% endfor %}
     </ul>
 </div>
 
-<div id="loading" style="display: none;">Loading...</div>
+<div id="loading" style="display: none;"></div>
+<div class="text-center">-- End of results --</div>
 
 
 
