@@ -6,7 +6,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['name', 'email', 'phone', 'password']
+        fields = ['name', 'email','aadhaar', 'phone', 'password']
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -145,10 +145,11 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'name', 'phone', 'password']
+        fields = ['email', 'name', 'phone','aadhaar', 'password']
         widgets = {
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'aadhaar': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control bg-primary text-white'}),
         }

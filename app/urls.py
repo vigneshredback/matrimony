@@ -34,11 +34,11 @@ urlpatterns = [
     path('aj', views.aj, name='aj'),
     path('get-post/', views.get_post, name='get_post'),
     # other URL patterns
-    #  path('post/<int:pk>/like/', biodataview.LikeToggleView.as_view(), name='biodata_like'),
      path('post/<int:pk>/like/', biodataview.LikeToggleView.as_view(), name='like_toggle'),
 
 
     # admin dashboard
     path('admin-home/', admindashboardview.adminhome, name='adminhome'),
     path('admin-adduser/', admindashboardview.adminadduser, name='adminadduser'),
+    path('admin-alluser/', admindashboardview.adminalluser, name='adminalluser'),
     ]

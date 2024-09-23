@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from app.forms import BiodataForm,UserRegistrationForm
 from django.contrib import messages
-from app.models import Biodata
+from app.models import Biodata,User
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -82,8 +84,6 @@ def adminadduser(request):
         else:
             form = BiodataForm()
             userform = UserRegistrationForm()
-
-        messages.info(request, "Create your biodata first")
         return render(request, 'adminpages/adduser.html', {'form': form, 'userform': userform})
     else:
         return redirect('home')
@@ -103,3 +103,48 @@ def adminregister(request):
         form = UserRegistrationForm()
 
     return render(request, 'register.html', {'form': form})
+
+
+def adminalluser(request):
+    if request.user.is_admin:
+        email = request.GET.get('email', '')
+        biodata = Biodata.objects.all()
+
+        # Filter by email if the email parameter is present
+        if email:
+            biodata = biodata.filter(user__email__icontains=email)
+
+        # Implement pagination, displaying 5 profiles per page
+        paginator = Paginator(biodata, 4)
+        page_number = request.GET.get('page', 1)
+        page_obj = paginator.get_page(page_number)
+
+        # Check if the request is AJAX for search or pagination
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            users_data = []
+            for biodata_item in page_obj:
+                users_data.append({
+                    'id': biodata_item.id,
+                    'name': biodata_item.user.name,
+                    'email': biodata_item.user.email,
+                    'phone': biodata_item.user.phone,
+                    'city': biodata_item.city.name if biodata_item.city else '',
+                    'date_of_birth': biodata_item.date_of_birth.strftime('%Y-%m-%d') if biodata_item.date_of_birth else ''
+                })
+            
+            data = {
+                'users': users_data,
+                'has_previous': page_obj.has_previous(),
+                'has_next': page_obj.has_next(),
+                'current_page': page_obj.number,
+                'total_pages': paginator.num_pages
+            }
+            return JsonResponse(data)
+
+        # Regular render for non-AJAX requests
+        return render(request, 'adminpages/adminallusers.html', {
+            'page_obj': page_obj
+        })
+
+    else:
+        return redirect('home')

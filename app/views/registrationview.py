@@ -173,11 +173,11 @@ def edit_account(request):
 
             form.save(commit=False)  # Save the form without committing yet
             user.save()  # Save the user with the new hashed password
-            messages.success(request, 'Your account has been updated successfully!')
-            return redirect('dashboardsetting')
+            messages.success(request, 'Your account has been updated successfully! login again with new password')
+            return redirect('login')
         else:
             messages.error(request, 'error happened try again!')
-            return redirect('dashboardsetting')
+            return redirect('edit_account')
     
     else:
         form = UserEditForm(instance=user)  # Pre-fill the form with the user's data
