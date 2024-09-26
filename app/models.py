@@ -98,6 +98,15 @@ class Religion(models.Model):
 
 genderchoices = (('Male', 'Male'), ('Female', 'Female'))
 
+
+class Plan(models.Model):
+    name = models.CharField(max_length=100)  # Example: Free, Premium
+    price = models.DecimalField(max_digits=6, decimal_places=2)  # Example: 0.00 for Free, 9.99 for Premium
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
 class Biodata(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(choices=genderchoices,max_length=10)
@@ -128,6 +137,7 @@ class Biodata(models.Model):
     family_name = models.CharField(max_length=150)
     profession = models.CharField(max_length=150)
     position = models.CharField(max_length=150)
+    plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True)  # Add Plan to Biodata
 
     # Image fields
     image1 = models.ImageField(upload_to='images/profile', blank=True, null=True)
@@ -147,3 +157,5 @@ class Like(models.Model):
 
     def __str__(self):
         return f"{self.user.name} likes {self.biodata.user.name}"
+
+

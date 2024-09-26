@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark/Light Theme</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config to Enable Dark Mode -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // Enable dark mode using class strategy
+    }
+  </script>
+
+  <style>
+    /* Ensure smooth transition for dark/light theme */
+    body {
+      transition: background-color 0.3s, color 0.3s;
+    }
+  </style>
+</head>
+<body class="bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300">
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="text-center">
+      <h1 class="text-3xl font-bold">Dark and Light Theme</h1>
+      <button id="themeToggle" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+        Toggle Theme
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const toggleButton = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Function to toggle between light and dark mode
+    const toggleTheme = () => {
+      body.classList.toggle('dark'); // Toggle dark class
+      if (body.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark'); // Store the preference
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    };
+
+    // Check for saved theme in localStorage and apply it
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark'); // Apply dark mode if saved as dark
+    }
+
+    // Toggle theme on button click
+    toggleButton.addEventListener('click', toggleTheme);
+  </script>
+</body>
+</html>

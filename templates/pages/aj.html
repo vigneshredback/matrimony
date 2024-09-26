@@ -8,7 +8,7 @@
 <body>
     <h1>my name is aj</h1>
     <div id="response2"></div>
-    <button id="getData">Get data</button>
+    <button id="getData" onclick="apidata()">Get data</button>
     <div id="response"></div>
 
     <!-- <script>
@@ -55,23 +55,20 @@
         let apidata = async ()=>{
             try{
 
-                let datafetch = fetch('http://127.0.0.1:8000/get-post/') 
+                let datafetch = await fetch('http://127.0.0.1:8000/get-post/') 
 
-                datafetch.then((response)=>{
-                    return response.json();
-                }).then((data)=>{
-                    console.log(data);
-                    response2.innerHTML = `<h1>${data.title}</h1><p>${data.body}</p>`
-                })
+                let data = await datafetch.json();
+
+                console.log(data);
+                
             }
             catch(e){
                 console.log(`the error is ${e}`);
-                
             }
 
         }
 
-        apidata()
+        
         
     </script>
 </body>

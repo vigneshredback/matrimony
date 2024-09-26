@@ -184,17 +184,14 @@
                       <li>
                         <a href="{% url 'adminalluser' %}">All Users</a>
                       </li>
-                      <li>
+                      {% comment %} <li>
                         <a href="#!">New User Requests</a>
+                      </li> {% endcomment %}
+                      <li>
+                        <a href="{% url 'adminfreeuser' %}">Free Users</a>
                       </li>
                       <li>
-                        <a href="#!">Free Users</a>
-                      </li>
-                      <li>
-                        <a href="#!">Standard Users</a>
-                      </li>
-                      <li>
-                        <a href="#!">Premium Users</a>
+                        <a href="{% url 'adminpremiumuser' %}">Premium Users --</a>
                       </li>
 
                     </ol>

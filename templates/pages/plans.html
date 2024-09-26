@@ -24,34 +24,48 @@
             <div class="row">
                 <ul class="d-flex justify-content-center">
                     <li>
-                        <div class="pri-box pri-box-pop">
-                            <h2>Basic</h2>
-                            <p>Get starter pack for free</p>
-                            <a href="sign-up.html" class="cta">Get Started</a>
-                            <span class="pri-cou"><b>₹0</b>/mo</span>
-                            <ol>
-                                <li><i class="fa-brands fa-check" aria-hidden="true"></i>unlimited basic profile view for free</li>
-                                <li><i class="fa-brands fa-check" aria-hidden="true"></i>Un verified account</li>
-                                <li><i class="fa-brands fa-check" aria-hidden="true"></i>cant view contact details</li>
-                            </ol>
-                        </div>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="pri-box pri-box-pop">
+                                <input type="text" name="plan_id" value="{{plan1.id}}" style="display: none;">
+                                <h2>{{plan1.name}}</h2>
+                                <p>Get starter pack for free</p>
+                                <!-- <a href="sign-up.html" class="cta">Get Started</a> -->
+                                <div>
+                                    <button type="submit" class="btn btn-danger w-100 py-2 rounded-pill">Get Started</button>
+                                </div>
+                                <span class="pri-cou"><b>₹0</b>/mo</span>
+                                <ol>
+                                    <li><i class="fa-brands fa-check" aria-hidden="true"></i>unlimited basic profile view for free</li>
+                                    <li><i class="fa-brands fa-check" aria-hidden="true"></i>Un verified account</li>
+                                    <li><i class="fa-brands fa-check" aria-hidden="true"></i>cant view contact details</li>
+                                </ol>
+                            </div>
+                        </form>
                     </li>
                     <li>
-                        <div class="pri-box pri-box-pop">
-                            <h2>Premium</h2>
-                            <p>Explore all features</p>
-                            <a href="sign-up.html" class="cta">Get Started</a>
-                            <span class="pri-cou"><b>₹349</b>/mo</span>
-                            <ol>
-                                <li><i class="fa-solid fa-check"></i>unlimited basic/premium views</li>
-                                <li><i class="fa-solid fa-check"></i></i>Verified account</li>
-                                <li><i class="fa-solid fa-check"></i>View contact details</li>
-                                <li><i class="fa-solid fa-check"></i>privacy from basic users</li>
-                                <li><i class="fa-solid fa-check"></i>Send interest</li>
-                            </ol>
-                        </div>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="pri-box pri-box-pop">
+                                <input type="text" name="plan_id" value="{{plan2.id}}" style="display: none;">
+                                <h2>{{plan2.name}}</h2>
+                                <p>Explore all features</p>
+                                <!-- <a href="sign-up.html" class="cta">Get Started</a> -->
+                                <!-- <a href="sign-up.html" class="cta">Get Started</a> -->
+                                <div>
+                                    <button type="submit" class="btn btn-danger w-100 py-2 rounded-pill">Get Started</button>
+                                </div>
+                                <span class="pri-cou"><b>₹349</b>/mo</span>
+                                <ol>
+                                    <li><i class="fa-solid fa-check"></i>unlimited basic/premium views</li>
+                                    <li><i class="fa-solid fa-check"></i></i>Verified account</li>
+                                    <li><i class="fa-solid fa-check"></i>View contact details</li>
+                                    <li><i class="fa-solid fa-check"></i>privacy from basic users</li>
+                                    <li><i class="fa-solid fa-check"></i>Send interest</li>
+                                </ol>
+                            </div>
+                        </form>
                     </li>
-                  
                 </ul>
             </div>
         </div>

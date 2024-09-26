@@ -13,7 +13,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Users</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">All users</li>
+                    <li class="breadcrumb-item active" aria-current="page">Premium users</li>
                 </ol>
             </nav>
         </div>
@@ -77,12 +77,12 @@
         // Function to fetch users via AJAX
         function fetchUsers(email = '', page = 1) {
             $.ajax({
-                url: "{% url 'adminalluser' %}",
+                url: "{% url 'adminpremiumuser' %}",
                 data: {
                     email: email,
                     page: page
                 },
-                success: function(response){
+                success: function(response) {
                     // Clear existing table rows
                     $('#userResults').empty();
                     // Populate with new data

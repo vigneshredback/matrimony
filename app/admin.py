@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Couples
-from .models import Biodata, City, JobType, Hobby, Religion,User,Like
+from .models import Biodata, City, JobType, Hobby, Religion,User,Like,Plan
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 class UserAdmin(BaseUserAdmin):
@@ -36,3 +36,4 @@ admin.site.register(Hobby)
 admin.site.register(Religion)
 admin.site.register(Couples)
 admin.site.register(Like)
+admin.site.register(Plan)

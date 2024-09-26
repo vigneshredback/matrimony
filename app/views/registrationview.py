@@ -93,7 +93,7 @@ def loginview(request):
                 return redirect('home')
 
             except Biodata.DoesNotExist:
-                return redirect('profile_detail', pk=user.id)
+                return redirect('biodata')
 
         else:
             messages.error(request, "Invalid username or password!")
