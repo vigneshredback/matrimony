@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from app.models import Biodata
 from app.serializers import BiodataSerializer
 from rest_framework.response import Response
-
+from app.models import City
 
 def aj(request):
     return render(request,'pages/aj.html')
@@ -24,4 +24,5 @@ def get_post(request):
 #     except Exception as e:
 #         print(f"Error: {e}")  # Print the error in the server console for debugging
 #         return JsonResponse({'error': 'Something went wrong!'}, status=500)
+
 

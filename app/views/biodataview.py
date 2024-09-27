@@ -199,6 +199,10 @@ def searchprofile(request):
             if totalprofiles < 5:
                 return JsonResponse('no data', safe=False)
             return JsonResponse(data)
+        
+        # Pass the same data for HTML response
+        for profile in page_obj:
+            profile.user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
 
         # Regular non-AJAX response for initial page load
         return render(request, 'pages/filteredprofiles.html', {
@@ -253,7 +257,6 @@ def biodata_update_view(request):
     return render(request, 'pages/biodata_update.html', {'form': form})
 
 from django.views.decorators.http import require_POST
-
 class LikeToggleView(APIView):
     def post(self, request, pk, *args, **kwargs):
         user = request.user

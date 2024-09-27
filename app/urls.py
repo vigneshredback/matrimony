@@ -63,4 +63,5 @@ urlpatterns = [
     # 
     path('users/', apiviews.user_list, name='user_list'),
     path('users/<int:user_id>/', apiviews.user_detail, name='user_detail'),
+
 ]
