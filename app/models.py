@@ -153,9 +153,13 @@ class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     biodata = models.ForeignKey(Biodata, on_delete=models.CASCADE)
 
-
-
     def __str__(self):
         return f"{self.user.name} likes {self.biodata.user.name}"
 
 
+class Interest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    biodata = models.ForeignKey(Biodata, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.name} Interested in {self.biodata.user.name}"

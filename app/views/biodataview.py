@@ -4,7 +4,7 @@ from datetime import date
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.contrib import messages
-from app.models import Biodata,City,Religion,Like
+from app.models import Biodata,City,Religion,Like,Interest
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from rest_framework import status
@@ -87,6 +87,8 @@ def allprofiles(request):
         for profile in page_obj:
             # Check if the user has liked this profile
             user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
+            # Check if the user has interest this profile
+            user_has_interest = Interest.objects.filter(user=request.user, biodata=profile).exists()
 
             profiles_data.append({
                 'id': profile.id,
@@ -97,7 +99,8 @@ def allprofiles(request):
                 'age': profile.age,
                 'height': profile.height,
                 'image1': profile.image1.url if profile.image1 else '',  # Convert ImageField to URL
-                'user_has_liked': user_has_liked  # Add like status to the data
+                'user_has_liked': user_has_liked,  # Add like status to the data
+                'user_has_interest': user_has_interest  # Add like status to the data
             })
         
         data = {
@@ -109,6 +112,7 @@ def allprofiles(request):
     # Pass the same data for HTML response
     for profile in page_obj:
         profile.user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
+        profile.user_has_interest = Interest.objects.filter(user=request.user, biodata=profile).exists()
 
     return render(request, 'pages/allprofiles.html', {
         'profiles': page_obj,
@@ -178,6 +182,7 @@ def searchprofile(request):
         profiles_data = []
         for profile in page_obj:
             user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
+            user_has_interest = Interest.objects.filter(user=request.user, biodata=profile).exists()
             profiles_data.append({
                 'id': profile.id,
                 'gender': profile.gender,
@@ -187,7 +192,8 @@ def searchprofile(request):
                 'age': profile.age,
                 'height': profile.height,
                 'image1': profile.image1.url if profile.image1 else '',
-                'user_has_liked': user_has_liked
+                'user_has_liked': user_has_liked,
+                'user_has_interest': user_has_interest
             })
 
         # Handle AJAX requests for infinite scroll
@@ -203,6 +209,7 @@ def searchprofile(request):
         # Pass the same data for HTML response
         for profile in page_obj:
             profile.user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
+            profile.user_has_interest = Interest.objects.filter(user=request.user, biodata=profile).exists()
 
         # Regular non-AJAX response for initial page load
         return render(request, 'pages/filteredprofiles.html', {
@@ -214,7 +221,8 @@ def searchprofile(request):
             'religion': religion,
             'cities': cities,
             'religions': religions,
-            'user_has_liked': user_has_liked  # Pass a default value for user_has_liked
+            'user_has_liked': user_has_liked,  # Pass a default value for user_has_liked
+            'user_has_interest': user_has_interest
         })
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
@@ -277,3 +285,25 @@ class LikeToggleView(APIView):
         # Return the like status (True for liked, False for unliked)
         
         return Response({"liked": liked}, status=status.HTTP_200_OK)
+    
+
+class InterestToggleView(APIView):
+    def post(self, request, pk, *args, **kwargs):
+        user = request.user
+        biodata = get_object_or_404(Biodata, pk=pk)
+        
+        # Check if the user already Interested in  this Biodata
+        interest = Interest.objects.filter(user=user, biodata=biodata).first()
+        
+        if interest:
+            # User already liked, remove the like (unlike)
+            interest.delete()
+            interested = False
+        else:
+            # Add a new Interest
+            Interest.objects.create(user=user, biodata=biodata)
+            interested = True
+
+        # Return the Interest status (True for liked, False for unliked)
+        
+        return Response({"interested": interested}, status=status.HTTP_200_OK)

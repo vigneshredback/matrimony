@@ -31,7 +31,11 @@
                     </div>
                     <div class="links">
                         <a href="#!">WhatsApp</a>
-                        <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
+                        {% if item.user_has_interest %}
+                        <span href="#!" class="cta cta-sendint interest-icon bg-success text-white"  data-bs-target="#sendInter" data-biodata-id="{{ item.id }}" data-liked="true" title="Click to remove interest.">interested</span>
+                        {% else %}
+                        <span href="#!" class="cta cta-sendint interest-icon"  data-bs-target="#sendInter" data-biodata-id="{{ item.id }}" data-liked="false" title="Click to interest.">send interest</span>
+                        {% endif %}
                         <a href="profile-details.html">More details</a>
                     </div>
                 </div>
@@ -99,6 +103,19 @@
                             </div>
                             <div class="links">
                                 <a href="#!">WhatsApp</a>
+
+
+
+
+                        ${item.user_has_interest ? 
+                            `<span href="#!" class="cta cta-sendint interest-icon bg-success text-white"  data-bs-target="#sendInter" data-biodata-id="${ item.id }" data-liked="true" title="Click to remove interest.">interested</span>` : 
+                            `<span href="#!" class="cta cta-sendint interest-icon"  data-bs-target="#sendInter" data-biodata-id="${ item.id }" data-liked="false" title="Click to interest.">send interest</span>`
+                        }
+
+
+
+
+
                                 <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
                                 <a href="profile-details.html">More details</a>
                             </div>
@@ -123,6 +140,7 @@
 
             // Reattach event handlers after new profiles are loaded
             attachLikeIconHandlers();
+            attachInterestIconHandlers();
         })
         .catch(() => {
             loading = false;
@@ -163,7 +181,46 @@
         });
     }
 
+    function attachInterestIconHandlers() {
+        const interestIcons = document.querySelectorAll('.interest-icon');
+        interestIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const biodataId = this.getAttribute('data-biodata-id');
+                const isLiked = this.getAttribute('data-liked') === 'true';
+
+                fetch(`/post/${biodataId}/interest/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',  // Django's CSRF protection
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.interested) {
+                        this.innerHTML = 'interested'; // Liked state
+                        this.setAttribute('data-liked', 'true');
+                        this.setAttribute('class', 'text-white bg-success');
+                        this.setAttribute('title', 'Click to remove like.');
+                    } else {
+                        this.innerHTML = 'send interest'; // Not liked state
+                        this.setAttribute('data-liked', 'false');
+                        this.setAttribute('class', 'text-dark bg-white');
+
+                        this.setAttribute('title', 'Click to like.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    }
+
+
+    
+
     // Attach event handlers on page load
     document.addEventListener('DOMContentLoaded', attachLikeIconHandlers);
+    document.addEventListener('DOMContentLoaded', attachInterestIconHandlers);
 
 </script>

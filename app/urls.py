@@ -49,6 +49,7 @@ urlpatterns = [
     path('get-post/', views.get_post, name='get_post'),
     # other URL patterns
      path('post/<int:pk>/like/', biodataview.LikeToggleView.as_view(), name='like_toggle'),
+     path('post/<int:pk>/interest/', biodataview.InterestToggleView.as_view(), name='like_toggle'),
 
 
     # admin dashboard
