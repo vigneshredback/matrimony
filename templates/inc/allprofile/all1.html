@@ -41,11 +41,11 @@
                 </div>
                 {% if item.user_has_liked %}
                 <span class="enq-sav like-icon" data-biodata-id="{{ item.id }}" data-liked="true" title="Click to remove like.">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> <!-- Liked state -->liked
+                    <i class="fa fa-thumbs-up" aria-hidden="true" style="color: green !important;"></i>
                 </span>
                 {% else %}
                 <span class="enq-sav like-icon" data-biodata-id="{{ item.id }}" data-liked="false" title="Click to like.">
-                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <!-- Not liked state -->not Liked
+                    <i class="fa fa-thumbs-o-down" aria-hidden="true" ></i>
                 </span>
                 {% endif %}
             </div>
@@ -113,19 +113,15 @@
                         }
 
 
-
-
-
-                                <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
                                 <a href="profile-details.html">More details</a>
                             </div>
                         </div>
                         ${item.user_has_liked ? 
                             `<span class="enq-sav like-icon" data-biodata-id="${item.id}" data-liked="true" title="Click to remove like.">
-                                <i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked
+                                <i class="fa fa-thumbs-up" aria-hidden="true" style="color: green !important;"></i>
                             </span>` : 
                             `<span class="enq-sav like-icon" data-biodata-id="${item.id}" data-liked="false" title="Click to like.">
-                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> not Liked
+                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
                             </span>`
                         }
                     </div>
@@ -166,14 +162,33 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    toastr.options = {
+                        "closeButton": true,           // Close button on the toast
+                        "debug": false,
+                        "newestOnTop": true,           // Display the newest toast on top
+                        "progressBar": true,           // Show progress bar
+                        "positionClass": "toast-top-right", // Position of the toast (you can change to other positions)
+                        "preventDuplicates": false,    // Allow duplicate toasts
+                        "onclick": null,
+                        "showDuration": "300",         // How long it takes to show (in milliseconds)
+                        "hideDuration": "1000",        // How long it takes to hide (in milliseconds)
+                        "timeOut": "1000",             // Display duration of the toast (5000ms = 5 seconds)
+                        "extendedTimeOut": "2000",     // Extra time when hovering over the toast (in milliseconds)
+                        "showEasing": "swing",         // Animation easing when showing the toast
+                        "hideEasing": "linear",        // Animation easing when hiding the toast
+                        "showMethod": "fadeIn",        // Show method
+                        "hideMethod": "fadeOut"        // Hide method
+                      };
                     if (data.liked) {
-                        this.innerHTML = '<i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked'; // Liked state
+                        this.innerHTML = '<i class="fa fa-thumbs-up" aria-hidden="true" style="color: green !important;"></i>'; // Liked state
                         this.setAttribute('data-liked', 'true');
                         this.setAttribute('title', 'Click to remove like.');
+                        toastr["{{ message.tags|default:'success' }}"]("like added");
                     } else {
-                        this.innerHTML = '<i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Not liked'; // Not liked state
+                        this.innerHTML = '<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>'; // Not liked state
                         this.setAttribute('data-liked', 'false');
                         this.setAttribute('title', 'Click to like.');
+                        toastr["{{ message.tags|default:'error' }}"]("like removed");
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -198,17 +213,36 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    toastr.options = {
+                        "closeButton": true,           // Close button on the toast
+                        "debug": false,
+                        "newestOnTop": true,           // Display the newest toast on top
+                        "progressBar": true,           // Show progress bar
+                        "positionClass": "toast-top-right", // Position of the toast (you can change to other positions)
+                        "preventDuplicates": false,    // Allow duplicate toasts
+                        "onclick": null,
+                        "showDuration": "300",         // How long it takes to show (in milliseconds)
+                        "hideDuration": "1000",        // How long it takes to hide (in milliseconds)
+                        "timeOut": "1000",             // Display duration of the toast (5000ms = 5 seconds)
+                        "extendedTimeOut": "2000",     // Extra time when hovering over the toast (in milliseconds)
+                        "showEasing": "swing",         // Animation easing when showing the toast
+                        "hideEasing": "linear",        // Animation easing when hiding the toast
+                        "showMethod": "fadeIn",        // Show method
+                        "hideMethod": "fadeOut"        // Hide method
+                      };
                     if (data.interested) {
                         this.innerHTML = 'interested'; // Liked state
                         this.setAttribute('data-liked', 'true');
                         this.setAttribute('class', 'text-white bg-success');
                         this.setAttribute('title', 'Click to remove like.');
+                        toastr["{{ message.tags|default:'success' }}"]("interest sent succesfully");
+                      
                     } else {
                         this.innerHTML = 'send interest'; // Not liked state
                         this.setAttribute('data-liked', 'false');
                         this.setAttribute('class', 'text-dark bg-white');
-
                         this.setAttribute('title', 'Click to like.');
+                        toastr["{{ message.tags|default:'error' }}"]("interest revoked");
                     }
                 })
                 .catch(error => console.error('Error:', error));

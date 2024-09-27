@@ -156,10 +156,13 @@ class Like(models.Model):
     def __str__(self):
         return f"{self.user.name} likes {self.biodata.user.name}"
 
-
 class Interest(models.Model):
+    # interest_choices = (('Pending', 'Pending'),('Interested', 'Interested'), ('Not Interested', 'Not Interested'))
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     biodata = models.ForeignKey(Biodata, on_delete=models.CASCADE)
+    # created_at = models.DateTimeField(auto_now_add=True)
+    # biodata_status = models.CharField(max_length=20, choices=interest_choices, default='Pending')
+
 
     def __str__(self):
         return f"{self.user.name} Interested in {self.biodata.user.name}"
