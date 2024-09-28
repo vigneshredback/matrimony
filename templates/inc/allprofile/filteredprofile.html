@@ -90,6 +90,7 @@
                     const response = JSON.parse(xhr.responseText);
                     hasNext = response.has_next;
                     const profiles = response.profiles;
+                    console.log(profiles)
 
                     if (profiles.length) {
                         profiles.forEach(profile => {
@@ -125,9 +126,9 @@
                                         </div>
                                         <div class="links">
                                             <a href="#!">WhatsApp</a>
-                    ${item.user_has_interest ? 
-                            `<span href="#!" class="cta cta-sendint interest-icon bg-success text-white"  data-bs-target="#sendInter" data-biodata-id="${ item.id }" data-liked="true" title="Click to remove interest.">interested</span>` : 
-                            `<span href="#!" class="cta cta-sendint interest-icon"  data-bs-target="#sendInter" data-biodata-id="${ item.id }" data-liked="false" title="Click to interest.">send interest</span>`
+                    ${profile.user_has_interest ? 
+                            `<span href="#!" class="cta cta-sendint interest-icon bg-success text-white"  data-bs-target="#sendInter" data-biodata-id="${ profile.id }" data-liked="true" title="Click to remove interest.">interested</span>` : 
+                            `<span href="#!" class="cta cta-sendint interest-icon"  data-bs-target="#sendInter" data-biodata-id="${ profile.id }" data-liked="false" title="Click to interest.">send interest</span>`
                         }
                                             <a href="profile-details.html">More details</a>
                                         </div>

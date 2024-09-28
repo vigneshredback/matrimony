@@ -195,6 +195,8 @@ def searchprofile(request):
                 'user_has_liked': user_has_liked,
                 'user_has_interest': user_has_interest
             })
+        
+
 
         # Handle AJAX requests for infinite scroll
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -202,6 +204,7 @@ def searchprofile(request):
                 'profiles': profiles_data,
                 'has_next': page_obj.has_next(),  # Check if more profiles exist
             }
+            print(data)
             if totalprofiles < 5:
                 return JsonResponse('no data', safe=False)
             return JsonResponse(data)
