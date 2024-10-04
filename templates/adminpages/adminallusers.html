@@ -1,5 +1,6 @@
 {% extends "base/adminbase.html" %}
 {% load static %}
+
 {% block content %}
 <div class="pan-rhs">
     <div class="row main-head">
@@ -47,7 +48,8 @@
                             <th>City</th>
                             <th>Date of birth</th>
                             <th class="text-center">Plan</th>
-                            <th>Edit</th>  <!-- New Edit column -->
+                            <th class="text-center">Approval</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody id="userResults">
@@ -55,7 +57,7 @@
                 </table>
 
                 <!-- Pagination controls will be updated dynamically with AJAX -->
-                <nav aria-label="Page navigation " >
+                <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center" id="paginationControls">
                         <!-- Pagination buttons will be inserted here -->
                     </ul>
@@ -82,7 +84,7 @@
                     email: email,
                     page: page
                 },
-                success: function(response){
+                success: function(response) {
                     // Clear existing table rows
                     $('#userResults').empty();
                     // Populate with new data
@@ -94,7 +96,16 @@
                                 <td>${user.phone}</td>
                                 <td>${user.city}</td>
                                 <td>${user.date_of_birth}</td>
-                                <td class="text-center"><button class="btn btn-outline-secondary" style="color: ${user.plan === 'Free' ? 'green' : user.plan === 'premium' ? 'goldenrod' : 'black'};">${user.plan.charAt(0).toUpperCase() + user.plan.slice(1)}</button></td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-secondary" style="color: ${user.plan === 'Free' ? 'green' : user.plan === 'premium' ? 'goldenrod' : 'black'};">
+                                        ${user.plan.charAt(0).toUpperCase() + user.plan.slice(1)}
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn ${user.admin_approval ? 'btn-outline-success' : 'btn-outline-danger'} approve-btn" data-user-id="${user.id}">
+                                        ${user.admin_approval ? 'Approved' : 'Pending'}
+                                    </button>
+                                </td>
                                 <td>
                                     <a href="http://127.0.0.1:8000/edit_user/${user.id}" class="text-primary">
                                         <i class="fas fa-edit"></i>
@@ -140,7 +151,35 @@
 
         // Fetch all users initially on page load
         fetchUsers();
+
+        // Handle approval toggle button click
+        $(document).on('click', '.approve-btn', function() {
+            var userId = $(this).data('user-id');
+            var button = $(this);
+
+            $.ajax({
+                url: "{% url 'toggle_approvals' 0 %}".replace('0', userId),  // Ensure this matches your URL configuration
+                method: 'POST',
+                data: {
+                    user_id: userId,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Toggle the button text and class based on new approval status
+                        var newApprovalStatus = response.new_approval_status;
+                        console.log(newApprovalStatus)
+                        button.text(newApprovalStatus ? 'Approved' : 'Pending');
+                        button.toggleClass('btn-outline-success btn-outline-danger');
+                    } else {
+                        alert('Failed to toggle approval.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred: ' + error);
+                }
+            });
+        });
     });
 </script>
-
 {% endblock content %}

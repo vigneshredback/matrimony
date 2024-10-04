@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from app.serializers import BiodataSerializer
 from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_POST
 
 
 
@@ -16,7 +17,11 @@ from django.shortcuts import get_object_or_404
 @login_required(login_url='login')
 def adminhome(request):
     if request.user.is_admin:
-        return render(request,'adminpages/adminhome.html')
+        newusers = Biodata.objects.filter(admin_approval=False).count()
+        totalusers = Biodata.objects.all().count()
+        free_users = Biodata.objects.filter(plan=1).count()
+        premium_users = Biodata.objects.filter(plan=2).count()
+        return render(request,'adminpages/adminhome.html',{'newusers': newusers,'totalusers': totalusers,'free_users': free_users,'premium_users': premium_users})
     else:
         return redirect('home')
     
@@ -108,7 +113,6 @@ def adminregister(request):
 
     return render(request, 'register.html', {'form': form})
 
-
 @login_required(login_url='login')
 def adminalluser(request):
     if request.user.is_admin:
@@ -119,7 +123,7 @@ def adminalluser(request):
         if email:
             biodata = biodata.filter(user__email__icontains=email)
 
-        # Implement pagination, displaying 5 profiles per page
+        # Implement pagination, displaying 15 profiles per page
         paginator = Paginator(biodata, 15)
         page_number = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
@@ -135,7 +139,8 @@ def adminalluser(request):
                     'phone': biodata_item.user.phone,
                     'plan': biodata_item.plan.name,
                     'city': biodata_item.city.name if biodata_item.city else '',
-                    'date_of_birth': biodata_item.date_of_birth.strftime('%Y-%m-%d') if biodata_item.date_of_birth else ''
+                    'date_of_birth': biodata_item.date_of_birth.strftime('%Y-%m-%d') if biodata_item.date_of_birth else '',
+                    'admin_approval': biodata_item.admin_approval
                 })
             
             data = {
@@ -154,7 +159,22 @@ def adminalluser(request):
 
     else:
         return redirect('home')
-    
+
+@login_required(login_url='login')
+def toggle_approvals(request, user_id):
+    if request.method == 'POST' and request.user.is_admin:
+        try:
+            biodata_item = Biodata.objects.get(id=user_id)
+            biodata_item.admin_approval = not biodata_item.admin_approval  # Toggle approval status
+            biodata_item.save()
+            print(biodata_item.admin_approval)
+            return JsonResponse({
+                'status': 'success',
+                'new_approval_status': biodata_item.admin_approval
+            })
+        except Biodata.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User not found.'}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Invalid request.'}, status=400)
 
 @login_required(login_url='login')
 def adminfreeuser(request):
@@ -286,6 +306,22 @@ def adminupdateuser(request, user_id):
 
 def adminnewuserrequests(request):
     if request.user.is_admin:
-        return render(request,'adminpages/adminnewuserrequests.html')
+        newusers = Biodata.objects.filter(admin_approval=False)
+        return render(request, 'adminpages/adminnewuserrequests.html', {'newusers': newusers})
     else:
         return redirect('home')
+
+@require_POST
+def toggle_approval(request, user_id):
+    if request.user.is_admin:
+        print('here')
+        try:
+            biodata = Biodata.objects.get(user_id=user_id)
+            biodata.admin_approval = not biodata.admin_approval  # Toggle approval status
+            biodata.save()
+            return JsonResponse({'status': 'success', 'approved': biodata.admin_approval})
+        except Biodata.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User not found'})
+    return JsonResponse({'status': 'error', 'message': 'Unauthorized'})
+
+

@@ -72,7 +72,7 @@ def allprofiles(request):
         return redirect('biodata')
 
     # Continue with normal profile listing logic if the plan is selected
-    profiles = Biodata.objects.all()
+    profiles = Biodata.objects.filter(admin_approval=True)
     cities = City.objects.all()
     religions = Religion.objects.all()
     context = {'cities': cities, 'religions': religions}
@@ -108,7 +108,10 @@ def allprofiles(request):
             'profiles': profiles_data,
             'has_next': page_obj.has_next(),
         }
+        if totalprofiles < 5:
+            return JsonResponse('no data', safe=False)
         return JsonResponse(data)
+
 
     # Pass the same data for HTML response
     for profile in page_obj:
@@ -149,7 +152,7 @@ def searchprofile(request):
         religions = Religion.objects.all()
 
         # Start with the base queryset
-        profiles = Biodata.objects.all()
+        profiles = Biodata.objects.filter(admin_approval=True)
         
 
         print(profile_type)

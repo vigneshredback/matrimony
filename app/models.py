@@ -138,7 +138,8 @@ class Biodata(models.Model):
     profession = models.CharField(max_length=150)
     position = models.CharField(max_length=150)
     plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True)  # Add Plan to Biodata
-    # admin_approval = models.BooleanField(default=False)
+    admin_approval = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     # Image fields
     image1 = models.ImageField(upload_to='images/profile', blank=True, null=True)

@@ -45,6 +45,8 @@ urlpatterns = [
     path('admin-premiumuser/', admindashboardview.adminpremiumuser, name='adminpremiumuser'),
     path('edit_user/<int:user_id>/', admindashboardview.adminupdateuser, name='edit_user'),
     path('admin-new-user-requests/', admindashboardview.adminnewuserrequests, name='adminnewuserrequests'),
+    path('toggle-approval/<int:user_id>/', admindashboardview.toggle_approval, name='toggle_approval'),
+    path('toggle-approvals/<int:user_id>/', admindashboardview.toggle_approvals, name='toggle_approvals'),
 
 
 

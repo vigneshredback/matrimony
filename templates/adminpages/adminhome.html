@@ -1,4 +1,5 @@
 {% extends "base/adminbase.html" %}
+{% load static %}
 {% block content %}
 <div class="pan-rhs">
     <div class="row main-head">
@@ -22,22 +23,50 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-6">
+
         <div class="box-com box-qui box-drk grn-box">
           <h4>New Users</h4>
-          <h2>User requests</h2>
-          <span class="bnum">69</span>
-          <p>This count for today how many users can register.</p>
+          <h2>Pending profile approval</h2>
+          <span class="bnum">{{newusers}}</span>
+          <p>This is the number of new users waiting for admin approval</p>
           <a href="{% url 'adminnewuserrequests' %}" class="fclick"></a>
         </div>
+
+        <div class="box-com box-qui box-lig box-new-user">
+          <h2>Total Users</h2>
+          <span class="bnum">{{totalusers}}</span>
+          <div class="users-cir-thum-hori">
+            <p>Total Registered Users</p>
+          </div>
+        </div>
+
+
+        
+
+      </div>
+      <div class="col-md-6">
         <div class="box-com box-qui box-lig ali-cen">
           <h3>
             <span>All</span> Members
           </h3>
-          <span class="bnum">6900</span>
+          <span class="bnum">{{totalusers}}</span>
           <canvas id="Chart_users"></canvas>
           <!-- <a href="admin-new-user-requests.php" class="fclick"></a> -->
         </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box-com box-qui box-lig ali-cen">
+          <h3>
+            <span>Total</span> Earnings
+          </h3>
+          <span class="bnum">
+            <sub>₹</sub>10,069 </span>
+          <canvas id="Chart_earni"></canvas>
+        </div>
+      </div>
+      <div class="col-md-6">
+
         <div class="box-com box-qui live-box">
           <h4>Live visitos</h4>
           <h2>Currently Active Users</h2>
@@ -47,46 +76,8 @@
             <span class="move"></span>
           </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="box-com box-qui box-lig box-new-user">
-          <h2>New Registrants</h2>
-          <span class="bnum">38</span>
-          <div class="users-cir-thum-hori">
-            <span>
-              <img src="../images/profiles/1.jpg" data-bs-toggle="tooltip" title="Hooray!">
-            </span>
-            <span>
-              <img src="../images/profiles/10.jpg" data-bs-toggle="tooltip" title="Hooray!">
-            </span>
-            <span>
-              <img src="../images/profiles/11.jpg" data-bs-toggle="tooltip" title="Hooray!">
-            </span>
-            <span>
-              <img src="../images/profiles/12.jpg" data-bs-toggle="tooltip" title="Hooray!">
-            </span>
-            <span>
-              <img src="../images/profiles/13.jpg" data-bs-toggle="tooltip" title="Hooray!">
-            </span>
-            <span>
-              <img src="../images/profiles/14.jpg" data-bs-toggle="tooltip" title="Hooray!">
-            </span>
-            <span>
-              <img src="../images/profiles/15.jpg" data-bs-toggle="tooltip" title="Hooray!">
-            </span>
-            <span>
-              <img src="../images/profiles/16.jpg" data-bs-toggle="tooltip" title="Hooray!">
-            </span>
-          </div>
-        </div>
-        <div class="box-com box-qui box-lig ali-cen">
-          <h3>
-            <span>Total</span> Earnings
-          </h3>
-          <span class="bnum">
-            <sub>₹</sub>10,069 </span>
-          <canvas id="Chart_earni"></canvas>
-        </div>
+
+
         <div class="box-com box-qui box-drk box-lead-thum">
           <h2>Leads & Enquiry</h2>
           <span class="bnum">28</span>
@@ -102,7 +93,7 @@
           <a href="admin-enquiry.html" class="fclick"></a>
         </div>
       </div>
-      <div class="col-md-6">
+      <!-- <div class="col-md-6">
         <div class="box-com box-qui box-lig ali-cen">
           <h3>
             <span>Monthly</span> Earnings
@@ -125,7 +116,7 @@
           <a href="#" class="btn-com btn-gre">Licance key</a>
           <a href="#" class="btn-com btn-line btn-whi">More details</a>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -612,4 +603,71 @@
       </div>
     </div>
   </div>
+
+  <small id="totalusers" class="">{{totalusers}}</small>
+  <small id="free_users" class="">{{free_users}}</small>
+  <small id="premium_users" class="">{{premium_users}}</small>
+
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/select-opt.js' %}"></script>
+  <script src="{% static 'admin/js/chart.js' %}"></script>
+  <script src="{% static 'admin/js/admin-custom.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  <script>
+    //ARNING CHART
+    var earningCanvas = document.getElementById("Chart_earni");
+    Chart.defaults.global.defaultFontSize = 14;
+    var earningsData = {
+      labels: ["Premium Plus", "Premium"],
+      datasets: [{
+        data: [50, 50],
+        backgroundColor: ["#8463FF", "#6384FF"]
+      }]
+    };
+    var pieChart = new Chart(earningCanvas, {
+      type: 'pie',
+      data: earningsData
+    });
+    //USER CHART
+    var usersCanvas = document.getElementById("Chart_users");
+    let free_users = Number(document.getElementById("free_users").innerHTML);
+    let premium_users = Number(document.getElementById("premium_users").innerHTML);
+    let totalusers = Number(document.getElementById("totalusers").innerHTML);
+    // Calculate percentage for free users and premium users
+    let free_users_percentage = (free_users / totalusers) 
+    let premium_users_percentage = (premium_users / totalusers) 
+
+    
+    var usersData = {
+      labels: [ "Premium", "Free"],
+      datasets: [{
+        data: [ premium_users_percentage, free_users_percentage],
+        backgroundColor: ["#ffc107", "#6c757d"]
+      }]
+    };
+    var pieChart = new Chart(usersCanvas, {
+      type: 'pie',
+      data: usersData
+    });
+    //USER CHART
+    var ctx = document.getElementById("Chart_earni_rece").getContext('2d');
+    var barChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: 'data-1',
+          data: [4000, 5000, 4550, 6005, 8550, 9008, 3220, 4880, 6550, 2500, 2500],
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          borderWidth: 2,
+          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+        }]
+      }
+    });
+  </script>
 {% endblock content %}
