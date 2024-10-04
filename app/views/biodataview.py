@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from app.models import Like, Biodata, Plan
 from app.serializers import LikeSerializer
-
+from django.db.models import Count
 
 
 
@@ -100,7 +100,8 @@ def allprofiles(request):
                 'height': profile.height,
                 'image1': profile.image1.url if profile.image1 else '',  # Convert ImageField to URL
                 'user_has_liked': user_has_liked,  # Add like status to the data
-                'user_has_interest': user_has_interest  # Add like status to the data
+                'user_has_interest': user_has_interest,  # Add like status to the data,
+                'plan_id': profile.plan_id
             })
         
         data = {
@@ -142,12 +143,26 @@ def searchprofile(request):
         age = request.GET.get('age', 'all') if request.method == 'GET' else request.POST.get('age', 'all')
         city = request.GET.get('city', 'all') if request.method == 'GET' else request.POST.get('city', 'all')
         religion = request.GET.get('religion', 'all') if request.method == 'GET' else request.POST.get('religion', 'all')
+        profile_type = request.GET.get('profile_type') if request.method == 'GET' else request.POST.get('profile_type')
 
         cities = City.objects.all()
         religions = Religion.objects.all()
 
         # Start with the base queryset
         profiles = Biodata.objects.all()
+        
+
+        print(profile_type)
+        message = 'you are viewing all profiles'
+
+        # Apply profile type filter
+        if profile_type == 'premium':
+            profiles = profiles.filter(plan_id=1)
+            message = 'you are viewing premium profiles'
+        elif profile_type == 'free':
+            profiles = profiles.filter(plan_id=2)
+            message = 'you are viewing free profiles'
+        
 
         # Apply filters
         if gender != 'all':
@@ -215,8 +230,10 @@ def searchprofile(request):
             profile.user_has_interest = Interest.objects.filter(user=request.user, biodata=profile).exists()
 
         # Regular non-AJAX response for initial page load
+        # messages.success(request, message)
         return render(request, 'pages/filteredprofiles.html', {
             'profiles': page_obj,
+            'profile_type': profile_type,
             'totalprofiles': totalprofiles,
             'gender': gender,
             'age': age,
@@ -230,12 +247,30 @@ def searchprofile(request):
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+
+def calculate_age(birthdate):
+    today = date.today()
+    age = today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
+    return age
+
 def profile_detail(request, pk):
     try:
-        profile = Biodata.objects.get(pk=pk)
-        return render(request, 'pages/profile_detail.html', {'profile': profile})
+        # Annotate the profile with the number of likes
+        profile = Biodata.objects.annotate(like_count=Count('likes')).get(pk=pk)
+        profile.age = calculate_age(profile.date_of_birth)
+
+        # Annotate recommended profiles with their like count and calculate age
+        recommended_profiles = Biodata.objects.annotate(like_count=Count('likes')).filter(city=profile.city, gender=profile.gender).exclude(id=pk)[:4]
+        
+        for rec_profile in recommended_profiles:
+            rec_profile.age = calculate_age(rec_profile.date_of_birth)
+
+        return render(request, 'pages/profile_detail.html', {
+            'profile': profile, 
+            'recommended_profiles': recommended_profiles
+        })
     except Biodata.DoesNotExist:
-        messages.warning(request, "create your profile first")
+        messages.warning(request, "Create your profile first")
         return redirect('biodata')
 
 def biodata_update_view(request):

@@ -1,0 +1,277 @@
+{% extends "base/adminbase.html" %}
+{% block content %}
+<style>
+    ul li {
+        color: red !important;
+    }
+</style>
+<div class="pan-rhs">
+    <div class="row main-head">
+        <div class="col-md-4">
+            <div class="tit">
+                <h1>Update User</h1>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Users</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Update User</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-com box-qui box-lig box-form">
+                <div class="form-inp">
+                    <form method="POST" action="{% url 'edit_user' user.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h1>Update User</h1>
+
+                        <!-- ACCOUNT DETAILS SECTION -->
+                        <div class="edit-pro-parti">
+                            <div class="form-tit">
+                                <h4>Account details</h4>
+                                <h1>Email & Password</h1>
+                            </div>
+                            <div class="form-group">
+                                {{ userform.email.label_tag }}
+                                {{ userform.email }}
+                                {{ userform.email.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ userform.name.label_tag }}
+                                {{ userform.name }}
+                                {{ userform.name.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ userform.phone.label_tag }}
+                                {{ userform.phone }}
+                                {{ userform.phone.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ userform.aadhaar.label_tag }}
+                                {{ userform.aadhaar }}
+                                {{ userform.aadhaar.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ userform.password.label_tag }}
+                                <input type="password" class="form-control" id="id_password" required name="password">
+                                {{ userform.password.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ userform.confirm_password.label_tag }}
+                                <input type="password" class="form-control" id="id_confirm_password" required name="confirm_password">
+                                {{ userform.confirm_password.errors }}
+                            </div>
+                        </div>
+
+                        <!-- BASIC INFO SECTION -->
+                        <div class="edit-pro-parti">
+                            <div class="form-tit">
+                                <h4>Basic Info</h4>
+                            </div>
+                            <div class="form-group">
+                                {{ form.gender.label_tag }}
+                                {{ form.gender }}
+                                {{ form.gender.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.city.label_tag }}
+                                {{ form.city }}
+                                {{ form.city.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.date_of_birth.label_tag }}
+                                {{ form.date_of_birth }}
+                                {{ form.date_of_birth.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.age.label_tag }}
+                                {{ form.age }}
+                                {{ form.age.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.height.label_tag }}
+                                {{ form.height }}
+                                {{ form.height.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.weight.label_tag }}
+                                {{ form.weight }}
+                                {{ form.weight.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.father_name.label_tag }}
+                                {{ form.father_name }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.mother_name.label_tag }}
+                                {{ form.mother_name }}
+                                {{ form.mother_name.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.address.label_tag }}
+                                {{ form.address }}
+                                {{ form.address.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.about.label_tag }}
+                                {{ form.about }}
+                                {{ form.about.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.religion.label_tag }}
+                                {{ form.religion }}
+                                {{ form.religion.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.family_name.label_tag }}
+                                {{ form.family_name }}
+                                {{ form.family_name.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.profession.label_tag }}
+                                {{ form.profession }}
+                                {{ form.profession.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.position.label_tag }}
+                                {{ form.position }}
+                                {{ form.position.errors }}
+                            </div>
+                        </div>
+
+                        <!-- JOB DETAILS SECTION -->
+                        <div class="edit-pro-parti">
+                            <div class="form-tit">
+                                <h4>Job Details</h4>
+                                <h1>Job & Education</h1>
+                            </div>
+                            <div class="form-group">
+                                {{ form.job_type.label_tag }}
+                                {{ form.job_type }}
+                                {{ form.job_type.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.company_name.label_tag }}
+                                {{ form.company_name }}
+                                {{ form.company_name.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.salary.label_tag }}
+                                {{ form.salary }}
+                                {{ form.salary.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.job_experience.label_tag }}
+                                {{ form.job_experience }}
+                                {{ form.job_experience.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.degree.label_tag }}
+                                {{ form.degree }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.school.label_tag }}
+                                {{ form.school }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.college.label_tag }}
+                                {{ form.college }}
+                                {{ form.college.errors }}
+                            </div>
+                        </div>
+
+                        <!-- SOCIAL MEDIA SECTION -->
+                        <div class="edit-pro-parti">
+                            <div class="form-tit">
+                                <h4>Social Media</h4>
+                                <h1>Media Links</h1>
+                            </div>
+                            <div class="form-group">
+                                {{ form.whatsapp_link.label_tag }}
+                                {{ form.whatsapp_link }}
+                                {{ form.whatsapp_link.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.facebook_link.label_tag }}
+                                {{ form.facebook_link }}
+                                {{ form.facebook_link.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.instagram_link.label_tag }}
+                                {{ form.instagram_link }}
+                                {{ form.instagram_link.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.x_link.label_tag }}
+                                {{ form.x_link }}
+                                {{ form.x_link.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.youtube_link.label_tag }}
+                                {{ form.youtube_link }}
+                                {{ form.youtube_link.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.linkedin_link.label_tag }}
+                                {{ form.linkedin_link }}
+                                {{ form.linkedin_link.errors }}
+                            </div>
+                        </div>
+
+                                                <!-- HOBBIES SECTION -->
+                                                <div class="edit-pro-parti">
+                                                    <div class="form-tit">
+                                                        <h4>Interests</h4>
+                                                        <h1>Hobbies</h1>
+                                                    </div>
+                                                    <div class="chosenini">
+                                                        <div class="form-group">
+                                                            {{ form.hobbies }}
+                                                        </div>
+                                                        {{ form.hobbies.errors }}
+                                                    </div>
+                        
+                                                </div>
+                                                <!--END HOBBIES SECTION-->
+
+                        <!-- IMAGE UPLOAD SECTION -->
+                        <div class="edit-pro-parti">
+                            <div class="form-tit">
+                                <h4>Profile Images</h4>
+                            </div>
+                            <div class="form-group">
+                                {{ form.image1.label_tag }}
+                                {{ form.image1 }}
+                                {{ form.image1.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.image2.label_tag }}
+                                {{ form.image2 }}
+                                {{ form.image2.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.image3.label_tag }}
+                                {{ form.image3 }}
+                                {{ form.image3.errors }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.image4.label_tag }}
+                                {{ form.image4 }}
+                                {{ form.image4.errors }}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="cta-full cta-colr">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

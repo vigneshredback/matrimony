@@ -138,6 +138,7 @@ class Biodata(models.Model):
     profession = models.CharField(max_length=150)
     position = models.CharField(max_length=150)
     plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True)  # Add Plan to Biodata
+    # admin_approval = models.BooleanField(default=False)
 
     # Image fields
     image1 = models.ImageField(upload_to='images/profile', blank=True, null=True)
@@ -151,11 +152,12 @@ class Biodata(models.Model):
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    biodata = models.ForeignKey(Biodata, on_delete=models.CASCADE)
+    biodata = models.ForeignKey(Biodata, on_delete=models.CASCADE, related_name='likes')
 
     def __str__(self):
         return f"{self.user.name} likes {self.biodata.user.name}"
-
+    
+    
 class Interest(models.Model):
     interest_choices = (('Pending', 'Pending'),('Interested', 'Interested'), ('Not Interested', 'Not Interested'))
     user = models.ForeignKey(User, on_delete=models.CASCADE)

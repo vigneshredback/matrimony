@@ -96,7 +96,7 @@
                                 <td>${user.date_of_birth}</td>
                                 <td class="text-center"><button class="btn btn-outline-secondary" style="color: ${user.plan === 'Free' ? 'green' : user.plan === 'premium' ? 'goldenrod' : 'black'};">${user.plan.charAt(0).toUpperCase() + user.plan.slice(1)}</button></td>
                                 <td>
-                                    <a href="/edit_user/${user.id}" class="text-primary">
+                                    <a href="http://127.0.0.1:8000/edit_user/${user.id}" class="text-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>

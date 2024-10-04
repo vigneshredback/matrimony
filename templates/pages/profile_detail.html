@@ -1,5 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load custom_filters %}
+
 {% block content %}
     <!-- PROFILE -->
     <section>
@@ -32,8 +34,7 @@
                             <div class="pro-pg-intro">
                                 <h1>{{profile.user.name}}</h1>
                                 <div class="pro-info-status">
-                                    <span class="stat-1"><b>100</b> viewers</span>
-                                    <span class="stat-2"><b>Available</b> online</span>
+                                    <span class="stat-2"><b>{{ profile.like_count }}</b> Likes</span>
                                 </div>
                                 <ul>
                                     <li>
@@ -198,71 +199,29 @@
                             <div class="slid-inn pr-bio-c wedd-rel-pro">
                                 <h3>Related profiles</h3>
                                 <ul class="slider3">
+                                    {% for profile in recommended_profiles %}
                                     <li>
                                         <div class="wedd-rel-box">
                                             <div class="wedd-rel-img">
-                                                <img src="images/profiles/1.jpg" alt="">
-                                                <span class="badge badge-success">21 Years old</span>
+                                                {% if not profile.image1 %}
+                                                {% if profile.gender == 'Male' %}
+                                                    <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
+                                                {% else %}
+                                                    <img src="{% static 'images/couples/femaleavatar.jpg' %}" class="image-responsive" alt="female">
+                                                {% endif %}
+                                                {% else %}
+                                                    <img src="{{ profile.image1.url }}" alt="original">
+                                                {% endif %}
+                                                <span class="badge badge-success">{{ profile.age }} Years old</span>
                                             </div>
                                             <div class="wedd-rel-con">
-                                                <h5>Christine</h5>
-                                                <span>City: <b>New York City</b></span>
+                                                <h5>{{profile.user.name}}</h5>
+                                                <span>City: <b>{{profile.city}}</b></span>
                                             </div>
-                                            <a href="profile-details.html" class="fclick"></a>
+                                            <a href="{% url 'profile_detail' profile.id %}" class="fclick"></a>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="wedd-rel-box">
-                                            <div class="wedd-rel-img">
-                                                <img src="images/profiles/2.jpg" alt="">
-                                                <span class="badge badge-success">21 Years old</span>
-                                            </div>
-                                            <div class="wedd-rel-con">
-                                                <h5>Christine</h5>
-                                                <span>City: <b>New York City</b></span>
-                                            </div>
-                                            <a href="profile-details.html" class="fclick"></a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wedd-rel-box">
-                                            <div class="wedd-rel-img">
-                                                <img src="images/profiles/3.jpg" alt="">
-                                                <span class="badge badge-success">21 Years old</span>
-                                            </div>
-                                            <div class="wedd-rel-con">
-                                                <h5>Christine</h5>
-                                                <span>City: <b>New York City</b></span>
-                                            </div>
-                                            <a href="profile-details.html" class="fclick"></a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wedd-rel-box">
-                                            <div class="wedd-rel-img">
-                                                <img src="images/profiles/4.jpg" alt="">
-                                                <span class="badge badge-success">21 Years old</span>
-                                            </div>
-                                            <div class="wedd-rel-con">
-                                                <h5>Christine</h5>
-                                                <span>City: <b>New York City</b></span>
-                                            </div>
-                                            <a href="profile-details.html" class="fclick"></a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="wedd-rel-box">
-                                            <div class="wedd-rel-img">
-                                                <img src="images/profiles/6.jpg" alt="">
-                                                <span class="badge badge-success">21 Years old</span>
-                                            </div>
-                                            <div class="wedd-rel-con">
-                                                <h5>Christine</h5>
-                                                <span>City: <b>New York City</b></span>
-                                            </div>
-                                            <a href="profile-details.html" class="fclick"></a>
-                                        </div>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                             <!-- END RELATED PROFILES -->

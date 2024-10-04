@@ -24,19 +24,28 @@
                     <h4><a href="{% url 'profile_detail' item.id %}">{{ item.user.name }}</a></h4>
                     <div class="pro-bio">
                         <span class="bg-primary">Id: {{item.id}}</span>
+
                         <span>{{ item.degree }}</span>
                         <span>{{ item.profession }}</span>
                         <span>Age: {{ item.age }}</span>
                         <span>Height: {{ item.height }}</span>
                     </div>
                     <div class="links">
+                        {% if item.plan_id == 1 %}
+                        <span class="bg-secondary text-white">free user</span>
+                        {% elif item.plan_id == 2 %}
+                        <span class="bg-warning text-white">premium user</span>
+                        {% endif %}
+                        <a href="profile-details.html">More details</a>
+
                         <a href="#!">WhatsApp</a>
                         {% if item.user_has_interest %}
                         <span href="#!" class="cta cta-sendint interest-icon bg-success text-white"  data-bs-target="#sendInter" data-biodata-id="{{ item.id }}" data-liked="true" title="Click to remove interest.">interested</span>
                         {% else %}
                         <span href="#!" class="cta cta-sendint interest-icon"  data-bs-target="#sendInter" data-biodata-id="{{ item.id }}" data-liked="false" title="Click to interest.">send interest</span>
                         {% endif %}
-                        <a href="profile-details.html">More details</a>
+
+
                     </div>
                 </div>
                 {% if item.user_has_liked %}
@@ -102,6 +111,7 @@
                                 <span>Height: ${item.height}</span>
                             </div>
                             <div class="links">
+                                ${item.plan_id == 1 ? '<span class="bg-secondary text-white">free user</span>' : item.plan_id == 2 ? '<span class="bg-warning text-white">premium user</span>' : '' }
                                 <a href="#!">WhatsApp</a>
 
 

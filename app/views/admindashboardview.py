@@ -5,6 +5,9 @@ from django.contrib import messages
 from app.models import Biodata,User
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from app.serializers import BiodataSerializer
+from django.shortcuts import get_object_or_404
+
 
 
 # Create your views here.
@@ -244,5 +247,45 @@ def adminpremiumuser(request):
             'page_obj': page_obj
         })
 
+    else:
+        return redirect('home')
+    
+
+
+@login_required(login_url='login')
+def adminupdateuser(request, user_id):
+    # Ensure that the logged-in user is an admin
+    if request.user.is_admin:
+        # Get the user and their corresponding biodata
+        user = get_object_or_404(User, pk=user_id)
+        biodata = get_object_or_404(Biodata, user=user)
+
+        if request.method == 'POST':
+            # Create a user form and biodata form with the POST data
+            userform = UserRegistrationForm(request.POST, instance=user)
+            form = BiodataForm(request.POST, request.FILES, instance=biodata)
+
+            # Check if both forms are valid
+            if userform.is_valid() and form.is_valid():
+                # Save the user and biodata
+                userform.save()
+                form.save()
+                messages.success(request, "User and Biodata updated successfully!")
+                return redirect('adminhome')
+            else:
+                print("Errors:", userform.errors, form.errors)
+        else:
+            # Load the form with the existing data
+            userform = UserRegistrationForm(instance=user)
+            form = BiodataForm(instance=biodata)
+
+        return render(request, 'adminpages/updateuser.html', {'form': form, 'userform': userform, 'user': user})
+    else:
+        return redirect('home')
+    
+
+def adminnewuserrequests(request):
+    if request.user.is_admin:
+        return render(request,'adminpages/adminnewuserrequests.html')
     else:
         return redirect('home')

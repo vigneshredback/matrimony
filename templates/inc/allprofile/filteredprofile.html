@@ -48,9 +48,7 @@
                     <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
                 </span>
                 {% endif %}
-                {% if item.user_has_liked %}
-                <span>hi</span>
-                {% endif %}
+
             </div>
         </li>
         {% endfor %}
@@ -82,7 +80,7 @@
 
             page++;
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', `/search/?page=${page}&gender={{ gender }}&age={{ age }}&religion={{ religion }}&city={{ city }}`, true);
+            xhr.open('GET', `/search/?page=${page}&gender={{ gender }}&age={{ age }}&religion={{ religion }}&city={{ city }}&profile_type={{ profile_type }}`, true);
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
             xhr.onload = function() {
