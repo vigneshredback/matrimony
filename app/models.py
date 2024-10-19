@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
 from django.db import models
 from django.core.validators import RegexValidator
+from tinymce.models import HTMLField
 class UserManager(BaseUserManager):
     def create_user(self, email, name, phone, password=None):
         if not email:
@@ -169,3 +170,16 @@ class Interest(models.Model):
 
     def __str__(self):
         return f"{self.user.name} Interested in {self.biodata.user.name}"
+
+
+class Blog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/blog', blank=True, null=True)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    content = HTMLField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

@@ -21,7 +21,8 @@ def adminhome(request):
         totalusers = Biodata.objects.all().count()
         free_users = Biodata.objects.filter(plan=1).count()
         premium_users = Biodata.objects.filter(plan=2).count()
-        return render(request,'adminpages/adminhome.html',{'newusers': newusers,'totalusers': totalusers,'free_users': free_users,'premium_users': premium_users})
+        recentusers = Biodata.objects.all().order_by('-id')[:5]
+        return render(request,'adminpages/adminhome.html',{'newusers': newusers,'totalusers': totalusers,'free_users': free_users,'premium_users': premium_users,'recentusers': recentusers})
     else:
         return redirect('home')
     

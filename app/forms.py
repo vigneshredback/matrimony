@@ -1,5 +1,5 @@
 from django import forms
-from .models import User,Biodata, JobType, Hobby, Religion
+from .models import User,Biodata, JobType, Hobby, Religion,Blog
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -163,3 +163,17 @@ class UserRegistrationForm(forms.ModelForm):
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match")
         return cleaned_data
+    
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ['user', 'image', 'title', 'description', 'content']
+        widgets = {
+            'user': forms.Select(attrs={'class': 'form-select chosen-select'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control',id:'content'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
+
+    

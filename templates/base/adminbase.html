@@ -29,6 +29,8 @@
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
   </head>
@@ -173,13 +175,15 @@
     <!-- COPYRIGHTS -->
     <section>
       <div class="main">
-        <div class="incon" <div class="row">
+        <div class="incon"  class="row">
           <div class="pan-lhs ad-menu-main">
             <div class="ad-menu">
               <ul>
+
                 <li class="ic-db">
                   <a href="{% url 'adminhome' %}">Dashboard</a>
                 </li>
+
                 <li class="ic-user">
                   <a href="#" class="">Users</a>
                   <div>
@@ -190,9 +194,7 @@
                       <li>
                         <a href="{% url 'adminalluser' %}">All Users</a>
                       </li>
-                      {% comment %} <li>
-                        <a href="#!">New User Requests</a>
-                      </li> {% endcomment %}
+                      
                       <li>
                         <a href="{% url 'adminfreeuser' %}">Free Users</a>
                       </li>
@@ -204,6 +206,10 @@
                   </div>
                 </li>
 
+                <li class="ic-db">
+                  <a href="{% url 'blog_list' %}">Blog</a>
+                </li>
+
 
                 <li>
                   <h4>Payments</h4>
@@ -213,24 +219,22 @@
                 </li>
 
                 
-                <li>
+                {% comment %} <li>
                   <h4>Settings</h4>
                 </li>
                 <li class="ic-set">
                   <a href="admin-setting.html">Site Setting</a>
-                </li>
+                </li> {% endcomment %}
 
 
 
 
-                <li>
-                  <h4>Others</h4>
-                </li>
+  
                 <li class="ic-febk">
-                  <a href="admin-enquiry.html">All Enquiry</a>
+                  <a href="#">All Enquiry</a>
                 </li>
                 <li class="ic-imp">
-                  <a href="admin-export.html">Export</a>
+                  <a href="#">Export</a>
                 </li>
 
 
@@ -238,14 +242,14 @@
                   <h4>Sign out </h4>
                 </li>
                 <li class="ic-lgo">
-                  <a href="logout.html">Log out</a>
+                  <a href="{% url 'logout' %}">Log out</a>
                 </li>
               </ul>
             </div>
           </div>
           {% block content %}
           {% endblock content %}
-        </div>
+        </>
       </div>
       </div>
     </section>
@@ -294,6 +298,9 @@
                       {% endif %}
                   });
     </script>
+
+  
+
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -301,5 +308,6 @@
     <script src="{% static 'admin/js/chart.js' %}"></script>
     <script src="{% static 'admin/js/admin-custom.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+
   </body>
 </html>

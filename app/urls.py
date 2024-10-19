@@ -1,5 +1,5 @@
 from django.urls import path 
-from .views import  dashboardview, homeview,aboutview,faqview,planview,contactview,registrationview,biodataview,admindashboardview
+from .views import  dashboardview, homeview,aboutview,faqview,planview,contactview,registrationview,biodataview,admindashboardview,galleryview,blogview
 from django.contrib.auth import views as auth_views
 
 
@@ -9,13 +9,23 @@ urlpatterns = [
     path('faq/',faqview.faq,name='faq'),
     path('plan/',planview.plan,name='plan'),
     path('contact/',contactview.contact,name='contact'),
-    path('dashboard/',dashboardview.dashboard,name='dashboard'),
+    path('photo-gallery/',galleryview.photogallery,name='photo_gallery'),
+
+    # blog
+
+    path('blog-detail/<int:pk>/',blogview.blog_detail,name='blog_detail'),
+    path('blog-list/', blogview.blog_list, name='blog_list'),
+    path('blog-create/', blogview.blog_create, name='blog_create'),
+    path('blog-update/<int:pk>/', blogview.blog_update, name='blog_update'),
+    path('blog-delete/<int:pk>/', blogview.blog_delete, name='blog_delete'),
+
+
+    # registration urls
     path('register/', registrationview.register, name='register'),
     path('login/', registrationview.loginview, name='login'),
     path('logout/', registrationview.logoutview, name='logout'),
     path('activate/<uidb64>/<token>/', registrationview.activate, name='activate'),
     path('edit-account/', registrationview.edit_account, name='edit_account'),
-    # Password reset URLs
     path('password-reset/', registrationview.password_reset_request, name='password_reset'),
     path('password-reset/done/', registrationview.password_reset_done, name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', registrationview.password_reset_confirm, name='password_reset_confirm'),

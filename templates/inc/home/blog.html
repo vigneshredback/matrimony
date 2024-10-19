@@ -7,41 +7,23 @@
                     <div class="home-tit">
                         <p>Blog posts</p>
                         <h2><span>Blog & Articles</span></h2>
+               
                         <span class="leaf1"></span>
                         <span class="tit-ani-"></span>
                     </div>
                     <div class="blog">
                         <ul>
+                            {% for item in blog %}
                             <li>
                                 <div class="blog-box">
-                                    <img src="{% static 'images/og/blog1.jpg' %}" alt="" loading="lazy">
-                                    <span>Wedding - Johnny</span>
-                                    <h2>Wedding arrangements</h2>
-                                    <p>It is a long established fact that a reader will be distracted by the readable
-                                        content.</p>
-                                    <a href="#!" class="cta-dark"><span>Read more</span></a>
+                                    <img src="{{ item.image.url }}" alt="" loading="lazy">
+                                    <h2>{{ item.title }}</h2>
+                                    <p>{{ item.description }}</p>
+                                    <a href="{% url 'blog_detail' item.id %}" class="cta-dark"><span>Read more</span></a>
                                 </div>
                             </li>
-                            <li>
-                                <div class="blog-box">
-                                    <img src="{% static 'images/og/blog2.jpg' %}" alt="" loading="lazy">
-                                    <span>Wedding - Johnny</span>
-                                    <h2>Wedding arrangements</h2>
-                                    <p>It is a long established fact that a reader will be distracted by the readable
-                                        content.</p>
-                                    <a href="#!" class="cta-dark"><span>Read more</span></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="blog-box">
-                                    <img src="{% static 'images/og/blog3.jpg' %}" alt="" loading="lazy">
-                                    <span>Wedding - Johnny</span>
-                                    <h2>Invitation cards</h2>
-                                    <p>It is a long established fact that a reader will be distracted by the readable
-                                        content.</p>
-                                    <a href="#!" class="cta-dark"><span>Read more</span></a>
-                                </div>
-                            </li>
+                            {% endfor %}
+
                         </ul>
                     </div>
                 </div>

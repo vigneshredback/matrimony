@@ -1,0 +1,92 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- START -->
+    <section>
+        <div class="inn-ban">
+            <div class="container">
+                <div class="row">
+                    <h1>{{blog.title}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END -->
+
+    <!-- START -->
+    <section>
+        <div class="blog-main blog-detail">
+            <div class="container">
+                <div class="row">
+                    <div class="inn">
+                        <div class="lhs">
+                            <!--BIG POST START-->
+                            <div class="blog-home-box">
+                                <div class="im">
+                                    <img src="{{blog.image.url}}" alt="" loading="lazy">
+                                    <span class="blog-date">22, Jan 2023</span>
+                                    <div class="shar-1">
+                                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                                        <ul>
+                                            <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                            <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                            <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                                            <li><span><i class="fa fa-link" aria-hidden="true" data-toggle="modal"
+                                                        data-target="#sharepop"></i></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="txt">
+                                    <h3>{{blog.description}}</h3>
+                                    <p>{{blog.content|safe}}</p>
+                                </div>
+                            </div>
+                            <!--END BIG POST START-->
+
+                        </div>
+                        
+                        <div class="rhs">
+                            <div class="blog-com-rhs">
+                                <!-- SOCIAL MEDIA START-->
+                                <div class="blog-soci">
+                                    <h4>Social media</h4>
+                                    <ul>
+                                        <li><a target="_blank" href="#!" class="sm-fb-big"><b>3k</b> Facebook</a></li>
+                                        <li><a target="_blank" href="#!" class="sm-tw-big"><b>10K</b> Twitter</a></li>
+                                        <li><a target="_blank" href="#!" class="sm-li-big"><b>1k</b> Linkedin</a></li>
+                                        <li><a target="_blank" href="#!" class="sm-yt-big"><b>100K</b> Youtube</a></li>
+                                    </ul>
+                                </div>
+                                <!-- SOCIAL MEDIA END-->
+
+                                <!-- SUBSCRIBE START-->
+                                <div class="blog-subsc">
+                                    <div class="ud-rhs-poin1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/6349/6349282.png" alt=""
+                                            loading="lazy">
+                                        <h5>Subscribe <b>Newsletter</b></h5>
+                                    </div>
+                                    <form name="news_newsletter_subscribe_form" id="news_newsletter_subscribe_form">
+                                        <ul>
+                                            <li><input type="text" name="news_newsletter_subscribe_name"
+                                                    placeholder="Enter Email Id*" class="form-control" required="">
+                                            </li>
+                                            <li><input type="submit" id="news_newsletter_subscribe_submit"
+                                                    name="news_newsletter_subscribe_submit" class="form-control"></li>
+                                        </ul>
+                                    </form>
+                                </div>
+                                <!-- SUBSCRIBE END-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END -->
+
+
+
+{% endblock content %} 

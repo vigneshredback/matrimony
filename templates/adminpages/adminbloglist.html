@@ -1,0 +1,68 @@
+{% extends "base/adminbase.html" %}
+{% load static %}
+{% block content %}
+
+<div class="pan-rhs">
+    <div class="row main-head">
+      <div class="col-md-4">
+        <div class="tit">
+          <h1>All Blogs</h1>
+        </div>
+      </div>
+    </div>
+    <a href="{% url 'blog_create' %}"><button class="btn btn-success">create new</button></a>
+<p>This is the list of all blogs</p>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box-com box-qui box-lig box-tab">
+          <div class="tit">
+            <div class="dropdown">
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Posted On</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in blogs %}
+              {{item}}
+              <tr>
+                <td>{{item.created_at|date:"d-M-Y"}}</td>
+                <td>
+                  <div class="prof-table-thum">
+                    <div class="pro">
+
+                          <img src="{{ item.image.url }}" alt="original">
+      
+                    </div>
+
+                  </div>
+                </td>
+                <td>{{item.title|slice:":20"}}..</td>
+                <td>{{item.description|slice:":20"}}...</td>
+                <td>
+                  <span class="hig-grn"><a href="{% url 'blog_update' item.pk %}">Edit</a></span>
+                </td>
+                <td>
+                    <form action="{% url 'blog_delete' item.pk %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

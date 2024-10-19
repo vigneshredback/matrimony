@@ -1,0 +1,3099 @@
+:root {
+    --bs-brandicon: url(https://assets.indiaonline.in/common/logo-icon-30.webp) no-repeat
+}
+
+*,*::before,*::after {
+    box-sizing: border-box
+}
+
+body {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1rem;
+    background-color: #eee;
+    color: #000
+}
+
+@-moz-keyframes animatePreloader {
+    0% {
+        background-position: -468px 0
+    }
+
+    100% {
+        background-position: 468px 0
+    }
+}
+
+@-webkit-keyframes animatePreloader {
+    0% {
+        background-position: -468px 0
+    }
+
+    100% {
+        background-position: 468px 0
+    }
+}
+
+@-o-keyframes animatePreloader {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+@keyframes animatePreloader {
+    0% {
+        background-position: -468px 0
+    }
+
+    100% {
+        background-position: 468px 0
+    }
+}
+
+.preloader {
+    position: relative
+}
+
+.preloader::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    animation-name: animatePreloader;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    background: linear-gradient(to right,#eee 8%,#ddd 18%,#eee 33%);
+    background-color: #ccc;
+    background-size: 800px 100px;
+    width: 100%;
+    height: 100%;
+    z-index: 10
+}
+
+p {
+    line-height: 26px
+}
+
+a {
+    text-decoration: none
+}
+
+a:hover,a:focus {
+    text-decoration: none
+}
+
+a:not([href]):not([class]):hover,a:not([href]):not([class]):hover {
+    border: 1px solid #ccc;
+    color: var(--bs-darkblue)
+}
+
+.btn {
+    white-space: nowrap
+}
+
+.btn:focus,.btn:hover,.btn:active:focus {
+    box-shadow: none
+}
+
+header.headerShadow {
+    box-shadow: 0 30px 30px rgba(255,255,255,1)
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    border-bottom: 1px solid rgba(205,205,205,.7);
+    background-color: #fff;
+    padding: 15px 0
+}
+
+header .container {
+    max-width: 1420px;
+    padding: 0 12px;
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-around;
+    position: relative
+}
+
+header a {
+    color: #222
+}
+
+header .logoBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0;
+    margin: 0 auto 0 0;
+    gap: 6px;
+    height: 33px
+}
+
+header .logoBlock a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
+header .logoBlock a:hover,header .logoBlock a:focus-visible {
+    outline: 0
+}
+
+header .logoBlock a .domainLogoBlock {
+    display: flex;
+    align-items: center
+}
+
+header .logoBlock a .domainLogoBlock .logoIcon img {
+    height: 28px;
+    width: auto;
+    margin-right: 5px
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo {
+    display: flex;
+    flex-direction: column
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText {
+    display: flex;
+    line-height: 1;
+    font-size: 1.9rem;
+    font-weight: 600;
+    text-transform: uppercase
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText.domainLogo9 {
+    font-size: 1.7rem
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText.domainLogo12 {
+    font-size: 1.5rem
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText.domainLogo17 {
+    font-size: 1.3rem
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText .cityText {
+    color: #28306f
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText .onlineText {
+    color: #ec4002
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText .dotInText {
+    color: #28306f
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    line-height: 1;
+    font-weight: 700;
+    color: #ec4002
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText~.domainLogoText {
+    font-size: 1rem
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText~.domainLogoText.domainLogo9 {
+    font-size: 1rem
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText~.domainLogoText.domainLogo12 {
+    font-size: 1rem
+}
+
+header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText~.domainLogoText.domainLogo17 {
+    font-size: 1rem
+}
+
+header .searchComboBlock {
+    display: flex;
+    background-color: #fff;
+    border-radius: .25rem;
+    width: 100%;
+    max-width: 640px;
+    position: absolute;
+    right: 350px;
+    gap: 10px;
+    transform: translate3d(45px,0,0);
+    transition: all .15s ease
+}
+
+header .searchComboBlock .form-control {
+    font-size: .95rem;
+    border-radius: .25rem;
+    height: 39px;
+    box-shadow: none;
+    font-weight: 500;
+    color: #000 !important
+}
+
+.searchComboBlock .localitySearchBlock {
+    max-width: 170px;
+    width: 100%;
+    display: flex;
+    flex-direction: column
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchbox {
+    position: relative
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchbox .form-control {
+    padding: 0 15px 0 30px;
+    border-radius: .25rem;
+    border: 1px solid #000;
+    background: var(--bs-brandicon);
+    background-size: 12px 16px;
+    background-position: 10px 11px;
+    background-color: #f5f5f5
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchbox .form-control:focus {
+    background-color: #fff
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchbox .globalLocationLoader,.inputSearchbox .globalSearchLoader {
+    position: absolute;
+    z-index: 99999;
+    font-size: .75rem;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: none
+}
+
+.inputSearchbox .globalSearchLoader {
+    right: 95px
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchbox .globalLocationLoader .fas.fa-circle-notch {
+    position: static !important;
+    width: inherit;
+    height: inherit
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchbox .fas,.searchComboBlock .localitySearchBlock .inputSearchbox img {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    color: #666;
+    width: 11px;
+    height: 15px
+}
+
+.homeClass .searchComboBlock .localitySearchBlock .inputSearchbox .form-control {
+    padding: 0 15px 0 30px;
+    background-position: 10px 14px
+}
+
+.homeClass .searchComboBlock .localitySearchBlock .inputSearchbox .fas,.homeClass .searchComboBlock .localitySearchBlock .inputSearchbox img {
+    top: 16px
+}
+
+.searchComboBlock .localitySearchBlock .inputLocalitySearchBlock {
+    display: none
+}
+
+.localitySearchBlock .inputSearchBlock.active {
+    display: block
+}
+
+.searchComboBlock .mainSearchBlock {
+    width: calc(100% - 185px)
+}
+
+.searchComboBlock .mainSearchBlock .inputSearchbox {
+    position: relative
+}
+
+.searchComboBlock .mainSearchBlock .inputSearchbox .form-control {
+    padding: 0 66px 0 15px;
+    border-radius: .25rem;
+    border: 1px solid #000
+}
+
+.clearBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 70px;
+    cursor: pointer;
+    padding: 0 5px;
+    display: none
+}
+
+.searchComboBlock .mainSearchBlock .inputSearchbox [data-voicesearch="voiceSearchButton"] {
+    position: absolute;
+    top: 1px;
+    right: 40px;
+    padding: 2px 4px;
+    border-radius: .25rem;
+    cursor: pointer;
+    background: -webkit-linear-gradient(90deg,#23306f,#ec4002 80%);
+    font-size: 1.5rem;
+    background-image: linear-gradient(-225deg,#231557 0%,#44107a 29%,#ff1361 67%,#fff800 100%);
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block
+}
+
+.searchComboBlock .mainSearchBlock .inputSearchbox .fa-search {
+    position: absolute;
+    top: 5.5px;
+    right: 6px;
+    padding: 6px;
+    border-radius: .25rem;
+    background: #ff5722;
+    color: #fff;
+    cursor: pointer
+}
+
+.homeClass .searchComboBlock .mainSearchBlock .inputSearchbox [data-voicesearch="voiceSearchButton"] {
+    top: 4px;
+    right: 42px;
+    text-transform: uppercase;
+    background-image: linear-gradient(-225deg,#231557 0%,#44107a 29%,#ff1361 67%,#fff800 100%);
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block
+}
+
+@keyframes textclip {
+    to {
+        background-position: 200% center
+    }
+}
+
+.homeClass .searchComboBlock .mainSearchBlock .inputSearchbox .fa-search {
+    top: 9px;
+    right: 8px
+}
+
+.searchComboBlock .mainSearchBlock .inputMainSearchBlock {
+    display: none
+}
+
+.mainSearchBlock .inputSearchBlock.active {
+    display: block
+}
+
+.searchComboBlock button {
+    border: 0;
+    background-color: transparent;
+    color: var(--bs-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0
+}
+
+.inputSearchBlock {
+    max-width: 455px;
+    border: 1px solid #666;
+    position: absolute;
+    top: 45px;
+    z-index: 1;
+    width: 100%;
+    border-radius: .25rem;
+    padding: 8px;
+    background-color: #fff
+}
+
+header.homeClass .searchComboBlock .inputSearchBlock {
+    top: 50px
+}
+
+.inputSearchBlock .detectLocation {
+    display: flex;
+    align-items: baseline;
+    font-size: .9rem;
+    justify-content: start;
+    padding: 5px 10px;
+    margin: 10px 0;
+    gap: 10px;
+    color: var(--bs-blue)
+}
+
+.inputSearchBlock ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: .9rem;
+    max-height: 358px;
+    overflow: auto
+}
+
+.inputSearchBlock ul::-webkit-scrollbar {
+    width: 8px
+}
+
+.inputSearchBlock ul::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: .3rem
+}
+
+.inputSearchBlock ul::-webkit-scrollbar-thumb {
+    background: #b8b8b8;
+    border-radius: .3rem
+}
+
+.inputSearchBlock ul::-webkit-scrollbar-thumb:hover {
+    background: #a3a3a3
+}
+
+.inputSearchBlock ul li.defaultLocationIcon {
+    background: var(--bs-brandicon);
+    background-size: 12px 16px;
+    background-position: 11px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 7px 10px 7px 35px;
+    background-color: #fff;
+    border-radius: .25rem;
+    position: relative;
+    cursor: pointer
+}
+
+.inputSearchBlock ul li.defaultLocationIcon:hover {
+    background-color: #eee
+}
+
+.inputSearchBlock ul li a,.inputSearchBlock ul li span.item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 7px 10px 10px 46px;
+    background: #fff;
+    border-radius: .25rem;
+    position: relative;
+    cursor: pointer
+}
+
+.inputSearchBlock ul li a:hover,.inputSearchBlock ul li span.item:hover {
+    background-color: #eee
+}
+
+.inputSearchBlock ul li a,.inputSearchBlock ul li span.item .inputText {
+    font-weight: 500
+}
+
+.inputSearchBlock ul li img.iconCategory {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: 2px;
+    top: 10px;
+    border: 1px solid #ccc;
+    padding: 3px;
+    object-fit: contain
+}
+
+.inputSearchBlock ul li img.iconBrand {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    position: absolute;
+    left: 2px;
+    top: 10px;
+    border: 1px solid #eee;
+    padding: 3px
+}
+
+.inputSearchBlock ul li img {
+    height: 12px
+}
+
+.inputSearchBlock ul li .listContent .inputRelation {
+    display: block;
+    font-size: .8rem;
+    color: #777
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchBlock ul li a {
+    padding-left: 30px
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchBlock ul li .fas {
+    position: absolute;
+    left: 10px;
+    top: 11px
+}
+
+.searchComboBlock .localitySearchBlock .inputSearchBlock ul li img {
+    position: absolute;
+    left: 12px;
+    top: 11px;
+    width: 10px;
+    height: 14px
+}
+
+.speakMsg span {
+    font-weight: 500
+}
+
+header.homeClass {
+    padding: 14px 0 15px 0
+}
+
+header.homeClass .listyourbusiness {
+    display: none
+}
+
+header.homeClass .searchComboBlock .localitySearchBlock .inputSearchbox .fas {
+    top: 13px
+}
+
+header.homeClass .searchComboBlock {
+    position: absolute;
+    right: 710px;
+    top: 0;
+    max-width: 640px;
+    gap: 15px;
+    transform: translate3d(35px,120px,0);
+    transition: all .15s ease
+}
+
+header.homeClass .searchComboBlock .form-control {
+    height: 45px;
+    border-radius: .25rem !important;
+    border: 1px solid #000 !important
+}
+
+header .listyourbusiness a {
+    background-color: #f9f9f9;
+    white-space: nowrap;
+    padding: 8px 10px;
+    position: relative;
+    display: table;
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    border-radius: .25em;
+    border: 1px solid #eee
+}
+
+header .listyourbusiness a:hover {
+    background-color: #f5f5f5;
+    color: #000
+}
+
+header .listyourbusiness a span {
+    padding: 0 3px;
+    border-radius: .15em;
+    background-color: #ec4002;
+    color: #fff;
+    line-height: 16px;
+    font-size: 12px
+}
+
+header .allCategory {
+    border: 0;
+    background-color: transparent
+}
+
+header .headerNav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+    font-size: 1rem
+}
+
+header .headerNav a {
+    display: flex;
+    gap: 10px;
+    align-items: center
+}
+
+header .headerNav li.user a {
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    color: #222;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #d7eeff;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+header .headerNav li.user a .alphabetBlock {
+    width: 16px;
+    height: 16px;
+    display: block;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 16px;
+    font-weight: 700;
+    text-transform: capitalize
+}
+
+#offcanvasUserMenu {
+    width: 30%
+}
+
+#offcanvasUserMenu .offcanvas-body {
+    padding-top: 0;
+    background: #fff url("https://assets.indiaonline.in/common/loginCanvasBg.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: auto
+}
+
+#offcanvasUserMenuLabel {
+    display: flex;
+    gap: 10px;
+    width: calc(100% - 24px)
+}
+
+#offcanvasUserMenuLabel .alphabetBlock {
+    width: 55px;
+    height: 55px;
+    display: block;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+    text-transform: capitalize;
+    border: 1px solid #ccc;
+    line-height: 55px;
+    border-radius: 30px;
+    background: #eee
+}
+
+#offcanvasCatagaries {
+    width: 50%
+}
+
+#offcanvasCatagaries .offcanvas-header {
+    padding-right: 50px;
+    align-items: start;
+    flex-direction: column;
+    gap: 10px
+}
+
+#offcanvasCatagaries .offcanvas-header .offcanvas-title {
+    font-weight: 600
+}
+
+#offcanvasCatagaries .offcanvas-header .canvassearch {
+    max-width: 500px;
+    width: 100%;
+    position: relative
+}
+
+#offcanvasCatagaries .offcanvas-header .canvassearch [data-voicesearch="voiceSearchButton"] {
+    position: absolute;
+    top: 4px;
+    right: 40px;
+    height: 34px;
+    padding: 2px 4px;
+    border-radius: .25rem;
+    cursor: pointer;
+    background: -webkit-linear-gradient(90deg,#23306f,#ec4002 80%);
+    font-size: 1.5rem;
+    background-image: linear-gradient(-225deg,#231557 0%,#44107a 29%,#ff1361 67%,#fff800 100%);
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block
+}
+
+#offcanvasCatagaries .offcanvas-header .canvassearch button {
+    position: absolute;
+    top: 8px;
+    right: 7px;
+    padding: 4px;
+    border-radius: .25rem;
+    background: #ff5722;
+    color: #fff;
+    cursor: pointer;
+    font-size: .9rem;
+    border: 0;
+    height: 28px;
+    width: 28px
+}
+
+#offcanvasCatagaries .offcanvas-header .canvassearch .form-control {
+    border: 1px solid #000;
+    height: 44px;
+    border-radius: .25rem;
+    font-size: .9rem;
+    box-shadow: none
+}
+
+#offcanvasCatagaries .offcanvas-header .canvassearch .inputSearchBlock {
+    max-width: 500px
+}
+
+#offcanvasCatagaries .offcanvas-header .btn-close {
+    position: absolute;
+    top: 28px;
+    right: 15px;
+    font-size: 1rem;
+    border-radius: 16px;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#offcanvasCatagaries .offcanvas-header .btn-close:focus {
+    box-shadow: none
+}
+
+#offcanvasCatagaries .navbar-nav {
+    gap: 20px 15px
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item .categoryItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item .categoryItem .categoryName {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item .categoryItem img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item .categoryItem button {
+    display: none;
+    position: absolute;
+    top: 2px;
+    right: -5px;
+    font-size: 1rem;
+    border-radius: 16px;
+    background: #eee;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    cursor: pointer
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item.active .categoryItem {
+    padding-top: 5px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    padding-right: 25px
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item.active .categoryItem .categoryName {
+    font-size: 1rem
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item.active .categoryItem button {
+    display: flex
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item ul.subCategory {
+    margin: 5px 0 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: .8rem;
+    font-weight: 600;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+    white-space: nowrap
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item ul.subCategory li:nth-child(4) {
+    display: block
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item ul.subCategory li:not(:nth-child(-n+4)) {
+    display: none
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item ul.subCategory li a {
+    display: flex;
+    gap: 10px;
+    font-size: .85rem;
+    position: relative;
+    padding: 5px;
+    color: #000;
+    font-weight: 500
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item ul.subCategory li a img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item ul.subCategory li a .subName {
+    white-space: normal
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item ul.subCategory li button {
+    display: flex;
+    gap: 10px;
+    font-size: 1.2rem;
+    position: relative;
+    padding: 5px;
+    color: #000;
+    font-weight: 500;
+    border: 0;
+    background-color: transparent
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item.active ul.subCategory {
+    flex-direction: column;
+    height: calc(100% - 41px);
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    padding-bottom: 10px
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item.active ul.subCategory li {
+    width: 100%
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item.active ul.subCategory li:nth-child(4) {
+    display: none
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item.active ul.subCategory li:not(:nth-child(-n+4)) {
+    display: block
+}
+
+#offcanvasCatagaries .navbar-nav .nav-item.active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    padding: 12px;
+    height: 100vh;
+    z-index: 10;
+    background-color: #fff
+}
+
+#offcanvasUserMenu .offcanvas-header .offcanvas-title {
+    font-weight: 600
+}
+
+#offcanvasUserMenu .offcanvas-header .offcanvas-title .subTitle {
+    display: block;
+    font-size: .8rem;
+    font-weight: 300
+}
+
+#offcanvasUserMenu .offcanvas-header .btn-close {
+    position: absolute;
+    top: 28px;
+    right: 15px;
+    font-size: 1rem;
+    border-radius: 16px;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#offcanvasUserMenu .offcanvas-header .btn-close:focus {
+    box-shadow: none
+}
+
+#offcanvasUserMenu .userMenuList {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+#offcanvasUserMenu .userMenuList a {
+    font-size: 1rem;
+    padding: .75rem 0;
+    border-bottom: 1px solid var(--bs-gray-200);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #000
+}
+
+#offcanvasUserMenu .userMenuList a:hover {
+    background-color: #f5f5f5
+}
+
+#offcanvasUserMenu .userMenuList a .fas,#offcanvasUserMenu .userMenuList a .far {
+    width: 20px;
+    text-align: center
+}
+
+.searchComboBlock .detectedLocation {
+    display: none
+}
+
+.growPageMobile,.growPageMobile.stickyMobile {
+    display: none
+}
+
+@media(min-width: 901px) {
+    .inviteMessageVander {
+        display:none
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+@media(max-width: 900px) {
+    #venderNotification {
+        position:fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        display: none;
+        margin-top: 0
+    }
+
+    .inviteMessageVander {
+        background-color: #00ad57;
+        z-index: 9;
+        gap: 10px;
+        display: block;
+        align-items: center;
+        width: 100%;
+        padding: 15px;
+        font-size: .8rem;
+        box-shadow: 0 1px 2px rgba(0,0,0,.5);
+        color: #fff
+    }
+
+    .inviteMessageVander .inviteContent {
+        display: flex;
+        gap: 10px;
+        align-items: center
+    }
+
+    .inviteMessageVander p {
+        line-height: 1.5;
+        margin: 0
+    }
+
+    .inviteMessageVander .notice-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.2rem
+    }
+
+    .inviteMessageVander .btn-invite {
+        background: #fff;
+        font-size: 1rem;
+        margin: 0 auto;
+        color: #00ad57;
+        display: flex;
+        gap: 5px;
+        align-items: baseline;
+        font-weight: 500;
+        margin-top: 20px
+    }
+
+    .inviteMessageVander .btn-invite:hover,.inviteMessageVander .btn-invite:focus:not(:focus-visible),.inviteMessageVander .btn-invite:first-child:active {
+        background: #fff;
+        color: #00ad57
+    }
+
+    header.headerShadow {
+        box-shadow: none
+    }
+
+    header {
+        padding: 6px 0
+    }
+
+    header .container {
+        gap: 10px
+    }
+
+    header.homeClass {
+        padding: 6px 0
+    }
+
+    header .logoBlock {
+        margin: 0 auto
+    }
+
+    header .logoBlock a .domainLogoBlock .logoIcon img {
+        height: 24px
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText {
+        font-size: 1.2rem
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText.domainLogo9 {
+        font-size: 1.1rem
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText.domainLogo12 {
+        font-size: .9rem
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .domainLogoText.domainLogo17 {
+        font-size: .85rem
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText {
+        font-size: .95rem
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText~.domainLogoText {
+        font-size: .85rem
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText~.domainLogoText.domainLogo9 {
+        font-size: .85rem
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText~.domainLogoText.domainLogo12 {
+        font-size: .85rem
+    }
+
+    header .logoBlock a .domainLogoBlock .domainSubDomainLogo .subCityText~.domainLogoText.domainLogo17 {
+        font-size: .85rem
+    }
+
+    .searchComboBlock .localitySearchBlock .inputSearchbox .fas,.searchComboBlock .localitySearchBlock .inputSearchbox img {
+        top: 16px
+    }
+
+    .searchComboBlock .mainSearchBlock .inputSearchbox .form-control {
+        padding: 0 38px;
+        background-color: #fff
+    }
+
+    .searchComboBlock .mainSearchBlock .inputSearchbox {
+        position: relative;
+        width: 100%;
+        padding: 1.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        border-radius: .25rem;
+        background-color: rgba(255,255,255,.1);
+        overflow: hidden
+    }
+
+    .searchComboBlock .mainSearchBlock .inputSearchbox.animated::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#f8fc01,#ec4002);
+        animation: rotate 3s linear infinite;
+        animation-iteration-count: 1;
+        animation-timing-function: ease
+    }
+
+    .searchComboBlock .mainSearchBlock .inputSearchbox.animated::after {
+        content: '';
+        position: absolute;
+        background: #fff
+    }
+
+    .clearBtn {
+        right: 35px
+    }
+
+    .searchComboBlock .mainSearchBlock .inputSearchbox [data-voicesearch="voiceSearchButton"],.homeClass .searchComboBlock .mainSearchBlock .inputSearchbox [data-voicesearch="voiceSearchButton"] {
+        right: 6px;
+        top: 5px
+    }
+
+    .searchComboBlock .mainSearchBlock .inputSearchbox .fa-search {
+        left: 6px;
+        right: inherit !important;
+        background: transparent;
+        color: #666;
+        top: 10px;
+        font-size: 1.1rem
+    }
+
+    #offcanvasCatagaries .offcanvas-header .canvassearch .form-control {
+        padding: 0 32px 0 32px
+    }
+
+    #offcanvasCatagaries .offcanvas-header .canvassearch [data-voicesearch="voiceSearchButton"] {
+        right: 5px;
+        left: inherit
+    }
+
+    #offcanvasCatagaries .offcanvas-header .canvassearch button {
+        top: 6px;
+        left: 4px;
+        right: inherit;
+        background: transparent;
+        color: #666;
+        font-size: 1.1rem
+    }
+
+    header .searchComboBlock,header.homeClass .searchComboBlock {
+        display: block;
+        width: 100%;
+        max-width: inherit;
+        padding: 10px 12px;
+        left: 0;
+        top: 0;
+        position: absolute;
+        border-radius: 0;
+        -webkit-transform: translate3d(0,40px,0);
+        -moz-transform: translate3d(0,40px,0);
+        transform: translate3d(0,40px,0)
+    }
+
+    header .searchComboBlock.fixedTop,header.homeClass .searchComboBlock.fixedTop {
+        top: 0;
+        position: fixed;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(205,205,205,.7);
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+
+    header .searchComboBlock.fullHeight,header.homeClass .searchComboBlock.fullHeight {
+        top: 0;
+        bottom: 0;
+        position: fixed;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(205,205,205,.7);
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+
+    header .searchComboBlock .form-control {
+        height: 44px !important;
+        border: 1px solid #000 !important;
+        border-radius: .25rem !important
+    }
+
+    .searchComboBlock .inputSearchBlock {
+        position: static;
+        padding: 0;
+        border: 0
+    }
+
+    .inputSearchBlock {
+        max-width: 100% !important
+    }
+
+    .searchComboBlock .localitySearchBlock,.searchComboBlock .mainSearchBlock {
+        max-width: inherit;
+        width: 100%
+    }
+
+    .searchComboBlock.fixedTop .mainSearchBlock .inputSearchBlock {
+        display: none
+    }
+
+    .searchComboBlock .localitySearchBlock {
+        display: none
+    }
+
+    header .searchComboBlock.fullHeight .localitySearchBlock {
+        display: none
+    }
+
+    .searchComboBlock .localitySearchBlock .inputSearchBlock {
+        width: calc(100% - 20px);
+        top: 78px
+    }
+
+    .searchComboBlock .localitySearchBlock .inputSearchbox .fa-search {
+        right: 18px;
+        left: inherit;
+        background: transparent;
+        color: #666;
+        top: 14px;
+        font-size: 1.1rem
+    }
+
+    .searchComboBlock .detectedLocation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: .9rem
+    }
+
+    .searchComboBlock .detectedLocation .fa-chevron-left {
+        position: absolute;
+        left: 10px;
+        top: 14px;
+        padding: 5px
+    }
+
+    .searchComboBlock .detectedLocation {
+        display: none
+    }
+
+    .searchComboBlock.fullHeight .detectedLocation {
+        display: flex;
+        padding: 4px 0
+    }
+
+    .searchComboBlock .detectedLocation .localityText {
+        background: var(--bs-brandicon);
+        background-size: 12px 16px;
+        background-position: 0;
+        padding-left: 22px;
+        white-space: nowrap;
+        max-width: 235px;
+        overflow: hidden;
+        text-overflow: ellipsis
+    }
+
+    .searchComboBlock .detectedLocation .showLocationSearchBlock {
+        padding: 5px;
+        background: #ec4002;
+        border-radius: 20px;
+        color: #fff;
+        height: 21px;
+        font-size: .8rem
+    }
+
+    .searchComboBlock .localitySearchBlock .inputLocalitySearchBlock {
+        display: block;
+        width: 100%;
+        max-width: 100%
+    }
+
+    .inputSearchbox .globalSearchLoader {
+        right: 64px
+    }
+
+    .searchComboBlock .localitySearchBlock .inputSearchbox .globalLocationLoader {
+        right: 35px
+    }
+
+    .inputSearchBlock ul {
+        max-height: calc(100vh - 170px)
+    }
+
+    .localitySearchBlock .inputSearchBlock ul {
+        max-height: calc(100vh - 210px)
+    }
+
+    header .listyourbusiness {
+        display: none
+    }
+
+    header .allCategory {
+        order: -1;
+        padding-left: 2px
+    }
+
+    .offcanvas.offcanvas-end {
+        width: 90% !important;
+        border-left: 0
+    }
+
+    #offcanvasCatagaries .navbar-nav .nav-item.active {
+        width: 90% !important;
+        padding-bottom: 60px
+    }
+
+    #offcanvasCatagaries .offcanvas-header .offcanvas-title {
+        width: 100%;
+        font-size: 1rem;
+        padding-right: 15px;
+        white-space: pre-wrap
+    }
+
+    #offcanvasCatagaries .offcanvas-header .canvassearch {
+        max-width: inherit
+    }
+}
+
+footer {
+    background-color: #f9f9f9;
+    padding: 15px 0;
+    font-size: .9rem
+}
+
+footer .homeListingAnchor {
+    margin: 20px 0 20px auto
+}
+
+footer .h3 {
+    font-size: 1.1rem;
+    font-weight: 700
+}
+
+footer p {
+    line-height: 1;
+    margin: 0
+}
+
+footer a {
+    color: #000
+}
+
+footer a:hover,footer a:focus {
+    color: #444
+}
+
+footer ul {
+    margin: 0;
+    padding: 0 0 20px 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: wrap
+}
+
+footer ul .fas {
+    margin-left: 7px
+}
+
+footer .footerBottom {
+    font-size: .75rem;
+    margin-top: 20px;
+    padding: 10px 0;
+    display: flex;
+    gap: 10px;
+    align-items: end;
+    flex-wrap: wrap;
+    justify-content: end
+}
+
+footer .indiaonlineNetwork {
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+footer .indiaonlineNetwork p {
+    line-height: 18px
+}
+
+footer .copyRightSaftBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+    max-width: 600px;
+    text-align: right
+}
+
+footer .copyright {
+    margin: 0;
+    line-height: 18px
+}
+
+footer .thirdParty {
+    margin: 0;
+    line-height: 18px;
+    color: #777;
+    font-style: italic
+}
+
+footer ul.policyTerms {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+
+@media(max-width: 900px) {
+    footer .homeListingAnchor {
+        margin:20px 0 10px 0
+    }
+
+    footer .footerBottom {
+        justify-content: start;
+        gap: 5px
+    }
+
+    footer .copyRightSaftBlock {
+        max-width: 100%;
+        margin-top: 15px;
+        text-align: left
+    }
+
+    footer .indiaonlineNetwork {
+        margin: 0
+    }
+}
+
+.assetsContainer {
+    max-width: 1350px;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    background-color: #fff
+}
+
+h1,.h1 {
+    font-size: 1.5rem;
+    font-weight: 600
+}
+
+h2,.h2 {
+    font-size: 1.2rem;
+    font-weight: 600
+}
+
+h3,.h3 {
+    font-size: 1.1rem;
+    font-weight: 600
+}
+
+.colorPrimary {
+    color: #ec4002
+}
+
+.colorSecondary {
+    color: #28306f
+}
+
+.colorDark {
+    color: #000
+}
+
+.containerBlock {
+    padding-top: 20px !important;
+    background-color: var(--bs-white);
+    padding-bottom: 40px;
+    min-height: 350px
+}
+
+.containerBlock h1 {
+    margin-top: 15px;
+    margin-bottom: 50px
+}
+
+.containerBlock ol li,.containerBlock ul li {
+    margin-bottom: 5px;
+    padding-left: 12px
+}
+
+.btn {
+    position: relative
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    -webkit-transform: scaleX(.2);
+    transform: scaleX(.2);
+    opacity: 0;
+    transition: all .2s
+}
+
+.btn:focus::before {
+    opacity: 1;
+    background-color: rgba(255,255,255,.2);
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    transition: -webkit-transform .4s cubic-bezier(.08,.35,.13,1.02),opacity .4s;
+    transition: transform .4s cubic-bezier(.08,.35,.13,1.02),opacity
+}
+
+.btn-submit {
+    background: #cb3803;
+    background: linear-gradient(0deg,rgba(203,56,3,1) 0%,rgba(236,64,2,1) 35%);
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 8px 30px;
+    border-radius: .25rem;
+    margin: 0;
+    padding: 10px 40px;
+    font-size: 1.2rem;
+    border: 0
+}
+
+.btn-submit:hover,.btn-submit:focus:not(:focus-visible) {
+    background: #bb3403;
+    background: linear-gradient(0deg,rgba(187,52,3,1) 0%,rgba(224,66,8,1) 35%);
+    color: #fff
+}
+
+.formValidationError {
+    margin: 0;
+    padding: .2rem .2em 0 .5em;
+    color: #ec4002;
+    font-size: .75em;
+    line-height: inherit;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    font-weight: 400;
+    position: relative
+}
+
+.formValidationError .fas {
+    position: static !important;
+    color: #ec4002 !important;
+    font-size: .75em !important
+}
+
+.homeHeadBlock~.containerBlock>.container h2 {
+    font-weight: 600
+}
+
+.card-title {
+    padding: 10px;
+    background: #e2e2e2;
+    background: linear-gradient(0deg,#c8c8c8 0%,#fafafa 55%);
+    border-radius: .25rem .25rem 0 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between
+}
+
+.mobileMargin {
+    margin-bottom: 20px
+}
+
+.card-title a.stateHead {
+    display: block;
+    color: #222;
+    font-weight: 700;
+    font-size: 1rem;
+    width: calc(100% - 40px)
+}
+
+.card-title a.stateHead {
+    color: #222
+}
+
+.plusMinus {
+    display: none;
+    border: 0;
+    background: transparent;
+    width: 40px;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    font-size: 25px;
+    font-weight: 600
+}
+
+.plusMinus.active::after {
+    content: "−";
+    color: #222;
+    display: block
+}
+
+.plusMinus::after {
+    content: '+';
+    color: #222
+}
+
+.card-body {
+    padding-top: 14px
+}
+
+.card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: .9rem
+}
+
+.card ul a {
+    padding: 5px;
+    display: block;
+    text-transform: lowercase;
+    color: #000
+}
+
+.card ul a:hover {
+    color: #000;
+    background-color: #f5f5f5
+}
+
+.card ul.cityDomain,.card ul.subCityDomain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px 0
+}
+
+.card ul.cityDomain li,.card ul.subCityDomain li {
+    width: calc(100%/4 - 10px)
+}
+
+.homeListingAnchor {
+    max-width: 340px;
+    width: 100%;
+    position: relative;
+    display: block
+}
+
+.listYourBusinessBannerBlock {
+    position: relative;
+    width: 340px;
+    margin-left: auto;
+    top: -18px;
+    height: 137px;
+    overflow: hidden;
+    display: none
+}
+
+.listYourBusinessBannerBlock.slick-initialized {
+    display: block
+}
+
+.listYourBusinessBannerBlock .slick-list {
+    height: 137px;
+    overflow: hidden !important;
+    padding-top: 18px
+}
+
+.listYourBusinessBanner {
+    background: #fed0bf;
+    background: radial-gradient(circle,rgba(254,208,191,1) 0%,rgba(252,148,110,1) 100%);
+    border-radius: .5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,.8);
+    display: flex;
+    align-items: baseline;
+    height: 116px
+}
+
+.listYourBusinessBannerBlock .item:nth-of-type(1) .listYourBusinessBanner {
+    background: #fed0bf;
+    background: radial-gradient(circle,rgba(254,208,191,1) 0%,rgba(252,148,110,1) 100%)
+}
+
+.listYourBusinessBannerBlock .item:nth-of-type(2) .listYourBusinessBanner {
+    background: #fbe6be;
+    background: radial-gradient(circle,rgba(251,230,190,1) 0%,#faae21 100%)
+}
+
+.listYourBusinessBannerBlock .item:nth-of-type(3) .listYourBusinessBanner {
+    background: #fbbed3;
+    background: radial-gradient(circle,rgba(251,190,211,1) 0%,rgba(251,84,142,1) 100%)
+}
+
+.listYourBusinessBannerBlock .item:nth-of-type(4) .listYourBusinessBanner {
+    background: #fed2c0;
+    background: radial-gradient(circle,rgba(254,210,192,1) 0%,#d16a42 100%)
+}
+
+.listYourBusinessBannerBlock .item:nth-of-type(5) .listYourBusinessBanner {
+    background: #f5befb;
+    background: radial-gradient(circle,rgba(245,190,251,1) 0%,rgba(239,127,252,1) 100%)
+}
+
+.listYourBusinessContent {
+    padding: 20px 120px 20px 20px;
+    display: flex;
+    gap: 8px;
+    flex-direction: column
+}
+
+.listYourBusinessContent div {
+    font-size: .9rem;
+    color: #000;
+    font-weight: 600;
+    line-height: 1.2
+}
+
+.homeListingAnchor .btn-banner {
+    background: #fff;
+    background: linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(221,221,221,1) 100%);
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: .25rem;
+    padding: 8px 10px;
+    color: #000;
+    font-size: .8rem;
+    display: table;
+    text-align: center;
+    margin: 0;
+    font-size: .75rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,.8);
+    position: absolute;
+    top: 65px;
+    left: 20px;
+    z-index: 2;
+    display: none
+}
+
+.homeListingAnchor .listYourBusinessBannerBlock.slick-initialized~.btn-banner {
+    display: block
+}
+
+.homeListingAnchor .btn-banner:hover,.homeListingAnchor .btn-banner:focus,.homeListingAnchor:not(.btn-check)+.btn-banner:active {
+    background: #fff;
+    background: linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(221,221,221,1) 100%);
+    color: #000;
+    box-shadow: 0 1px 2px rgba(0,0,0,.8)
+}
+
+.homeListingAnchor .btn-banner span {
+    color: #000;
+    font: 120%;
+    background-color: #fccd03;
+    padding: 0 2px;
+    border-radius: 2px
+}
+
+.homeListingAnchor:hover .btn-banner {
+    padding: 8px 10px;
+    top: 64px;
+    left: 19px;
+    font-size: .76rem;
+    transition: .3s
+}
+
+.listYourBusinessBanner .imgBlock {
+    width: 100px;
+    height: 134px;
+    position: absolute;
+    top: -18px;
+    right: 0
+}
+
+.listYourBusinessBanner img {
+    height: 100%;
+    margin-left: auto;
+    border-radius: 0 0 .5rem 0
+}
+
+.modal-open .container-fluid,.modal-open .container,.modal-open .containerBlock {
+    -webkit-filter: blur(5px) grayscale(90%);
+    -moz-filter: blur(5px) grayscale(90%);
+    -o-filter: blur(5px) grayscale(90%);
+    -ms-filter: blur(5px) grayscale(90%);
+    filter: blur(5px) grayscale(90%)
+}
+
+.modal-dialog .modal-content {
+    overflow: visible;
+    background: linear-gradient(0deg,rgba(250,250,250,1) 0%,rgba(255,255,255,1) 100%);
+    border-color: #ddd;
+    border-radius: 1rem;
+    padding: 20px 40px
+}
+
+.modal-dialog .modal-header {
+    border: 0
+}
+
+.modal-dialog .modal-header img {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: -45px;
+    left: 0
+}
+
+.modal-dialog .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    word-break: break-word
+}
+
+.modal-dialog .modal-title span.textHighlight {
+    color: #ec4002
+}
+
+.modal-dialog .modal-title .btn-close,.modal-dialog .modal-title~.btn-close {
+    opacity: 1;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.25rem
+}
+
+.modal-dialog .modal-title .btn-close:focus,.modal-dialog .modal-title~.btn-close:focus {
+    box-shadow: none!important
+}
+
+#loginRegister .modal-dialog .form-control {
+    min-height: 45px !important;
+    font-size: 1.1rem;
+    line-height: 24px
+}
+
+#loginRegister .modal-dialog .modalFieldBlock {
+    margin-bottom: 10px
+}
+
+#loginRegister .modal-dialog .modalFieldBlock .fas {
+    top: 14px
+}
+
+.modal-dialog .form-control {
+    height: 36px;
+    font-size: .85rem;
+    border-radius: .25rem;
+    box-shadow: 0 1px .5px 0 #ddd;
+    max-width: 300px;
+    width: 100%;
+    border-color: #222;
+    display: table;
+    margin: 0 auto 10px auto
+}
+
+.modal-dialog .modalFieldBlock,.modal-dialog .formFieldBlock {
+    position: relative;
+    max-width: 300px;
+    margin: 0 auto 15px auto
+}
+
+.modal-dialog .modalFieldBlock .form-control,.modal-dialog .formFieldBlock .form-control {
+    min-height: 44px;
+    max-width: inherit;
+    font-size: .85rem;
+    border-radius: .15rem;
+    box-shadow: 0 1px .5px 0 #ddd;
+    width: 100%;
+    border-color: #222;
+    display: table;
+    padding-left: 1.8rem;
+    margin-bottom: 0
+}
+
+.modal-dialog .modalFieldBlock .fas,.modal-dialog .formFieldBlock .fas {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 12px;
+    left: 5px;
+    font-size: .8rem;
+    color: #23306f;
+    text-align: center;
+    line-height: 20px
+}
+
+.modal-dialog .formFieldBlock textarea~.fas {
+    top: 8px !important
+}
+
+.modalFieldBlock .formValidationError {
+    display: none
+}
+
+.modalFieldBlock.formFieldError .formValidationError {
+    margin: 0;
+    padding: .2rem .2em 0 .5em;
+    color: #ec4002;
+    font-size: .75em;
+    line-height: inherit;
+    display: flex;
+    align-items: baseline;
+    gap: 5px
+}
+
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+input[type=number] {
+    -moz-appearance: textfield
+}
+
+#loginRegister .modal-dialog .modalFieldBlock.formFieldError .formValidationError .fas {
+    position: static;
+    color: #ec4002;
+    font-size: .75em
+}
+
+.modal-dialog .contactFormHeading {
+    padding-left: 32px
+}
+
+.modal-dialog .modal-content form textArea.form-control {
+    height: auto;
+    padding-right: 25px;
+    display: block
+}
+
+.modal-dialog .btn-submit,.modal-dialog .btn-contact {
+    background: #cb3803;
+    background: linear-gradient(0deg,rgba(203,56,3,1) 0%,rgba(236,64,2,1) 35%);
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: .25rem;
+    margin: 0;
+    padding: 12px 25px;
+    font-size: 1rem;
+    display: table;
+    margin: 20px auto 0 auto;
+    border-color: #ec4002;
+    color: #fff;
+    width: 100%;
+    max-width: 300px
+}
+
+.modal-dialog .btn-ok {
+    background: #cb3803;
+    background: linear-gradient(0deg,rgba(203,56,3,1) 0%,rgba(236,64,2,1) 35%);
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: .25rem;
+    margin: 0;
+    padding: 8px 25px;
+    font-size: 1rem;
+    display: table;
+    margin: 20px auto 0 auto;
+    border-color: #ec4002;
+    color: #fff
+}
+
+.modal-dialog .btn-submit:hover,.modal-dialog .btn-submit:focus:not(:focus-visible),.modal-dialog .btn-contact:hover,.modal-dialog .btn-contact:focus:not(:focus-visible),.modal-dialog .btn-ok:hover,.modal-dialog .btn-ok:focus:not(:focus-visible) {
+    background: #bb3403;
+    background: linear-gradient(0deg,rgba(187,52,3,1) 0%,rgba(224,66,8,1) 35%);
+    border-color: #ec4002;
+    color: #fff
+}
+
+.modal-dialog .btn-submit.me-auto,.modal-dialog .btn-contact.me-auto {
+    margin: 0 auto 0 0
+}
+
+.modal-dialog .skip {
+    display: table;
+    margin: 10px auto 0 auto;
+    font-size: .8rem
+}
+
+.modal-dialog .btn-continue {
+    display: table;
+    margin: 0 0 0 auto;
+    font-size: .8rem
+}
+
+.googleAdsDesktop {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+    inset: 0
+}
+
+.googleAdsDesktop .googleAds {
+    width: 100%;
+    animation-name: animatePreloader;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    background: linear-gradient(to right,#eee 8%,#ddd 18%,#eee 33%);
+    background-color: #ccc;
+    background-size: 800px 100px
+}
+
+.googleAds img {
+    position: relative;
+    max-width: 1350px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+    overflow: hidden
+}
+
+.googleAds .itemAds .googleAdsItem {
+    padding: 0;
+    height: 100px;
+    background-color: #fff
+}
+
+.googleAdsMobile {
+    display: none
+}
+
+.googleAds .slick-arrow {
+    position: absolute;
+    z-index: 999;
+    color: #fff;
+    top: 50%;
+    width: 25px;
+    height: 30px;
+    border: 0;
+    background: rgba(0,0,0,.3);
+    transform: translate(0,-50%)
+}
+
+.googleAds .prev-arrow {
+    left: 0;
+    border-radius: 0 5px 5px 0;
+    padding: 0
+}
+
+.googleAds .next-arrow {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+    padding: 0
+}
+
+.googleAds .slick-arrow .fas {
+    opacity: .5
+}
+
+.googleAds .slick-arrow:hover {
+    background: rgba(0,0,0,.7)
+}
+
+.googleAds .slick-arrow:hover .fas {
+    opacity: 1
+}
+
+.googleAdsDesktop .slick-initialized .slick-slide {
+    text-align: center
+}
+
+.itemAds img:hover {
+    cursor: pointer
+}
+
+#enquiryForm form {
+    margin: 0 auto
+}
+
+#enquiryThankyou .modal-dialog .modal-body {
+    border-top: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color)
+}
+
+#verifyboxsOTP .modal-dialog .modal-content {
+    padding: 20px 15px
+}
+
+#verifyboxsOTP .modal-dialog .modal-body {
+    padding: 0
+}
+
+#verifyboxsOTP .modal-dialog .modal-header {
+    padding: var(--bs-modal-padding) 0
+}
+
+.OTPlabel {
+    text-align: center;
+    display: block;
+    color: #000;
+    font-weight: 700;
+    margin-bottom: 35px;
+    font-size: 1.3rem
+}
+
+.verification-code {
+    position: relative;
+    margin: 0 auto;
+    text-align: center
+}
+
+.verification-code .inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px
+}
+
+.verification-code .inputs .input {
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+    width: 46px;
+    height: 46px;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    outline: 0
+}
+
+.verification-code .inputs .input:focus {
+    border-color: #999;
+    outline: none
+}
+
+.verification-code .inputs .input:nth-child(1) {
+    cursor: pointer;
+    pointer-events: all
+}
+
+.verification-code.error .inputs .input {
+    border: 1px solid #d11124
+}
+
+.verification-code .errorMessage {
+    color: #ec4002;
+    font-size: .75rem;
+    padding-top: 5px;
+    margin: 0;
+    display: none
+}
+
+.verification-code.error .errorMessage {
+    display: block
+}
+
+.verify-member {
+    display: flex;
+    text-align: center;
+    font-size: 1.4rem;
+    justify-content: center;
+    width: 320px;
+    margin: 10px auto 20px auto;
+    font-size: .9rem
+}
+
+.verify-member,#btnResendPinSMS {
+    font-size: .75rem !important
+}
+
+.verify-member .count {
+    display: inline-table;
+    width: 20px
+}
+
+#btnResendPinSMS {
+    border: 0;
+    color: #0d6efd;
+    background: none
+}
+
+#btnResendPinSMS:disabled,.reSendOTPTimer {
+    font-size: .75rem !important;
+    color: #999
+}
+
+.websiteTagLine {
+    padding: 15px;
+    color: #ec4002;
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Dancing Script',cursive
+}
+
+.modal-dialog.modal-lg .modal-content {
+    padding: 0;
+    border: 0
+}
+
+.modal-dialog.modal-lg .modal-content .modal-body {
+    padding: 0;
+    border: 0;
+    border-radius: 1rem;
+    overflow: hidden
+}
+
+.modal-dialog.modal-lg .modal-content .modal-body img {
+    width: 100%;
+    height: 100%;
+    max-height: 550px;
+    object-fit: cover
+}
+
+.modal-dialog.modal-lg .modal-content .btn-close {
+    opacity: 1;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9
+}
+
+.modal-dialog.modal-lg .modal-content .modal-body .modal-header {
+    padding-right: 50px
+}
+
+.modal-dialog.modal-lg .modal-content .modal-body form {
+    padding: var(--bs-modal-header-padding)
+}
+
+.googleAdsBlockTop {
+    margin: 10px 0;
+    text-align: center
+}
+
+.globalRightSticky {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translate(0,-50%);
+    border-radius: .25rem 0 0 .25rem;
+    background-color: #f9f9f9;
+    border: 1px solid #999;
+    border-right: 0;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 76px;
+    box-sizing: border-box;
+    transition: all .5s;
+    z-index: 999
+}
+
+.globalRightSticky.toggleSticky {
+    right: -76px
+}
+
+.globalRightToggle {
+    position: absolute;
+    bottom: 10px;
+    left: -31px;
+    background-color: #f9f9f9;
+    padding: 5px;
+    border-radius: .25rem 0 0 .25rem;
+    width: 30px;
+    border: 1px solid #999;
+    border-right: 0;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer
+}
+
+.btnRightBlock {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: .25rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px
+}
+
+.btnRightBlock .fas {
+    font-size: 1rem;
+    font-weight: 900;
+    display: block;
+    width: 33px;
+    height: 28px;
+    border: 1px solid rgba(255,255,255,.5);
+    padding: 5px;
+    border-radius: .15rem;
+    color: #fff;
+    text-align: center
+}
+
+.btnRightBlock span {
+    font-size: .8rem;
+    font-weight: 500;
+    line-height: 1.1;
+    white-space: normal;
+    color: #000
+}
+
+.btnFilter .fas {
+    background-color: #e6a902
+}
+
+.btnSendEnquiry .fas {
+    background-color: #ec4002
+}
+
+.btnFreeListing .fas {
+    background-color: #28306f
+}
+
+.btnShare .fas {
+    background-color: #1ac057
+}
+
+.btnRightBlock:hover,.btnRightBlock:focus:not(:focus-visible),.btnRightBlock:active {
+    color: #fff;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 3px rgba(0,0,0,.3)
+}
+
+.btnRightBlock.btnFilter:hover .fas,.btnRightBlock.btnFilter:focus:not(:focus-visible) .fas,.btnRightBlock.btnFilter:active .fas {
+    background-color: #e6a902
+}
+
+.btnRightBlock.btnSendEnquiry:hover .fas,.btnRightBlock.btnSendEnquiry:focus:not(:focus-visible) .fas,.btnRightBlock.btnSendEnquiry:active .fas {
+    background-color: #ec4002
+}
+
+.btnRightBlock.btnFreeListing:hover .fas,.btnRightBlock.btnFreeListing:focus:not(:focus-visible) .fas,.btnRightBlock.btnFreeListing:active .fas {
+    background-color: #28306f
+}
+
+.btnRightBlock.btnShare:hover .fas,.btnRightBlock.btnShare:focus:not(:focus-visible) .fas,.btnRightBlock.btnShare:active .fas {
+    background-color: #1ac057
+}
+
+.socialShareHeading {
+    font-size: 1.3rem;
+    margin: 0 auto;
+    display: table
+}
+
+.socialShare {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px 10px
+}
+
+.st-custom-button[data-network] {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    text-align: center;
+    width: 100%;
+    max-width: 75px
+}
+
+.st-custom-button[data-network]:hover,.st-custom-button[data-network]:focus {
+    text-decoration: none
+}
+
+.st-custom-button .socialIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.7rem !important;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .3rem
+}
+
+.st-custom-button span {
+    font-size: .8rem;
+    font-weight: 400
+}
+
+.st-custom-button .whatsappButton {
+    background-color: #25d366
+}
+
+.st-custom-button .whatsappButton:hover,.st-custom-button .whatsappButton:focus {
+    background-color: #1ac057
+}
+
+.st-custom-button .emailButton {
+    background-color: #7d7d7d
+}
+
+.st-custom-button .emailButton:hover,.st-custom-button .emailButton:focus {
+    background-color: #636262
+}
+
+.st-custom-button .smsButton {
+    background-color: #ffbd00
+}
+
+.st-custom-button .smsButton:hover,.st-custom-button .smsButton:focus {
+    background-color: #e6a902
+}
+
+.st-custom-button .facebookButton {
+    background-color: #4267b2
+}
+
+.st-custom-button .facebookButton:hover,.st-custom-button .facebookButton:focus {
+    background-color: #375ca5
+}
+
+.st-custom-button .twitterButton {
+    background-color: #000
+}
+
+.st-custom-button .twitterButton:hover,.st-custom-button .twitterButton:focus {
+    background-color: #000
+}
+
+.st-custom-button .twitterButton img {
+    width: 20px !important;
+    height: 20px !important;
+    position: static !important
+}
+
+.st-custom-button .linkedinButton {
+    background-color: #0077b5
+}
+
+.st-custom-button .linkedinButton:hover,.st-custom-button .linkedinButton:focus {
+    background-color: #016499
+}
+
+.st-custom-button .messengerButton {
+    background-color: #448aff
+}
+
+.st-custom-button .messengerButton:hover,.st-custom-button .messengerButton:focus {
+    background-color: #015886
+}
+
+.st-custom-button .telegramButton {
+    background-color: #08c
+}
+
+.st-custom-button .messengerButton:hover,.st-custom-button .messengerButton:focus {
+    background-color: #027ab6
+}
+
+.st-custom-button .gmailButton {
+    background-color: #d44638
+}
+
+.st-custom-button .gmailButton:hover,.st-custom-button .gmailButton:focus {
+    background-color: #c03326
+}
+
+.st-custom-button .copyButton {
+    background-color: #14682b;
+    position: relative
+}
+
+.st-custom-button .copyButton:hover,.st-custom-button .copyButton:focus {
+    background-color: #0d521f
+}
+
+.st-custom-button .copyButton .copy-notify {
+    color: #000 !important;
+    font-size: .75rem;
+    line-height: 1;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%,0);
+    height: 20px !important
+}
+
+.becomeSalesPartner {
+    font-weight: 500;
+    color: #ec4002
+}
+
+.becomeSalesPartner:hover,.becomeSalesPartner:focus {
+    color: #000
+}
+
+@media screen and (min-width: 901px) {
+    .modal-dialog {
+        max-width:600px
+    }
+
+    .modal-dialog.modal-lg {
+        max-width: 800px
+    }
+
+    .modal-dialog.modal-lg .modal-content .modal-body form {
+        min-height: 300px
+    }
+}
+
+@media(min-width: 1520px) {
+    .container {
+        max-width:1420px;
+        padding: 0 45px
+    }
+}
+
+@media(min-width: 1200px) {
+    .container {
+        max-width:inherit;
+        padding: 0 35px;
+        margin: 0
+    }
+}
+
+@media(max-width: 900px) {
+    .homeHeadBlock~.containerBlock>.container h2~.row {
+        height:auto !important
+    }
+
+    .assetsContainer.static {
+        padding-bottom: 0
+    }
+
+    .container {
+        padding: 0 12px
+    }
+
+    .containerBlock {
+        padding-top: 75px !important
+    }
+
+    h1,.h1 {
+        font-size: 1.3rem
+    }
+
+    h2,.h2 {
+        font-size: 1.1rem
+    }
+
+    h3,.h3 {
+        font-size: 1rem
+    }
+
+    .plusMinus {
+        display: block
+    }
+
+    .card-title~.card-body {
+        display: none
+    }
+
+    .mobileMargin {
+        position: static !important
+    }
+
+    .card ul.cityDomain li,.card ul.subCityDomain li {
+        width: calc(100%/2 - 10px)
+    }
+
+    .listYourBusinessBannerBlock {
+        width: 100%;
+        max-width: 340px
+    }
+
+    .modal-dialog {
+        margin: 0 !important
+    }
+
+    .modal.fade .modal-dialog.modal-dialog-centered {
+        transition: transform .3s ease-out;
+        transform: translate(0,50px)
+    }
+
+    .modal-dialog.modal-dialog-centered {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0% !important;
+        right: 0% !important;
+        margin-bottom: 0 !important;
+        max-width: 100%
+    }
+
+    .modal.show .modal-dialog.modal-dialog-centered {
+        transform: none;
+        margin: 0
+    }
+
+    .modal-dialog .contactFormHeading {
+        padding-top: 10px;
+        padding-left: 15px;
+        line-height: 1.2
+    }
+
+    .modal-dialog .modal-content {
+        border: 0;
+        border-radius: 0;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        position: fixed !important;
+        bottom: -1px !important;
+        left: 0% !important;
+        right: 0% !important;
+        margin-bottom: 0 !important
+    }
+
+    .modal-dialog .modalFieldBlock,.modal-dialog .formFieldBlock {
+        margin: 0 auto 10px auto
+    }
+
+    .modal-dialog .modalFieldBlock .form-control,.modal-dialog .formFieldBlock .form-control {
+        height: 44px;
+        font-size: 1rem
+    }
+
+    .modal-dialog .modal-content form textArea.form-control {
+        height: 110px
+    }
+
+    .modal-dialog .modalFieldBlock .fas,.modal-dialog .formFieldBlock .fas {
+        top: 12px
+    }
+
+    .modal-dialog .formFieldBlock textarea~.fas {
+        top: 8px !important
+    }
+
+    .googleAdsDesktop {
+        display: none
+    }
+
+    .googleAds .itemAds .googleAdsItem {
+        padding: 5px 0;
+        text-align: center
+    }
+
+    .googleAdsMobile {
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 9;
+        height: 82px;
+        overflow: hidden
+    }
+
+    .googleAds {
+        width: 100%;
+        overflow-x: hidden
+    }
+
+    .googleAdsMobile .slick-slider {
+        overflow: hidden
+    }
+
+    .googleAdsMobile .slick-list {
+        padding: 0 12px !important
+    }
+
+    .googleAdsMobile .itemAds a {
+        margin: 0 1%;
+        display: block
+    }
+
+    .googleAds img {
+        width: 360px;
+        height: 80px;
+        border-radius: .25rem;
+        overflow: hidden;
+        object-fit: fill
+    }
+
+    .websiteTagLine {
+        font-size: 2rem
+    }
+}
+
+@media(min-width: 576px) and (max-width:900px) {
+    .container,.container-sm {
+        max-width:100%
+    }
+}
+
+@media(max-width: 450px) {
+    .card ul.cityDomain li,.card ul.subCityDomain li {
+        width:100%
+    }
+
+    .googleAdsMobile .slick-list {
+        padding: 0 12px !important
+    }
+}
+
+@media(min-width: 395px) and (max-width:420px) {
+    .googleAdsMobile .slick-list {
+        padding:0 17px !important
+    }
+}
+
+@media(max-width: 375px) {
+    .googleAdsMobile .slick-list {
+        padding:0 17px !important
+    }
+
+    .googleAds img {
+        width: 330px;
+        height: 73px
+    }
+}
+
+@media(max-width: 360px) {
+    .googleAdsMobile .slick-list {
+        padding:0 12px !important
+    }
+}
+
+#loaderDefault {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: relative
+}
+
+#loaderDefault .fa-spinner {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-40%);
+    z-index: 999
+}
+
+h1,.h1 {
+    font-size: 1.5rem;
+    font-weight: 500
+}
+
+h2,.h2 {
+    font-size: 1.4rem;
+    font-weight: 500
+}
+
+h3,.h3 {
+    font-size: 1.2rem;
+    font-weight: 500
+}
+
+.homeHeadBlock {
+    padding: 35px 0 25px 0;
+    position: relative;
+    height: 200px
+}
+
+.homeHeadBlock .container {
+    position: relative
+}
+
+.homeHeading {
+    position: relative;
+    font-weight: 600
+}
+
+.homeHeading strong {
+    color: #ec4002;
+    font-weight: 700
+}
+
+.homeHeadBlock .homeListyourbusiness {
+    margin-left: auto;
+    display: table;
+    opacity: 0;
+    margin-top: -35px
+}
+
+header.homeClass~.homeHeadBlock .homeListyourbusiness {
+    display: table;
+    opacity: 1;
+    position: relative;
+    z-index: 10
+}
+
+.containerBlock {
+    background-color: var(--bs-white)
+}
+
+.containerBlock h1 {
+    margin-top: 15px
+}
+
+.homeHeadBlock~.containerBlock {
+    padding-top: 0 !important
+}
+
+.popularCategoriesBlock {
+    margin-bottom: 30px
+}
+
+.popularCategoriesBlock .navbar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    -webkit-overflow-scrolling: touch
+}
+
+.popularCategoriesBlock .navbar-nav .nav-item {
+    width: calc(100%/8 - 15px)
+}
+
+.popularCategoriesBlock .navbar-nav .nav-item:nth-child(16) {
+    display: none
+}
+
+.popularCategoriesBlock .navbar-nav .nav-link.categoriesItem {
+    width: 130px;
+    height: 140px;
+    padding: 0;
+    text-align: center;
+    display: table;
+    margin: 0 auto
+}
+
+.popularCategoriesBlock .navbar-nav .nav-link.categoriesItem img {
+    padding: 15px;
+    width: 74px;
+    height: 74px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    transition: all .3s;
+    transition-duration: .3s;
+    transition-property: transform
+}
+
+.popularCategoriesBlock .navbar-nav .nav-link.categoriesItem:hover img {
+    transform: scale(1.1)
+}
+
+.popularCategoriesBlock .navbar-nav .nav-link.categoriesItem .name {
+    margin-top: 8px;
+    font-size: .85rem;
+    color: #000;
+    font-weight: 500
+}
+
+.popularCategoriesBlock .navbar-nav .nav-link.categoriesItem .fas {
+    width: 70px;
+    height: 70px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #0070fc;
+    border-radius: 5px;
+    line-height: 35px;
+    font-size: 1.5rem
+}
+
+.btn-freeListing {
+    background: #cb3803;
+    background: linear-gradient(0deg,rgba(203,56,3,1) 0%,rgba(236,64,2,1) 35%);
+    border-color: #ec4002;
+    font-weight: 400;
+    text-transform: uppercase;
+    border-radius: .25rem;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 1rem;
+    display: table;
+    width: 280px;
+    text-align: center;
+    margin: 20px auto 0 auto
+}
+
+.btn-freeListing:hover,.btn-freeListing:focus,:not(.btn-check)+.btn-freeListing:active {
+    background: #9c2b01;
+    background: linear-gradient(0deg,#a12d02 0%,#c43805 35%);
+    border-color: #ca3701;
+    color: #fff
+}
+
+.btn-freeListing span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: .5s
+}
+
+.btn-freeListing:hover span {
+    padding-right: 20px
+}
+
+.btn-freeListing span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: -14px;
+    right: -30px;
+    transition: .5s;
+    font-size: 2rem
+}
+
+.btn-freeListing:hover span:after {
+    opacity: 1;
+    right: 0
+}
+
+.btn-postAd {
+    background: #23306f;
+    background: linear-gradient(0deg,#011474 0%,#02198d 35%);
+    border-color: #23306f;
+    font-weight: 400;
+    text-transform: uppercase;
+    border-radius: .25rem;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 1rem;
+    display: table;
+    width: 280px;
+    text-align: center;
+    margin: 20px auto 0 auto
+}
+
+.btn-postAd:hover,.btn-postAd:focus,:not(.btn-check)+.btn-postAd:active {
+    background: #161e47;
+    background: linear-gradient(0deg,#010d47 0%,#01157e 35%);
+    border-color: #121b47;
+    color: #fff
+}
+
+.btn-postAd span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: .5s
+}
+
+.btn-postAd:hover span {
+    padding-right: 20px
+}
+
+.btn-postAd span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: -14px;
+    right: -30px;
+    transition: .5s;
+    font-size: 2rem
+}
+
+.btn-postAd:hover span:after {
+    opacity: 1;
+    right: 0
+}
+
+@media(max-width: 900px) {
+    .homeHeadBlock {
+        padding:70px 10px 10px 10px;
+        text-align: center;
+        height: auto
+    }
+
+    .homeHeadBlock .container {
+        padding: 0
+    }
+
+    .homeHeading {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        margin-bottom: 0
+    }
+
+    header.homeClass~.homeHeadBlock .homeListyourbusiness,.homeHeadBlock .homeListyourbusiness {
+        display: none
+    }
+
+    .popularCategoriesBlock .navbar-nav {
+        gap: 20px 10px
+    }
+
+    .popularCategoriesBlock .navbar-nav .nav-item {
+        width: calc(100%/4 - 10px);
+        padding-left: 0;
+    }
+
+    .popularCategoriesBlock .navbar-nav .nav-link.categoriesItem {
+        width: 110px;
+        height: inherit
+    }
+
+    .popularCategoriesBlock .navbar-nav .nav-link.categoriesItem img {
+        width: 48px;
+        height: 48px;
+        border: 0;
+        padding: 10px;
+        object-fit: contain
+    }
+
+    .popularCategoriesBlock .navbar-nav .nav-link.categoriesItem .fas {
+        width: 48px;
+        height: 48px;
+        border: 1px solid #ddd;
+        line-height: 48px;
+        font-size: 1.4rem
+    }
+
+    .popularCategoriesBlock .navbar-nav .nav-link.categoriesItem .name {
+        font-size: .63rem;
+        font-weight: 600
+    }
+
+    .popularCategoriesBlock .navbar-nav .nav-item:nth-child(16) {
+        display: block
+    }
+
+    .popularCategoriesBlock .navbar-nav .nav-item:not(:nth-child(-n+16)) {
+        display: none
+    }
+
+    h1,.h1 {
+        font-size: 1.2rem
+    }
+
+    .latestBusinessBlock,.latestAdsBlock,.cityGuideBlock {
+        width: 100%
+    }
+}
+
+@media(max-width: 450px) {
+    .popularCategoriesBlock .navbar-nav .nav-link.categoriesItem {
+        width:75px
+    }
+}

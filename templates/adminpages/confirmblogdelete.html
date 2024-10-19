@@ -1,0 +1,11 @@
+{% extends "base/adminbase.html" %}
+{% load static %}
+{% block content %}
+<h1>Delete Blog</h1>
+<p>Are you sure you want to delete "{{ blog.title }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Yes, delete">
+</form>
+<a href="{% url 'blog_list' %}">Cancel</a>
+{% endblock content %}

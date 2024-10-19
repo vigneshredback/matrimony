@@ -1,0 +1,70 @@
+{% extends "base/adminbase.html" %}
+{% load static %}
+{% block content %}
+
+<div class="pan-rhs">
+    <h1>{% if form.instance.pk %}Edit Blog{% else %}Create Blog{% endif %}</h1>
+    <form method="post" enctype="multipart/form-data" id="blog-form">
+        {% csrf_token %}
+        <div class="edit-pro-parti">
+          <div class="form-tit">
+            <div class="form-group">
+              {{ form.user.label_tag }}
+              {{ form.user }}
+              {{ form.errors }}
+            </div>
+            <div class="form-group">
+              {{ form.title.label_tag }}
+              {{ form.title }}
+              {{ form.title.errors }}
+            </div>
+            <div class="form-group">
+              {{ form.description.label_tag }}
+              {{ form.description }}
+              {{ form.description.errors }}
+            </div>
+            <div class="form-group">
+              {{ form.content.label_tag }}
+              <textarea name="content" id="id_content" height="300px">{% if form.instance.pk %}{{ form.instance.content }}{% else %}Create Blog{% endif %}</textarea>
+              {{ form.content.errors }}
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a href="{% url 'blog_list' %}" class="btn btn-danger">Cancel</a>
+        </div>
+
+
+
+        
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        tinymce.init({
+            selector: 'textarea#id_content',
+            plugins: 'lists link image code',
+            toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | code',
+            setup: function(editor) {
+                editor.on('submit', function() {
+                    editor.save(); // Save content back to the textarea
+                });
+            }
+        });
+
+        // Add event listener for form submission
+        document.getElementById('blog-form').addEventListener('submit', function(e) {
+            // Ensure TinyMCE content is valid before submission
+            const content = tinymce.get('id_content').getContent();
+            if (!content.trim()) {
+                e.preventDefault(); // Prevent submission
+                alert('Content cannot be empty!');
+            }
+        });
+      });
+    </script>
+
+</div>
+
+{% endblock content %}

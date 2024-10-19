@@ -25,7 +25,7 @@
                                         <img src="{% static 'images/icon/user.png' %}" alt="" loading="lazy">
                                         <h4>Browse Profiles</h4>
                                         <p>1200+ Profiles</p>
-                                        <a href="all-profiles.html">View more</a>
+                                        <a href="{% url 'allprofiles' %}">View more</a>
                                     </div>
                                 </div>
                             </li>
@@ -55,7 +55,7 @@
                                         <img src="{% static 'images/icon/hall.png' %}" alt="" loading="lazy">
                                         <h4>Join Now</h4>
                                         <p>Start for free</p>
-                                        <a href="plans.html">Get started</a>
+                                        <a href="{% url 'plan' %}">Get started</a>
                                     </div>
                                 </div>
                             </li>
@@ -65,7 +65,7 @@
                                         <img src="{% static 'images/icon/photo-camera.png' %}" alt="" loading="lazy">
                                         <h4>Photo gallery</h4>
                                         <p>1200+ Profiles</p>
-                                        <a href="photo-gallery.html">View more</a>
+                                        <a href="{% url 'photo_gallery' %}">View more</a>
                                     </div>
                                 </div>
                             </li>

@@ -15,7 +15,6 @@ from app.serializers import LikeSerializer
 from django.db.models import Count
 
 
-
 def create_biodata(request):
     if request.method == 'POST':
         form = BiodataForm(request.POST, request.FILES)
@@ -126,22 +125,147 @@ def allprofiles(request):
     })
 
 
+# @login_required(login_url='login')
+# def searchprofile(request):
+#     # Check if the user has a biodata and if the plan is not selected
+#     try:
+#         user_biodata = Biodata.objects.get(user=request.user)
+#         if user_biodata.plan is None:  # Check if the plan is not selected
+#             messages.info(request, "Please select a plan to search profiles.")
+#             return redirect('plan')  # Redirect to the plan selection page
+#     except Biodata.DoesNotExist:
+#         # Handle the case where the user does not have a biodata yet
+#         messages.warning(request, "You need to create a biodata first.")
+#         return redirect('create_biodata')
+
+#     # Continue with the normal search logic if the plan is selected
+#     if request.method == 'POST' or request.method == 'GET':
+#         # Retrieve filters from request
+#         gender = request.GET.get('gender', 'all') if request.method == 'GET' else request.POST.get('gender', 'all')
+#         age = request.GET.get('age', 'all') if request.method == 'GET' else request.POST.get('age', 'all')
+#         city = request.GET.get('city', 'all') if request.method == 'GET' else request.POST.get('city', 'all')
+#         religion = request.GET.get('religion', 'all') if request.method == 'GET' else request.POST.get('religion', 'all')
+#         profile_type = request.GET.get('profile_type') if request.method == 'GET' else request.POST.get('profile_type')
+
+#         cities = City.objects.all()
+#         religions = Religion.objects.all()
+
+#         # Start with the base queryset
+#         profiles = Biodata.objects.filter(admin_approval=True)
+        
+
+#         print(profile_type)
+#         message = 'you are viewing all profiles'
+
+#         # Apply profile type filter
+#         if profile_type == 'premium':
+#             profiles = profiles.filter(plan_id=1)
+#             message = 'you are viewing premium profiles'
+#         elif profile_type == 'free':
+#             profiles = profiles.filter(plan_id=2)
+#             message = 'you are viewing free profiles'
+        
+
+#         # Apply filters
+#         if gender != 'all':
+#             profiles = profiles.filter(gender=gender)
+
+#         if age != 'all':
+#             if age == '1':
+#                 profiles = profiles.filter(age__gte=18, age__lte=30)
+#             elif age == '2':
+#                 profiles = profiles.filter(age__gte=31, age__lte=40)
+#             elif age == '3':
+#                 profiles = profiles.filter(age__gte=41, age__lte=50)
+
+#         if city != 'all':
+#             profiles = profiles.filter(city__name=city)
+
+#         if religion != 'all':
+#             profiles = profiles.filter(religion__name=religion)
+
+#         # Count the total profiles
+#         totalprofiles = profiles.count()
+
+#         # Implement pagination, displaying 5 profiles per page
+#         paginator = Paginator(profiles, 5)
+#         page_number = request.GET.get('page', 1)
+#         page_obj = paginator.get_page(page_number)
+
+#         # Initialize `user_has_liked` to avoid UnboundLocalError
+#         user_has_liked = False
+
+#         # Prepare profiles data for the JSON response
+#         profiles_data = []
+#         for profile in page_obj:
+#             user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
+#             user_has_interest = Interest.objects.filter(user=request.user, biodata=profile).exists()
+#             profiles_data.append({
+#                 'id': profile.id,
+#                 'gender': profile.gender,
+#                 'name': profile.user.name,
+#                 'degree': profile.degree,
+#                 'profession': profile.profession,
+#                 'age': profile.age,
+#                 'height': profile.height,
+#                 'image1': profile.image1.url if profile.image1 else '',
+#                 'user_has_liked': user_has_liked,
+#                 'user_has_interest': user_has_interest
+#             })
+        
+
+
+#         # Handle AJAX requests for infinite scroll
+#         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+#             data = {
+#                 'profiles': profiles_data,
+#                 'has_next': page_obj.has_next(),  # Check if more profiles exist
+#             }
+#             print(data)
+#             if totalprofiles < 5:
+#                 return JsonResponse('no data', safe=False)
+#             return JsonResponse(data)
+        
+#         # Pass the same data for HTML response
+#         for profile in page_obj:
+#             profile.user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
+#             profile.user_has_interest = Interest.objects.filter(user=request.user, biodata=profile).exists()
+
+#         # Regular non-AJAX response for initial page load
+#         # messages.success(request, message)
+#         return render(request, 'pages/filteredprofiles.html', {
+#             'profiles': page_obj,
+#             'profile_type': profile_type,
+#             'totalprofiles': totalprofiles,
+#             'gender': gender,
+#             'age': age,
+#             'city': city,
+#             'religion': religion,
+#             'cities': cities,
+#             'religions': religions,
+#             'user_has_liked': user_has_liked,  # Pass a default value for user_has_liked
+#             'user_has_interest': user_has_interest
+#         })
+
+#     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
 @login_required(login_url='login')
 def searchprofile(request):
     # Check if the user has a biodata and if the plan is not selected
     try:
         user_biodata = Biodata.objects.get(user=request.user)
-        if user_biodata.plan is None:  # Check if the plan is not selected
+        if user_biodata.plan is None:
             messages.info(request, "Please select a plan to search profiles.")
-            return redirect('plan')  # Redirect to the plan selection page
+            return redirect('plan')
     except Biodata.DoesNotExist:
-        # Handle the case where the user does not have a biodata yet
         messages.warning(request, "You need to create a biodata first.")
         return redirect('create_biodata')
 
+    user_has_liked = False  # Initialize default value
+    user_has_interest = False  # Initialize default value
+
     # Continue with the normal search logic if the plan is selected
-    if request.method == 'POST' or request.method == 'GET':
-        # Retrieve filters from request
+    if request.method in ['POST', 'GET']:
         gender = request.GET.get('gender', 'all') if request.method == 'GET' else request.POST.get('gender', 'all')
         age = request.GET.get('age', 'all') if request.method == 'GET' else request.POST.get('age', 'all')
         city = request.GET.get('city', 'all') if request.method == 'GET' else request.POST.get('city', 'all')
@@ -151,11 +275,7 @@ def searchprofile(request):
         cities = City.objects.all()
         religions = Religion.objects.all()
 
-        # Start with the base queryset
         profiles = Biodata.objects.filter(admin_approval=True)
-        
-
-        print(profile_type)
         message = 'you are viewing all profiles'
 
         # Apply profile type filter
@@ -165,7 +285,6 @@ def searchprofile(request):
         elif profile_type == 'free':
             profiles = profiles.filter(plan_id=2)
             message = 'you are viewing free profiles'
-        
 
         # Apply filters
         if gender != 'all':
@@ -185,18 +304,11 @@ def searchprofile(request):
         if religion != 'all':
             profiles = profiles.filter(religion__name=religion)
 
-        # Count the total profiles
         totalprofiles = profiles.count()
-
-        # Implement pagination, displaying 5 profiles per page
         paginator = Paginator(profiles, 5)
         page_number = request.GET.get('page', 1)
         page_obj = paginator.get_page(page_number)
 
-        # Initialize `user_has_liked` to avoid UnboundLocalError
-        user_has_liked = False
-
-        # Prepare profiles data for the JSON response
         profiles_data = []
         for profile in page_obj:
             user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
@@ -213,27 +325,21 @@ def searchprofile(request):
                 'user_has_liked': user_has_liked,
                 'user_has_interest': user_has_interest
             })
-        
 
-
-        # Handle AJAX requests for infinite scroll
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             data = {
                 'profiles': profiles_data,
-                'has_next': page_obj.has_next(),  # Check if more profiles exist
+                'has_next': page_obj.has_next(),
             }
-            print(data)
             if totalprofiles < 5:
                 return JsonResponse('no data', safe=False)
             return JsonResponse(data)
-        
+
         # Pass the same data for HTML response
         for profile in page_obj:
             profile.user_has_liked = Like.objects.filter(user=request.user, biodata=profile).exists()
             profile.user_has_interest = Interest.objects.filter(user=request.user, biodata=profile).exists()
 
-        # Regular non-AJAX response for initial page load
-        # messages.success(request, message)
         return render(request, 'pages/filteredprofiles.html', {
             'profiles': page_obj,
             'profile_type': profile_type,
@@ -244,7 +350,7 @@ def searchprofile(request):
             'religion': religion,
             'cities': cities,
             'religions': religions,
-            'user_has_liked': user_has_liked,  # Pass a default value for user_has_liked
+            'user_has_liked': user_has_liked,
             'user_has_interest': user_has_interest
         })
 
