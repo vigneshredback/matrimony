@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('app.urls')),
     path('tinymce/', include('tinymce.urls')),
-    path('services/',include('service.urls'))
+
 ]
 # Serve media files during development
 if settings.DEBUG:
