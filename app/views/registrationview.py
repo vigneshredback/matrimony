@@ -89,7 +89,7 @@ def loginview(request):
             login(request,user)
             try:
                 biodata = Biodata.objects.get(user=user)
-                messages.success(request, "Logged in successfully!")
+                messages.info(request,'succesfull login')
                 return redirect('home')
 
             except Biodata.DoesNotExist:

@@ -174,7 +174,7 @@ class Interest(models.Model):
 
 class Blog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/blog', blank=True, null=True)
+    image = models.ImageField(upload_to='images/blog', blank=False, null=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
     content = HTMLField()

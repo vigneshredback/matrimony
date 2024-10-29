@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('',homeview.home,name='home'),
+    path('service/',homeview.service,name='service'),
     path('about/',aboutview.about,name='about'),
     path('faq/',faqview.faq,name='faq'),
     path('plan/',planview.plan,name='plan'),
@@ -57,7 +58,5 @@ urlpatterns = [
     path('admin-new-user-requests/', admindashboardview.adminnewuserrequests, name='adminnewuserrequests'),
     path('toggle-approval/<int:user_id>/', admindashboardview.toggle_approval, name='toggle_approval'),
     path('toggle-approvals/<int:user_id>/', admindashboardview.toggle_approvals, name='toggle_approvals'),
-
-
-
+    path('admin-advanced-search/',admindashboardview.adminadvancedsearch,name='adminadvancedsearch')
 ]

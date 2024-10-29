@@ -14,7 +14,7 @@ from app.forms import BlogForm
 
 def blog_detail(request,pk):
     blog = Blog.objects.get(id=pk)
-    return render(request,'adminpages/blog_detail.html',{'blog':blog})
+    return render(request,'pages/blog_detail.html',{'blog':blog})
 
 # List view
 def blog_list(request):

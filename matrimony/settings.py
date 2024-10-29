@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'rest_framework',
     'drf_yasg',
-    'tinymce'
+    'tinymce',
+
 ]
 
 MIDDLEWARE = [

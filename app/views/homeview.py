@@ -10,5 +10,11 @@ def home(request):
     religions = Religion.objects.all()
     blog = Blog.objects.all().order_by('-id')[:3]
     context = {'couples':couples,'cities':cities,'religions':religions,'blog':blog}
+
+    print(request.user)
     return render(request,'pages/home.html',context)
+
+
+def service(request):
+    return render(request,'pages/services.html')
 

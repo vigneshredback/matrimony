@@ -1,0 +1,104 @@
+{% extends "base/adminbase.html" %}
+{% load static %}
+
+{% block content %}
+<div class="pan-rhs">
+    <h1 class="text-center">Advanced search for </h1>
+    <p>city : {{city}} religion : {{religion}} profile type : {{profile_type}} plan : {{plan}}</p>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="box-com box-qui box-lig box-tab">
+        <div class="tit">
+          <div class="dropdown">
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown">
+              <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="#">View all profile</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Profile</th>
+              <th>Phone</th>
+              <th>Join date</th>
+              <th>Plan type</th>
+            </tr>
+          </thead>
+          {% if profiles %}
+          <tbody>
+            {% for item in profiles %}
+            <tr>
+              <td>{{item.id}}</td>
+              <td>
+                <div class="prof-table-thum">
+                  <div class="pro">
+                    {% if not item.image1 %}
+                    {% if item.gender == 'Male' %}
+                        <img src="{% static 'images/couples/maleavatar.jpg' %}" class="image-responsive" alt="male">
+                    {% else %}
+                        <img src="{% static 'images/couples/femaleavatar.jpg' %}" class="image-responsive" alt="female">
+                    {% endif %}
+                    {% else %}
+                        <img src="{{ profile.image1.url }}" alt="original">
+                    {% endif %}
+                  </div>
+                  <div class="pro-info">
+                    <h5>{{item.user.name}}</h5>
+                    <p>{{item.user.email}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>{{item.user.phone}}</td>
+              <td>{{item.created_at}}</td>
+              <td>
+                <span class="hig-grn">{{item.plan}}</span>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="#">More details</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">View profile</a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          {% else %}
+          <tbody>
+            <tr>
+              <td colspan="5" class="text-center">No data found</td>
+            </tr>
+          </tbody>
+          {% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

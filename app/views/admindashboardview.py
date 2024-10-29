@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from app.forms import BiodataForm,UserRegistrationForm
 from django.contrib import messages
-from app.models import Biodata,User
+from app.models import Biodata,User,City,Religion,Like,Plan
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from app.serializers import BiodataSerializer
@@ -270,7 +270,6 @@ def adminpremiumuser(request):
 
     else:
         return redirect('home')
-    
 
 
 @login_required(login_url='login')
@@ -324,5 +323,54 @@ def toggle_approval(request, user_id):
         except Biodata.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'User not found'})
     return JsonResponse({'status': 'error', 'message': 'Unauthorized'})
+
+@login_required(login_url='login')
+def adminadvancedsearch(request):
+    if request.method=='POST':
+        gender =  request.POST.get('gender')
+        age = request.POST.get('age')
+        city = request.POST.get('city')
+        plan = request.POST.get('plan')
+        religion = request.POST.get('religion')
+        profile_type = request.POST.get('profile_type')
+
+        cities = City.objects.all()
+        religions = Religion.objects.all()
+        profiles = Biodata.objects.filter(admin_approval=True)
+
+                # Apply profile type filter
+        if profile_type == 'premium':
+            profiles = profiles.filter(plan_id=1)
+            message = 'you are viewing premium profiles'
+        elif profile_type == 'free':
+            profiles = profiles.filter(plan_id=2)
+            message = 'you are viewing free profiles'
+
+        # Apply filters
+        if gender != 'all':
+            profiles = profiles.filter(gender=gender)
+
+        if age != 'all':
+            if age == '1':
+                profiles = profiles.filter(age__gte=18, age__lte=30)
+            elif age == '2':
+                profiles = profiles.filter(age__gte=31, age__lte=40)
+            elif age == '3':
+                profiles = profiles.filter(age__gte=41, age__lte=50)
+
+        if city != 'all':
+            profiles = profiles.filter(city__name=city)
+
+        if religion != 'all':
+            profiles = profiles.filter(religion__name=religion)
+
+        return render(request, 'adminpages/adminadvancedsearchresults.html', {'profiles': profiles, 'gender':gender, 'age':age, 'city':city, 'plan':plan, 'religion':religion, 'profile_type':profile_type})
+
+        
+    else:
+        city = City.objects.all()
+        plan = Plan.objects.all()
+        religion = Religion.objects.all()
+        return render(request,'adminpages/adminadvancedsearch.html',{'city':city,'plan':plan,'religion':religion})
 
 

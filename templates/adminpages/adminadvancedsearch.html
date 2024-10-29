@@ -1,0 +1,99 @@
+{% extends "base/adminbase.html" %}
+{% load static %}
+
+{% block content %}
+<div class="pan-rhs">
+<h1 class="text-center">Advanced search</h1>
+<div>
+    <form method="post" action="">
+        {% csrf_token %}
+    <div class="filt-com lhs-cate">
+        <h4><i class="fa fa-search" aria-hidden="true"></i> I'm looking for</h4>
+        <div class="form-group">
+            <select class="chosen-select" name='gender' style="border: 1px solid black;">
+                <option value="all">All Genders</option>
+                <option value="Male">Men</option>
+                <option value="Female">Women</option>
+            </select>
+        </div>
+    </div>
+    <!-- END -->
+    <!-- START -->
+    <div class="filt-com lhs-cate">
+        <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Age</h4>
+        <div class="form-group">
+            <select class="chosen-select" name='age' style="border: 1px solid black;">
+                <option value="">Select age</option>
+                <option value="all">Any Age</option>
+                <option value="1">18 to 30</option>
+                <option value="2">31 to 40</option>
+                <option value="3">41 to 50</option>
+            </select>
+        </div>
+    </div>
+    <!-- END -->
+    <!-- START -->
+    <div class="filt-com lhs-cate">
+        <h4><i class="fa fa-bell-o" aria-hidden="true"></i> Select Religion</h4>
+        <div class="form-group">
+            <select class="chosen-select" name='religion' style="border: 1px solid black;">
+                <option value="all">Any Religion</option>
+                {% for item in religion %}
+                <option value="{{ item.name }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <!-- END -->
+    <!-- START -->
+    <div class="filt-com lhs-cate">
+        <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Location</h4>
+        <div class="form-group">
+            <select class="chosen-select" name='city' style="border: 1px solid black;">
+                <option value="all">Any City</option>
+                {% for item in city %}
+                <option value="{{ item.name }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <!-- END -->
+    <!-- START -->
+    <div class="filt-com lhs-rati lhs-ver lhs-cate">
+        <h4><i class="fa fa-shield" aria-hidden="true"></i> Profile</h4>
+        <ul>
+            <li>
+                <div class="rbbox">
+                    <input type="radio" value="all" name="profile_type" class="rating_check" id="exver1"
+                        checked>
+                    <label for="exver1">All</label>
+                </div>
+            </li>
+            <li>
+                <div class="rbbox">
+                    <input type="radio" value="premium" name="profile_type" class="rating_check"
+                        id="exver2">
+                    <label for="exver2">Premium</label>
+                </div>
+            </li>
+            <li>
+                <div class="rbbox">
+                    <input type="radio" value="free" name="profile_type" class="rating_check"
+                        id="exver3">
+                    <label for="exver3">Free</label>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="filt-com">
+        <button class="btn btn-primary px-3" style="width: 100%;" type="submit">Search</button>
+    </div>
+</form>
+</div>
+</div>
+
+
+
+
+
+{% endblock content %}
